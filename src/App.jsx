@@ -28,7 +28,19 @@ function App() {
             <Route path="/resume" element={<Resume />} />
           </Routes>
         </div>
-        <ToastContainer position="top-center" />
+        <ToastContainer
+  position="top-center"
+  autoClose={3000}
+  hideProgressBar={false}
+  newestOnTop={true}
+  closeOnClick
+  rtl={false}
+  pauseOnFocusLoss
+  draggable
+  pauseOnHover
+  theme="dark" // 🎨 gives dark/light-black styling!
+/>
+
         <Footer />
       </div>
     </Router>

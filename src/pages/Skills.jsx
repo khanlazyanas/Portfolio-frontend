@@ -1,4 +1,5 @@
 import React from "react";
+import { FaCheckCircle } from "react-icons/fa"; // ✔️ Icon import
 
 const skills = {
   Languages: ["JavaScript", "TypeScript", "HTML", "CSS"],
@@ -15,11 +16,17 @@ const Skills = () => {
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
           {Object.entries(skills).map(([category, items]) => (
-            <div key={category} className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+            <div
+              key={category}
+              className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition"
+            >
               <h3 className="text-xl font-semibold text-indigo-600 mb-4">{category}</h3>
-              <ul className="list-disc list-inside text-gray-700 space-y-2">
+              <ul className="space-y-2 text-gray-700">
                 {items.map((skill, i) => (
-                  <li key={i}>{skill}</li>
+                  <li key={i} className="flex items-center gap-2">
+                    <FaCheckCircle className="text-green-500" />
+                    <span>{skill}</span>
+                  </li>
                 ))}
               </ul>
             </div>

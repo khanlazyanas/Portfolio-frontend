@@ -22,10 +22,10 @@ const Footer = () => {
               className="h-10 md:h-[60px] w-auto object-contain invert hover:scale-105 transition-transform duration-300 select-none"
             />
           </Link>
-          <p className="mt-3 text-sm leading-relaxed text-gray-400">
-            Passionate Frontend Developer crafting seamless digital experiences
-            using React, Tailwind CSS, and modern tools.
-          </p>
+          <em>
+  Passionate <strong>Frontend Developer</strong> crafting seamless digital experiences using <strong>React</strong>, <strong>Tailwind CSS</strong>, and modern tools — powered by the <strong>MERN</strong> stack.
+</em>
+
         </div>
 
         {/* Navigation */}
@@ -112,7 +112,8 @@ const Footer = () => {
       </div>
 
       <div className="mt-12 text-center border-t border-gray-700 pt-5 text-sm text-gray-500">
-        &copy; {new Date().getFullYear()} Anas Khan. Crafted with 💙 using React & Tailwind CSS.
+        &copy; {new Date().getFullYear()} © 2025 Anas Khan — Full-Stack Visionary. Built with 💙 using React, Tailwind CSS & a pinch of genius.
+
       </div>
     </footer>
   );

@@ -5,7 +5,7 @@ import profileImage from "../assets/anas3.jpg";
 
 // Client images
 import client1 from "../assets/saquibansari.jpg";
-import client2 from "../assets/Iltaaf.jpg";
+import client2 from "../assets/iltaaf.jpg";
 import client3 from "../assets/umar.jpg";
 import client4 from "../assets/asjad.jpg";
 import client5 from "../assets/abubakar1.jpg";

@@ -53,11 +53,11 @@ const testimonials = [
 
 const Home = () => {
   return (
-    <>
+    <div className="bg-gray-900 text-white">
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 px-6 py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white text-center min-h-[80vh] flex items-center justify-center">
+      <section className="pt-32 px-6 py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-center min-h-[80vh] flex items-center justify-center">
         <div className="max-w-3xl mx-auto flex flex-col items-center">
           <img
             src={profileImage}
@@ -92,6 +92,36 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Code DNA Section */}
+      <section className="bg-gray-900 py-20 px-6 text-white">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+          🧬 My Tech Journey
+        </h2>
+        <div className="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-6 text-teal-300 text-lg font-mono">
+          {[
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "React",
+            "Tailwind",
+            "Node.js",
+            "Express",
+            "MongoDB",
+            "AI Tools"
+          ].map((tech, i, arr) => (
+            <div key={i} className="flex items-center space-x-2">
+              <span>{tech}</span>
+              {i < arr.length - 1 && <span>→</span>}
+            </div>
+          ))}
+        </div>
+        <p className="mt-8 text-center text-gray-400 max-w-2xl mx-auto">
+          From HTML basics to advanced full-stack development with MERN and
+          modern tools, this journey reflects my constant learning and
+          adaptability.
+        </p>
+      </section>
+
       {/* Testimonials Section */}
       <section className="bg-gray-950 py-20 text-white px-6">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
@@ -106,7 +136,7 @@ const Home = () => {
               <img
                 src={client.image}
                 alt={client.name}
-                className="w-20 h-20 rounded-full border-4 border-teal-400 mx-auto mb-4 object-cover"
+                className="w-28 h-28 rounded-full border-4 border-teal-400 mx-auto mb-4 object-cover transition-transform duration-300 hover:scale-105"
               />
               <h4 className="text-lg font-semibold mb-1">{client.name}</h4>
               {client.rating >= 3 && (
@@ -119,7 +149,7 @@ const Home = () => {
           ))}
         </div>
       </section>
-    </>
+    </div>
   );
 };
 

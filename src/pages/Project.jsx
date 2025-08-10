@@ -3,13 +3,20 @@ import React from "react";
 const projects = [
   {
     title: "Grocery Store",
-    description: "An online grocery store built with React & Tailwind CSS. Working... (Under Development).",
-    link: "https://your-grocery-store-link.com",
+    description:
+      "An online grocery store built with React & Tailwind CSS. Working... (Under Development).",
+    link: "https://deluxe-puffpuff-0ea7af.netlify.app/",
   },
   {
     title: "Weather App",
     description: "Real-time weather data app using OpenWeather API and React.",
     link: "https://anaskhanweathersearch.netlify.app/",
+  },
+  {
+    title: "Todo App (MERN)",
+    description:
+      "A full-stack Todo application built with the MERN stack, allowing users to manage daily tasks efficiently.",
+    link: "https://react-todo-app-pi-nine.vercel.app/",
   },
 ];
 
@@ -26,7 +33,9 @@ const Projects = () => {
               key={idx}
               className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all border border-gray-100"
             >
-              <h3 className="text-xl font-semibold text-indigo-600">{project.title}</h3>
+              <h3 className="text-xl font-semibold text-indigo-600">
+                {project.title}
+              </h3>
               <p className="mt-3 text-gray-600">{project.description}</p>
               <a
                 href={project.link}

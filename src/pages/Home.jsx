@@ -57,7 +57,7 @@ const Home = () => {
       <Header />
 
       {/* Hero Section */}
-      <section className="pt-32 px-6 py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-center min-h-[80vh] flex items-center justify-center">
+      <section className="pt-32 px-6 py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-center min-h-[80vh] flex items-center justify-center relative">
         <div className="max-w-3xl mx-auto flex flex-col items-center">
           <img
             src={profileImage}

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../assets/anas4.png"; // Make sure your image path is correct
+import logo from "../assets/anas4.png";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [visits, setVisits] = useState(null);
   const location = useLocation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -13,6 +14,13 @@ const Header = () => {
     location.pathname === path
       ? "text-indigo-600 font-semibold"
       : "text-gray-700 hover:text-indigo-600 transition-colors";
+
+  useEffect(() => {
+    fetch("https://anaskhanportfolio.onrender.com/api/visit")
+      .then((res) => res.json())
+      .then((data) => setVisits(data.visits || 0))
+      .catch(() => setVisits(0));
+  }, []);
 
   return (
     <header className="bg-[#fdf6e3] shadow-md fixed top-0 left-0 w-full z-50">
@@ -26,6 +34,8 @@ const Header = () => {
           />
         </Link>
 
+        
+
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6 font-medium">
           <Link to="/" className={linkStyle("/")}>Home</Link>
@@ -36,14 +46,24 @@ const Header = () => {
           <Link to="/resume" className={linkStyle("/resume")}>Resume</Link>
           <Link to="/contact" className={linkStyle("/contact")}>Contact</Link>
         </nav>
-
+{/* Visit Counter (Desktop) */}
+<div className="hidden md:flex items-center justify-center w-16 h-16 bg-cream-500 text-black rounded-full shadow-lg flex-col">
+  <span className="text-lg font-bold">{visits === null ? "..." : visits}</span>
+  <span className="text-[10px] tracking-wide font-semibold uppercase">Visits</span>
+</div>
         {/* Hamburger Button */}
         <button
           className="md:hidden text-gray-700 focus:outline-none"
           onClick={toggleMenu}
           aria-label="Toggle Menu"
         >
-          <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+          <svg
+            className="w-7 h-7"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -72,6 +92,12 @@ const Header = () => {
           <Link to="/experience" onClick={closeMenu} className={linkStyle("/experience")}>Experience</Link>
           <Link to="/resume" onClick={closeMenu} className={linkStyle("/resume")}>Resume</Link>
           <Link to="/contact" onClick={closeMenu} className={linkStyle("/contact")}>Contact</Link>
+
+          {/* Mobile Visit Counter */}
+<div className="mt-4 mx-auto flex items-center justify-center w-20 h-20 bg-dark-cream-500 text-black rounded-full shadow-lg flex-col">
+  <span className="text-xl font-bold">{visits === null ? "..." : visits}</span>
+  <span className="text-xs tracking-wide font-semibold uppercase">Visits</span>
+</div>
         </nav>
       </div>
 

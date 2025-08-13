@@ -3,8 +3,9 @@ import { FaCheckCircle } from "react-icons/fa"; // ✔️ Icon import
 
 const skills = {
   Languages: ["JavaScript", "TypeScript", "HTML", "CSS"],
-  Frameworks: ["React", "Next.js", "Tailwind CSS", "Node.js"],
-  Tools: ["Git", "VS Code", "Figma", "Postman"],
+  Frameworks: ["React", "Next.js", "Tailwind CSS", "Node.js", "Express.js"],
+  Databases: ["MongoDB", "MySQL"], // Added DB section
+  Tools: ["Git", "VS Code", "Figma", "Postman", "Redux", "Redux Toolkit"],
 };
 
 const Skills = () => {

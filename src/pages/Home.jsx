@@ -1,81 +1,51 @@
 import React from "react";
-import Header from "../components/Header";
 import { Typewriter } from "react-simple-typewriter";
 import profileImage from "../assets/anas3.jpg";
 
-// Client images
-import client1 from "../assets/saquibansari.jpg";
-import client2 from "../assets/iltaaf.jpg";
-import client3 from "../assets/umar.jpg";
-import client4 from "../assets/asjad.jpg";
-import client5 from "../assets/abubakar1.jpg";
-import client6 from "../assets/saquib1.jpg";
-
-// Testimonials data
-const testimonials = [
-  {
-    name: "Saquib Ansari",
-    image: client1,
-    quote: "Anas delivered our project ahead of schedule with clean code and amazing UI. Highly recommended!",
-    rating: 5
-  },
-  {
-    name: "Mohammad Iltaf",
-    image: client2,
-    quote: "Extremely professional and skilled. My React app now performs twice as fast.",
-    rating: 4
-  },
-  {
-    name: "Umar Iraqui",
-    image: client3,
-    quote: "From backend to frontend, everything was top-notch. Communication was smooth and clear!",
-    rating: 4
-  },
-  {
-    name: "Asjad Khan",
-    image: client4,
-    quote: "I loved working with Anas! He turned my vision into a working product seamlessly.",
-    rating: 3
-  },
-  {
-    name: "Abubakar",
-    image: client5,
-    quote: "Anas is a MERN magician! I’ll definitely hire him again for my next startup.",
-    rating: 5
-  },
-  {
-    name: "Mohammad Saquib",
-    image: client6,
-    quote: "Highly creative and always available for support. My go-to dev for anything MERN!",
-    rating: 4
-  }
-];
-
 const Home = () => {
   return (
-    <div className="bg-gray-900 text-white">
-      <Header />
+    <section className="relative bg-black text-white px-6 sm:px-10 md:px-20 lg:px-28 pt-40 pb-44 overflow-hidden">
+      <div className="max-w-7xl mx-auto relative">
 
-      {/* Hero Section */}
-      <section className="pt-32 px-6 py-20 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-center min-h-[80vh] flex items-center justify-center relative">
-        <div className="max-w-3xl mx-auto flex flex-col items-center">
-          <img
-            src={profileImage}
-            alt="Anas Khan"
-            className="w-80 h-80 border-4 border-teal-400 shadow-2xl mb-8 object-cover rounded-xl glow-frame"
-          />
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
+        {/* Parallax Grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff06_1px,transparent_1px),linear-gradient(to_bottom,#ffffff06_1px,transparent_1px)] bg-[size:70px_70px] opacity-[0.12] translate-y-[-20px]" />
+
+        {/* Floating Particles */}
+        <div className="absolute top-1/3 left-1/4 w-1 h-1 bg-white/40 rounded-full animate-ping" />
+        <div className="absolute bottom-1/3 right-1/4 w-1 h-1 bg-white/30 rounded-full animate-pulse" />
+
+        {/* Glow */}
+        <div className="absolute -top-40 -left-40 w-[540px] h-[540px] bg-teal-400/20 blur-[200px] rounded-full" />
+
+        {/* HEADER */}
+        <header className="mb-40 max-w-3xl relative z-10">
+
+          {/* Availability */}
+          <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-teal-400 mb-6">
+            <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
+            Available for Work
+          </div>
+
+          <p className="text-[11px] uppercase tracking-[0.35em] text-gray-500">
+            Introduction
+          </p>
+
+          <h1 className="mt-8 text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight">
             Hi, I’m{" "}
-            <span className="bg-gradient-to-r from-teal-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              ANAS KHAN
+            <span className="bg-gradient-to-r from-white via-gray-300 to-gray-400 bg-clip-text text-transparent">
+              Anas Khan
             </span>
+            <br />
+            Full-Stack MERN Engineer
           </h1>
-          <div className="text-xl sm:text-2xl text-teal-400 mt-4 font-mono h-10">
+
+          {/* Typewriter */}
+          <div className="mt-8 text-gray-400 text-sm sm:text-base font-mono h-6">
             <Typewriter
               words={[
                 "MERN Stack Developer",
                 "MongoDB • Express • React • Node",
-                "Full-Stack Web Developer"
+                "Engineering Scalable Web Systems",
               ]}
               loop={0}
               cursor
@@ -85,71 +55,128 @@ const Home = () => {
               delaySpeed={2000}
             />
           </div>
-          <p className="text-lg sm:text-xl text-gray-300 mt-6">
-            I build fast, full-stack web applications using the MERN stack.
-            Let's bring your ideas to life with clean, scalable code.
+
+          <p className="mt-8 text-gray-400 text-sm sm:text-base leading-relaxed">
+            I build systems, not just features — focusing on architecture,
+            performance, and long-term scalability.
           </p>
-        </div>
-      </section>
 
-      {/* Code DNA Section */}
-      <section className="bg-gray-900 py-20 px-6 text-white">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          🧬 My Tech Journey
-        </h2>
-        <div className="max-w-4xl mx-auto flex flex-wrap justify-center items-center gap-6 text-teal-300 text-lg font-mono">
-          {[
-            "HTML",
-            "CSS",
-            "JavaScript",
-            "React",
-            "Tailwind",
-            "Node.js",
-            "Express",
-            "MongoDB",
-            "AI Tools"
-          ].map((tech, i, arr) => (
-            <div key={i} className="flex items-center space-x-2">
-              <span>{tech}</span>
-              {i < arr.length - 1 && <span>→</span>}
-            </div>
-          ))}
-        </div>
-        <p className="mt-8 text-center text-gray-400 max-w-2xl mx-auto">
-          From HTML basics to advanced full-stack development with MERN and
-          modern tools, this journey reflects my constant learning and
-          adaptability.
-        </p>
-      </section>
+          {/* Philosophy Line */}
+          <blockquote className="mt-8 pl-4 border-l border-gray-700 text-sm text-gray-500 italic">
+            “Great software feels invisible to the user.”
+          </blockquote>
 
-      {/* Testimonials Section */}
-      <section className="bg-gray-950 py-20 text-white px-6">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          💬 What My Clients Say
-        </h2>
-        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {testimonials.map((client, index) => (
-            <div
-              key={index}
-              className="bg-gray-800 p-6 rounded-xl shadow-2xl hover:shadow-teal-500/50 transition duration-300 text-center"
+          {/* Trust Tags */}
+          <div className="flex flex-wrap gap-4 mt-10 text-[11px] uppercase tracking-widest text-gray-500">
+            <span>Clean Architecture</span>
+            <span>Performance-Driven</span>
+            <span>Scalable Systems</span>
+          </div>
+
+          {/* CTA */}
+          <div className="mt-14 flex flex-wrap gap-10">
+            <a
+              href="/projects"
+              className="relative inline-flex items-center gap-3 text-sm font-medium text-white group"
             >
-              <img
-                src={client.image}
-                alt={client.name}
-                className="w-28 h-28 rounded-full border-4 border-teal-400 mx-auto mb-4 object-cover transition-transform duration-300 hover:scale-105"
-              />
-              <h4 className="text-lg font-semibold mb-1">{client.name}</h4>
-              {client.rating >= 3 && (
-                <div className="text-yellow-400 mb-2 text-lg">
-                  {"⭐".repeat(client.rating)}
-                </div>
-              )}
-              <p className="text-gray-300 italic">“{client.quote}”</p>
+              <span className="absolute inset-0 rounded-full bg-white/5 blur-lg opacity-0 group-hover:opacity-100 transition" />
+              View Projects
+              <span className="text-xl group-hover:translate-x-1 transition-transform">
+                →
+              </span>
+            </a>
+
+            <a
+              href="/resume"
+              className="text-sm text-gray-400 hover:text-white transition"
+            >
+              Download Resume
+            </a>
+          </div>
+        </header>
+
+        {/* HERO */}
+        <article className="grid lg:grid-cols-2 gap-24 items-center relative z-10">
+
+          {/* Image */}
+          <div className="relative rounded-[3rem] overflow-hidden border border-white/10 backdrop-blur-xl group">
+            <img
+              src={profileImage}
+              alt="Anas Khan"
+              className="w-full h-[460px] object-cover transition-transform duration-1000 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition" />
+          </div>
+
+          {/* Content */}
+          <div className="max-w-xl">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-gray-500">
+              Engineering Focus
+            </p>
+
+            <h2 className="mt-4 text-3xl font-semibold text-white">
+              Designing systems built to last.
+            </h2>
+
+            <p className="mt-6 text-gray-400 text-sm leading-relaxed">
+              From API architecture to frontend performance optimization,
+              I prioritize clarity, scalability, and maintainability in
+              every project.
+            </p>
+
+            {/* Stack */}
+            <div className="flex flex-wrap gap-3 mt-8">
+              {[
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "React",
+                "Tailwind",
+                "Node.js",
+                "Express",
+                "MongoDB",
+                "AI Tools",
+              ].map((tech, i) => (
+                <span
+                  key={i}
+                  className="text-[11px] px-4 py-1.5 rounded-full border border-gray-700 text-gray-300 hover:border-gray-500 transition"
+                >
+                  {tech}
+                </span>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
-    </div>
+
+            {/* Metrics */}
+            <div className="grid grid-cols-3 gap-12 mt-16 text-center">
+              <div>
+                <p className="text-2xl font-semibold">10+</p>
+                <p className="text-[11px] uppercase tracking-widest text-gray-500">
+                  Projects
+                </p>
+              </div>
+              <div>
+                <p className="text-2xl font-semibold">1+</p>
+                <p className="text-[11px] uppercase tracking-widest text-gray-500">
+                  Years Learning
+                </p>
+              </div>
+              <div>
+                <p className="text-2xl font-semibold">MERN</p>
+                <p className="text-[11px] uppercase tracking-widest text-gray-500">
+                  Core Stack
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      {/* Scroll Cue */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-500 text-xs tracking-widest animate-bounce">
+        Scroll
+      </div>
+    </section>
   );
 };
 

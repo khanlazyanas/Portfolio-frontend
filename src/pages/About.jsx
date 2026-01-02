@@ -3,32 +3,75 @@ import profileImage from "../assets/anas3.jpg";
 
 const About = () => {
   return (
-    <section className="pt-28 px-6 md:px-20 pb-20 bg-[#fdf6e3] text-gray-800">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">About</h2>
-        <div className="h-1 w-24 bg-red-500 mx-auto mt-2 rounded-full"></div>
-      </div>
+    <section className="relative bg-black text-white px-6 sm:px-10 md:px-20 lg:px-28 pt-40 pb-44">
+      <div className="max-w-7xl mx-auto">
 
-      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
-        {/* Image Section */}
-        <div className="flex justify-center md:justify-start">
-          <img
-            src={profileImage}
-            alt="Anas Khan"
-            className="w-40 h-40 rounded-full object-cover border-4 border-red-300 shadow-md"
-          />
-        </div>
+        {/* Editorial Header */}
+        <header className="mb-40 max-w-3xl">
+          <p className="text-[11px] uppercase tracking-[0.35em] text-gray-500">
+            About
+          </p>
 
-        {/* Text Content */}
-        <div className="md:col-span-2 bg-white shadow-lg p-8 rounded-xl border">
-          <h3 className="text-2xl font-bold mb-4 text-gray-900">Who Am I?</h3>
-          <p className="text-gray-700 text-lg leading-relaxed">
-            Hello! I'm <span className="text-red-600 font-semibold">ANAS KHAN</span>, a front-end developer who builds responsive and interactive websites using modern technologies.
+          <h2 className="mt-8 text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight">
+            Building thoughtful,
+            <br />
+            scalable digital experiences.
+          </h2>
+
+          <p className="mt-8 text-gray-400 text-sm sm:text-base leading-relaxed">
+            I’m Anas Khan — a full-stack developer focused on crafting clean,
+            scalable, and production-ready web applications with a strong
+            emphasis on performance and user experience.
           </p>
-          <p className="mt-4 text-gray-700 text-lg leading-relaxed">
-            I specialize in <strong>React</strong> and <strong>Tailwind CSS</strong>. My aim is to turn clean designs into elegant and high-performance web interfaces.
-          </p>
-        </div>
+        </header>
+
+        {/* Content */}
+        <article className="grid lg:grid-cols-2 gap-16 items-center">
+
+          {/* Image */}
+          <div className="relative overflow-hidden rounded-[2.5rem]">
+            <img
+              src={profileImage}
+              alt="Anas Khan"
+              className="w-full h-[460px] object-cover transition-transform duration-1000 hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          </div>
+
+          {/* Text */}
+          <div className="max-w-xl">
+            <p className="text-[11px] uppercase tracking-[0.3em] text-gray-500">
+              Who I Am
+            </p>
+
+            <h3 className="mt-4 text-3xl font-semibold text-white">
+              Full-stack developer with a product mindset.
+            </h3>
+
+            <p className="mt-6 text-gray-400 text-sm leading-relaxed">
+              Hello! I’m{" "}
+              <span className="text-white font-medium">Anas Khan</span>, a
+              passionate full-stack developer who enjoys transforming complex
+              ideas into elegant, high-performance web applications.
+            </p>
+
+            <p className="mt-6 text-gray-400 text-sm leading-relaxed">
+              I specialize in building modern interfaces using{" "}
+              <span className="text-white">React</span>,{" "}
+              <span className="text-white">Tailwind CSS</span>, and robust backend
+              systems with the{" "}
+              <span className="text-white">MERN stack</span>. My work focuses on
+              clarity, scalability, and long-term maintainability.
+            </p>
+
+            <p className="mt-6 text-gray-500 text-sm leading-relaxed italic">
+              Beyond coding, I explore AI tools, system design, and modern web
+              technologies to continuously refine my craft.
+            </p>
+          </div>
+
+        </article>
+
       </div>
     </section>
   );

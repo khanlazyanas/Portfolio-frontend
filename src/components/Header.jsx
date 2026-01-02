@@ -1,113 +1,161 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import logo from "../assets/anas4.png";
 
+const drawerVariants = {
+  hidden: { x: "100%" },
+  visible: {
+    x: 0,
+    transition: { duration: 0.45, ease: [0.4, 0, 0.2, 1] },
+  },
+  exit: {
+    x: "100%",
+    transition: { duration: 0.3, ease: [0.4, 0, 1, 1] },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: 0.06 * i },
+  }),
+};
+
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [visits, setVisits] = useState(null);
+  const [open, setOpen] = useState(false);
   const location = useLocation();
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
+  const isActive = (path) => location.pathname === path;
 
-  const linkStyle = (path) =>
-    location.pathname === path
-      ? "text-indigo-600 font-semibold"
-      : "text-gray-700 hover:text-indigo-600 transition-colors";
-
-  useEffect(() => {
-    fetch("https://anaskhanportfolio.onrender.com/api/visit")
-      .then((res) => res.json())
-      .then((data) => setVisits(data.visits || 0))
-      .catch(() => setVisits(0));
-  }, []);
+  const links = [
+    ["/", "Introduction"],
+    ["/about", "About"],
+    ["/projects", "Projects"],
+    ["/skills", "Skills"],
+    ["/experience", "Experience"],
+    ["/resume", "Resume"],
+    ["/contact", "Contact"],
+  ];
 
   return (
-    <header className="bg-[#fdf6e3] shadow-md fixed top-0 left-0 w-full z-50">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" onClick={closeMenu}>
-          <img
-            src={logo}
-            alt="Logo"
-            className="h-10 md:h-[60px] w-auto object-contain hover:scale-105 transition-transform duration-300 select-none"
-          />
-        </Link>
+    <header className="fixed top-0 left-0 w-full z-50 font-outfit">
+      {/* Glass Header */}
+      <div className="backdrop-blur-2xl bg-black/45 border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 h-[76px] flex items-center justify-between">
 
-        
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-6 font-medium">
-          <Link to="/" className={linkStyle("/")}>Home</Link>
-          <Link to="/about" className={linkStyle("/about")}>About</Link>
-          <Link to="/projects" className={linkStyle("/projects")}>Projects</Link>
-          <Link to="/skills" className={linkStyle("/skills")}>Skills</Link>
-          <Link to="/experience" className={linkStyle("/experience")}>Experience</Link>
-          <Link to="/resume" className={linkStyle("/resume")}>Resume</Link>
-          <Link to="/contact" className={linkStyle("/contact")}>Contact</Link>
-        </nav>
-{/* Visit Counter (Desktop) */}
-<div className="hidden md:flex items-center justify-center w-16 h-16 bg-cream-500 text-black rounded-full shadow-lg flex-col">
-  <span className="text-lg font-bold">{visits === null ? "..." : visits}</span>
-  <span className="text-[10px] tracking-wide font-semibold uppercase">Visits</span>
-</div>
-        {/* Hamburger Button */}
-        <button
-          className="md:hidden text-gray-700 focus:outline-none"
-          onClick={toggleMenu}
-          aria-label="Toggle Menu"
-        >
-          <svg
-            className="w-7 h-7"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+          {/* Logo */}
+          <Link to="/" onClick={() => setOpen(false)} className="flex items-center">
+            <img
+              src={logo}
+              alt="Anas Khan"
+              className="h-10 md:h-12 w-auto object-contain invert select-none hover:scale-105 transition-transform duration-300"
             />
-          </svg>
-        </button>
-      </div>
+          </Link>
 
-      {/* Mobile Slide-in Menu */}
-      <div
-        className={`fixed top-0 right-0 h-full w-64 bg-[#fdf6e3] shadow-2xl transform transition-transform duration-300 ease-in-out z-40 ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        } md:hidden rounded-l-xl`}
-      >
-        <div className="flex justify-end p-4">
-          <button onClick={closeMenu} className="text-gray-700 focus:outline-none text-2xl">
-            ✕
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-12 text-[13px] tracking-[0.18em] uppercase font-lexend">
+            {links.map(([path, label]) => (
+              <Link
+                key={path}
+                to={path}
+                className={`relative transition-all duration-300 ${
+                  isActive(path)
+                    ? "text-white"
+                    : "text-gray-400 hover:text-white"
+                }`}
+              >
+                {label}
+
+                {/* Glow underline */}
+                {isActive(path) && (
+                  <span className="absolute left-0 -bottom-3 w-full h-[2px] bg-gradient-to-r from-teal-400 via-purple-400 to-pink-400 rounded-full shadow-[0_0_12px_rgba(45,212,191,0.8)] animate-glow" />
+                )}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Mobile Toggle */}
+          <button
+            onClick={() => setOpen(true)}
+            className="md:hidden text-gray-300 hover:text-white transition"
+            aria-label="Open Menu"
+          >
+            <div className="space-y-2">
+              <span className="block w-6 h-[2px] bg-white rounded-full" />
+              <span className="block w-4 h-[2px] bg-white/70 rounded-full" />
+            </div>
           </button>
         </div>
-        <nav className="flex flex-col space-y-6 px-6 text-lg font-medium">
-          <Link to="/" onClick={closeMenu} className={linkStyle("/")}>Home</Link>
-          <Link to="/about" onClick={closeMenu} className={linkStyle("/about")}>About</Link>
-          <Link to="/projects" onClick={closeMenu} className={linkStyle("/projects")}>Projects</Link>
-          <Link to="/skills" onClick={closeMenu} className={linkStyle("/skills")}>Skills</Link>
-          <Link to="/experience" onClick={closeMenu} className={linkStyle("/experience")}>Experience</Link>
-          <Link to="/resume" onClick={closeMenu} className={linkStyle("/resume")}>Resume</Link>
-          <Link to="/contact" onClick={closeMenu} className={linkStyle("/contact")}>Contact</Link>
-
-          {/* Mobile Visit Counter */}
-<div className="mt-4 mx-auto flex items-center justify-center w-20 h-20 bg-dark-cream-500 text-black rounded-full shadow-lg flex-col">
-  <span className="text-xl font-bold">{visits === null ? "..." : visits}</span>
-  <span className="text-xs tracking-wide font-semibold uppercase">Visits</span>
-</div>
-        </nav>
       </div>
 
-      {/* Backdrop */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm z-30 md:hidden"
-          onClick={closeMenu}
-        ></div>
-      )}
+      {/* Mobile Drawer */}
+      <AnimatePresence>
+        {open && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.6 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black z-40"
+              onClick={() => setOpen(false)}
+            />
+
+            <motion.aside
+              variants={drawerVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="fixed top-0 right-0 z-50 h-full w-[85%] max-w-sm bg-black px-10 pt-28 backdrop-blur-2xl"
+            >
+              <nav className="flex flex-col gap-10 font-lexend">
+                {links.map(([path, label], i) => (
+                  <motion.div
+                    key={path}
+                    custom={i}
+                    variants={itemVariants}
+                    initial="hidden"
+                    animate="visible"
+                    onClick={() => setOpen(false)}
+                  >
+                    <Link
+                      to={path}
+                      className={`text-2xl tracking-wide transition ${
+                        isActive(path)
+                          ? "text-white"
+                          : "text-gray-400 hover:text-white"
+                      }`}
+                    >
+                      {label}
+                    </Link>
+                  </motion.div>
+                ))}
+              </nav>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Fonts & Glow */}
+      <style>
+        {`
+          @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Lexend:wght@400;600;700;900&display=swap');
+
+          .font-outfit { font-family: 'Outfit', sans-serif; }
+          .font-lexend { font-family: 'Lexend', sans-serif; }
+
+          @keyframes glow {
+            0%,100% { opacity: 0.6; }
+            50% { opacity: 1; }
+          }
+
+          .animate-glow {
+            animation: glow 2.5s ease-in-out infinite;
+          }
+        `}
+      </style>
     </header>
   );
 };

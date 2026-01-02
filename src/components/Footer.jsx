@@ -6,115 +6,181 @@ import {
   FaInstagram,
   FaWhatsapp,
   FaYoutube,
+  FaEnvelope,
+  FaArrowUp,
 } from "react-icons/fa";
 import logo from "../assets/anas4.png";
 
 const Footer = () => {
+  const links = [
+    ["/", "Home"],
+    ["/about", "About"],
+    ["/projects", "Projects"],
+    ["/skills", "Skills"],
+    ["/experience", "Experience"],
+    ["/resume", "Resume"],
+    ["/contact", "Contact"],
+  ];
+
   return (
-    <footer className="bg-gradient-to-br from-gray-900 to-gray-800 text-gray-300 px-6 md:px-20 py-14">
-      <div className="max-w-7xl mx-auto grid gap-12 md:grid-cols-3">
-        {/* Brand Logo & Intro */}
-        <div>
+    <footer className="relative bg-black text-gray-400 px-6 sm:px-10 md:px-20 lg:px-28 pt-32 pb-16 overflow-hidden">
+
+      {/* Subtle Texture */}
+      <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] bg-[size:24px_24px]" />
+
+      {/* Top Glow Divider */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+      {/* Glow Accent */}
+      <div className="absolute -bottom-40 right-[-120px] w-[420px] h-[420px] bg-teal-400/10 blur-[160px] rounded-full" />
+
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-5 gap-14 relative z-10">
+
+        {/* Brand */}
+        <div className="lg:col-span-1">
           <Link to="/">
             <img
               src={logo}
               alt="Logo"
-              className="h-10 md:h-[60px] w-auto object-contain invert hover:scale-105 transition-transform duration-300 select-none"
+              className="h-10 mb-6 invert hover:opacity-90 transition"
             />
           </Link>
-          <em>
-  Passionate <strong>Frontend Developer</strong> crafting seamless digital experiences using <strong>React</strong>, <strong>Tailwind CSS</strong>, and modern tools — powered by the <strong>MERN</strong> stack.
-</em>
 
+          <p className="text-sm leading-relaxed max-w-sm">
+            Full-stack MERN developer crafting scalable, high-performance web
+            applications with clean architecture and modern UX.
+          </p>
+
+          {/* Status */}
+          <p className="mt-4 text-xs text-teal-400 uppercase tracking-widest">
+            ● Actively building new projects
+          </p>
         </div>
 
         {/* Navigation */}
         <div>
-          <h3 className="text-white text-lg font-semibold mb-4">Quick Links</h3>
-          <ul className="space-y-2 text-sm">
-            {[
-              { name: "Home", path: "/" },
-              { name: "About", path: "/about" },
-              { name: "Projects", path: "/projects" },
-              { name: "Skills", path: "/skills" },
-              { name: "Experience", path: "/experience" },
-              { name: "Resume", path: "/resume" },
-              { name: "Contact", path: "/contact" },
-            ].map((link) => (
-              <li key={link.name}>
+          <p className="text-[11px] uppercase tracking-[0.3em] text-gray-500 mb-6">
+            Navigation
+          </p>
+          <ul className="space-y-3 text-sm">
+            {links.map(([path, label]) => (
+              <li key={path}>
                 <Link
-                  to={link.path}
-                  className="hover:text-white transition duration-200 ease-in-out"
+                  to={path}
+                  className="hover:text-white transition-colors"
                 >
-                  {link.name}
+                  {label}
                 </Link>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Social Links */}
+        {/* Contact */}
         <div>
-          <h3 className="text-white text-lg font-semibold mb-4">Connect With Me</h3>
-          <ul className="flex flex-wrap gap-4 mt-2 text-2xl">
+          <p className="text-[11px] uppercase tracking-[0.3em] text-gray-500 mb-6">
+            Contact
+          </p>
+
+          <div className="space-y-4 text-sm">
+            <a
+              href="mailto:khananas@example.com"
+              className="flex items-center gap-3 hover:text-white transition"
+            >
+              <FaEnvelope />
+              khananas@example.com
+            </a>
+
+            <p className="text-gray-500">
+              📍 India • IST Timezone
+            </p>
+
+            <p className="inline-flex items-center gap-2 text-teal-400 text-xs uppercase tracking-widest">
+              <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
+              Available for work
+            </p>
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.3em] text-gray-500 mb-6">
+            Quick Actions
+          </p>
+
+          <ul className="space-y-3 text-sm">
             <li>
-              <a
-                href="https://github.com/khanlazyanas/anaskhanportfolio"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition"
-              >
-                <FaGithub />
-              </a>
+              <Link to="/contact" className="hover:text-white transition">
+                Hire Me →
+              </Link>
+            </li>
+            <li>
+              <Link to="/resume" className="hover:text-white transition">
+                View Resume →
+              </Link>
             </li>
             <li>
               <a
-                href="https://www.linkedin.com/in/khan-anas-a26b66364/"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="mailto:khananas@example.com"
                 className="hover:text-white transition"
               >
-                <FaLinkedin />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://instagram.com/khan_anas842"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition"
-              >
-                <FaInstagram />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://wa.me/8429755694"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition"
-              >
-                <FaWhatsapp />
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.youtube.com/@khananas2318"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition"
-              >
-                <FaYoutube />
+                Send Email →
               </a>
             </li>
           </ul>
         </div>
+
+        {/* Social */}
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.3em] text-gray-500 mb-6">
+            Social
+          </p>
+
+          <div className="flex gap-5 text-xl">
+            {[
+              ["https://github.com/khanlazyanas/anaskhanportfolio", <FaGithub />],
+              ["https://www.linkedin.com/in/khan-anas-a26b66364/", <FaLinkedin />],
+              ["https://instagram.com/khan_anas842", <FaInstagram />],
+              ["https://wa.me/8429755694", <FaWhatsapp />],
+              ["https://www.youtube.com/@khananas2318", <FaYoutube />],
+            ].map(([url, icon], i) => (
+              <a
+                key={i}
+                href={url}
+                target="_blank"
+                rel="noreferrer"
+                className="relative group"
+              >
+                <span className="absolute inset-0 rounded-full bg-white/10 blur-md opacity-0 group-hover:opacity-100 transition" />
+                <span className="relative z-10 hover:text-white transition">
+                  {icon}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div className="mt-12 text-center border-t border-gray-700 pt-5 text-sm text-gray-500">
-        &copy; {new Date().getFullYear()} © 2025 Anas Khan — Full-Stack Visionary. Built with 💙 using React, Tailwind CSS & a pinch of genius.
+      {/* Bottom Bar */}
+      <div className="mt-24 border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500 relative z-10">
+        <p>
+          © {new Date().getFullYear()} Anas Khan. All rights reserved.
+        </p>
 
+        <div className="flex items-center gap-6 text-gray-600">
+          <span>Privacy</span>
+          <span>Terms</span>
+          <span>Built with React • Tailwind • Framer Motion</span>
+        </div>
       </div>
+
+      {/* Back To Top */}
+      <a
+        href="#top"
+        className="absolute bottom-6 right-6 p-3 rounded-full border border-white/10 text-gray-400 hover:text-white hover:border-white/30 transition"
+      >
+        <FaArrowUp />
+      </a>
     </footer>
   );
 };

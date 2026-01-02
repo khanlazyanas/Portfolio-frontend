@@ -1,5 +1,10 @@
 import React from "react";
 
+// ✅ IMPORT IMAGES (MOST IMPORTANT FIX)
+import urbanGreensImg from "../assets/urbangreens.png";
+import bajajAutoImg from "../assets/bajajautosales.png";
+import weatherImg from "../assets/weather.png";
+
 const projects = [
   {
     title: "UrbanGreens",
@@ -7,7 +12,7 @@ const projects = [
     description:
       "A production-ready grocery commerce platform engineered with the MERN stack and Tailwind CSS. Designed for scale and reliability, featuring secure authentication, product and order management, cart workflows, and Razorpay payment integration with a refined, high-performance user experience.",
     link: "https://urbangreens-frontend-n2hv3.vercel.app",
-    image: "/src/assets/urbangreens.png",
+    image: urbanGreensImg, // ✅ FIXED
     tech: ["MERN Stack", "Tailwind CSS", "Razorpay", "JWT Auth"],
   },
   {
@@ -16,7 +21,7 @@ const projects = [
     description:
       "An enterprise-grade automobile sales and service management system built using the MERN stack. Enables vehicle discovery, pricing transparency, customer enquiries, booking, and service workflows within a scalable, business-ready interface.",
     link: "#",
-    image: "/src/assets/bajajautosales.png",
+    image: bajajAutoImg, // ✅ FIXED
     tech: ["MERN Stack", "Tailwind CSS", "REST APIs"],
   },
   {
@@ -25,7 +30,7 @@ const projects = [
     description:
       "A modern React-based weather application delivering real-time forecasts, location search, and API-driven insights using OpenWeather, wrapped in a calm, responsive, and user-centric interface.",
     link: "https://anaskhanweathersearch.netlify.app/",
-    image: "/src/assets/weather.png",
+    image: weatherImg, // ✅ FIXED
     tech: ["React", "API Integration", "Tailwind CSS"],
   },
 ];
@@ -35,7 +40,7 @@ const Projects = () => {
     <section className="relative bg-black text-white px-6 sm:px-10 md:px-20 lg:px-28 pt-40 pb-44">
       <div className="max-w-7xl mx-auto">
 
-        {/* Ultra Editorial Header */}
+        {/* Header */}
         <header className="mb-40 max-w-3xl">
           <p className="text-[11px] uppercase tracking-[0.35em] text-gray-500">
             Selected Work
@@ -50,8 +55,7 @@ const Projects = () => {
           <p className="mt-8 text-gray-400 text-sm sm:text-base leading-relaxed">
             A curated collection of production-grade applications built with a
             focus on clarity, scalability, performance, and timeless user
-            experience. Every project reflects real-world problem solving and
-            thoughtful system design.
+            experience.
           </p>
         </header>
 
@@ -86,7 +90,6 @@ const Projects = () => {
                   {project.description}
                 </p>
 
-                {/* Tech */}
                 <div className="flex flex-wrap gap-3 mt-8">
                   {project.tech.map((item, i) => (
                     <span
@@ -98,7 +101,6 @@ const Projects = () => {
                   ))}
                 </div>
 
-                {/* CTA */}
                 <div className="mt-12">
                   <a
                     href={project.link}
@@ -106,8 +108,7 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-4 text-sm font-medium text-white group-hover:gap-6 transition-all duration-300"
                   >
-                    View Project
-                    <span className="text-xl">→</span>
+                    View Project <span className="text-xl">→</span>
                   </a>
                 </div>
               </div>

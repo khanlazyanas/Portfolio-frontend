@@ -32,9 +32,10 @@ const Header = () => {
   const links = [
     ["/", "Introduction"],
     ["/about", "About"],
+    ["/services", "Service"],
     ["/projects", "Projects"],
     ["/skills", "Skills"],
-    ["/experience", "Experience"],
+    // ["/experience", "Experience"],
     ["/resume", "Resume"],
     ["/contact", "Contact"],
   ];

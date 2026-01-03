@@ -20,7 +20,7 @@ const projects = [
     subtitle: "Enterprise Automobile Sales & Service System",
     description:
       "An enterprise-grade automobile sales and service management system built using the MERN stack. Enables vehicle discovery, pricing transparency, customer enquiries, booking, and service workflows within a scalable, business-ready interface.",
-    link: "#",
+    link: "https://nationalautosales.vercel.app",
     image: bajajAutoImg, // ✅ FIXED
     tech: ["MERN Stack", "Tailwind CSS", "REST APIs"],
   },

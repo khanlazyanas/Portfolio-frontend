@@ -19,7 +19,7 @@ const Resume = () => {
       {/* Resume Card */}
       <div className="max-w-4xl mx-auto relative z-10 bg-gray-900/50 backdrop-blur-xl border border-gray-700/40 rounded-3xl shadow-2xl p-12 flex flex-col md:flex-row gap-6 justify-center items-center animate-slide-up">
         <a
-          href="/Anas_Khan_CV.pdf"
+          href="/public/Anas_Khan_CV 2026.docx"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-teal-400 text-gray-900 px-8 py-3 rounded-xl shadow-lg hover:bg-teal-300 transition font-semibold"

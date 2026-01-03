@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
 import profileImage from "../assets/anas2.jpg";
 
@@ -69,23 +70,23 @@ const Home = () => {
           </div>
 
           <div className="mt-14 flex flex-wrap gap-10">
-            <a
-              href="/projects"
-              className="relative inline-flex items-center gap-3 text-sm font-medium text-white group"
-            >
-              <span className="absolute inset-0 rounded-full bg-white/5 blur-lg opacity-0 group-hover:opacity-100 transition" />
-              View Projects
-              <span className="text-xl group-hover:translate-x-1 transition-transform">
-                →
-              </span>
-            </a>
+            <Link
+    to="/projects"
+    className="relative inline-flex items-center gap-3 text-sm font-medium text-white group"
+  >
+    <span className="absolute inset-0 rounded-full bg-white/5 blur-lg opacity-0 group-hover:opacity-100 transition" />
+    View Projects
+    <span className="text-xl group-hover:translate-x-1 transition-transform">
+      →
+    </span>
+  </Link>
 
-            <a
-              href="/resume"
-              className="text-sm text-gray-400 hover:text-white transition"
-            >
-              Download Resume
-            </a>
+  <Link
+    to="/resume"
+    className="text-sm text-gray-400 hover:text-white transition"
+  >
+    Download Resume
+  </Link>
           </div>
         </header>
 

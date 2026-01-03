@@ -18,3 +18,15 @@
   box-shadow: 0 0 25px rgba(13, 148, 136, 0.9), 0 0 50px rgba(139, 92, 246, 0.7);
 }
 
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float {
+  animation: float 2.5s ease-in-out infinite;
+}

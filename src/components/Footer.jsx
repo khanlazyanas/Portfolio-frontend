@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   FaGithub,
   FaLinkedin,
@@ -12,12 +12,20 @@ import {
 import logo from "../assets/anas4.png";
 
 const Footer = () => {
+  const location = useLocation();
+
+  // 🔥 Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location.pathname]);
+
   const links = [
     ["/", "Home"],
     ["/about", "About"],
+    ["/services", "Service"],
     ["/projects", "Projects"],
     ["/skills", "Skills"],
-    ["/experience", "Experience"],
+    // ["/experience", "Experience"],
     ["/resume", "Resume"],
     ["/contact", "Contact"],
   ];
@@ -28,7 +36,7 @@ const Footer = () => {
       {/* Subtle Texture */}
       <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#ffffff_1px,transparent_1px)] bg-[size:24px_24px]" />
 
-      {/* Top Glow Divider */}
+      {/* Top Divider */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
       {/* Glow Accent */}
@@ -51,7 +59,6 @@ const Footer = () => {
             applications with clean architecture and modern UX.
           </p>
 
-          {/* Status */}
           <p className="mt-4 text-xs text-teal-400 uppercase tracking-widest">
             ● Actively building new projects
           </p>
@@ -88,12 +95,10 @@ const Footer = () => {
               className="flex items-center gap-3 hover:text-white transition"
             >
               <FaEnvelope />
-              khananas@example.com
+              anaskhan995620@gmail.com
             </a>
 
-            <p className="text-gray-500">
-              📍 India • IST Timezone
-            </p>
+            <p className="text-gray-500">📍 India • IST Timezone</p>
 
             <p className="inline-flex items-center gap-2 text-teal-400 text-xs uppercase tracking-widest">
               <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
@@ -163,24 +168,32 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="mt-24 border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500 relative z-10">
-        <p>
-          © {new Date().getFullYear()} Anas Khan. All rights reserved.
-        </p>
+        <p>© {new Date().getFullYear()} Anas Khan. All rights reserved.</p>
 
         <div className="flex items-center gap-6 text-gray-600">
           <span>Privacy</span>
           <span>Terms</span>
-          <span>Built with React • Tailwind • Framer Motion</span>
+          <span>Built with React • Tailwind</span>
         </div>
       </div>
 
       {/* Back To Top */}
-      <a
-        href="#top"
-        className="absolute bottom-6 right-6 p-3 rounded-full border border-white/10 text-gray-400 hover:text-white hover:border-white/30 transition"
-      >
-        <FaArrowUp />
-      </a>
+<button
+  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+  className="absolute bottom-6 right-6 p-3 rounded-full 
+             border border-white/10 
+             text-gray-400 hover:text-white hover:border-white/30 
+             transition-all duration-300 
+             animate-float group
+             shadow-[0_0_18px_rgba(255,255,255,0.25)] 
+             hover:shadow-[0_0_28px_rgba(255,255,255,0.45)]"
+>
+  {/* Glow layer */}
+  <span className="absolute inset-0 rounded-full bg-white/10 blur-xl opacity-0 group-hover:opacity-100 transition" />
+
+  {/* Icon */}
+  <FaArrowUp className="relative z-10 text-lg transition-transform duration-300 group-hover:-translate-y-1 group-hover:rotate-[-6deg]" />
+</button>
     </footer>
   );
 };

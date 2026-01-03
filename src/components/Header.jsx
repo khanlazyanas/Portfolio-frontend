@@ -27,7 +27,6 @@ const itemVariants = {
 const Header = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
-
   const isActive = (path) => location.pathname === path;
 
   const links = [
@@ -42,16 +41,30 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 font-outfit">
-      {/* Glass Header */}
-      <div className="backdrop-blur-2xl bg-black/45 border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 h-[76px] flex items-center justify-between">
+      {/* Screenshot-matched glass bar */}
+      <div
+        className="
+          relative
+          backdrop-blur-[18px]
+          bg-[linear-gradient(90deg,
+            rgb(34,38,41)_0%,
+            rgb(28,30,33)_50%,
+            rgb(36,32,38)_100%
+          )]
+          border-b border-white/5
+        "
+      >
+        {/* subtle top light */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.04),transparent_60%)] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6 md:px-10 h-[76px] flex items-center justify-between relative z-10">
 
           {/* Logo */}
           <Link to="/" onClick={() => setOpen(false)} className="flex items-center">
             <img
               src={logo}
               alt="Anas Khan"
-              className="h-10 md:h-12 w-auto object-contain invert select-none hover:scale-105 transition-transform duration-300"
+              className="h-10 md:h-12 invert select-none transition-transform duration-300 hover:scale-105"
             />
           </Link>
 
@@ -61,7 +74,7 @@ const Header = () => {
               <Link
                 key={path}
                 to={path}
-                className={`relative transition-all duration-300 ${
+                className={`relative transition-colors duration-300 ${
                   isActive(path)
                     ? "text-white"
                     : "text-gray-400 hover:text-white"
@@ -69,9 +82,16 @@ const Header = () => {
               >
                 {label}
 
-                {/* Glow underline */}
                 {isActive(path) && (
-                  <span className="absolute left-0 -bottom-3 w-full h-[2px] bg-gradient-to-r from-teal-400 via-purple-400 to-pink-400 rounded-full shadow-[0_0_12px_rgba(45,212,191,0.8)] animate-glow" />
+                  <span
+                    className="
+                      absolute left-0 -bottom-3 w-full h-[2px]
+                      bg-gradient-to-r from-teal-400 via-purple-400 to-pink-400
+                      rounded-full
+                      shadow-[0_0_8px_rgba(99,102,241,0.45)]
+                      animate-glow
+                    "
+                  />
                 )}
               </Link>
             ))}
@@ -108,7 +128,12 @@ const Header = () => {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="fixed top-0 right-0 z-50 h-full w-[85%] max-w-sm bg-black px-10 pt-28 backdrop-blur-2xl"
+              className="
+                fixed top-0 right-0 z-50 h-full w-[85%] max-w-sm
+                bg-[linear-gradient(180deg,rgb(28,30,33),rgb(18,20,23))]
+                backdrop-blur-[20px]
+                px-10 pt-28
+              "
             >
               <nav className="flex flex-col gap-10 font-lexend">
                 {links.map(([path, label], i) => (
@@ -138,7 +163,7 @@ const Header = () => {
         )}
       </AnimatePresence>
 
-      {/* Fonts & Glow */}
+      {/* Fonts + animation */}
       <style>
         {`
           @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Lexend:wght@400;600;700;900&display=swap');

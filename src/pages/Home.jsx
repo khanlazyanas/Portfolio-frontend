@@ -1,6 +1,6 @@
 import React from "react";
 import { Typewriter } from "react-simple-typewriter";
-import profileImage from "../assets/anas3.jpg";
+import profileImage from "../assets/anas2.jpg";
 
 const Home = () => {
   return (
@@ -19,8 +19,6 @@ const Home = () => {
 
         {/* HEADER */}
         <header className="mb-40 max-w-3xl relative z-10">
-
-          {/* Availability */}
           <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.35em] text-teal-400 mb-6">
             <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
             Available for Work
@@ -39,7 +37,6 @@ const Home = () => {
             Full-Stack MERN Engineer
           </h1>
 
-          {/* Typewriter */}
           <div className="mt-8 text-gray-400 text-sm sm:text-base font-mono h-6">
             <Typewriter
               words={[
@@ -61,19 +58,16 @@ const Home = () => {
             performance, and long-term scalability.
           </p>
 
-          {/* Philosophy Line */}
           <blockquote className="mt-8 pl-4 border-l border-gray-700 text-sm text-gray-500 italic">
             “Great software feels invisible to the user.”
           </blockquote>
 
-          {/* Trust Tags */}
           <div className="flex flex-wrap gap-4 mt-10 text-[11px] uppercase tracking-widest text-gray-500">
             <span>Clean Architecture</span>
             <span>Performance-Driven</span>
             <span>Scalable Systems</span>
           </div>
 
-          {/* CTA */}
           <div className="mt-14 flex flex-wrap gap-10">
             <a
               href="/projects"
@@ -98,12 +92,12 @@ const Home = () => {
         {/* HERO */}
         <article className="grid lg:grid-cols-2 gap-24 items-center relative z-10">
 
-          {/* Image */}
-          <div className="relative rounded-[3rem] overflow-hidden border border-white/10 backdrop-blur-xl group">
+          {/* Image (REFINED SIZE) */}
+          <div className="relative max-w-[520px] mx-auto rounded-[3rem] overflow-hidden border border-white/10 backdrop-blur-xl group">
             <img
               src={profileImage}
               alt="Anas Khan"
-              className="w-full h-[460px] object-cover transition-transform duration-1000 group-hover:scale-105"
+              className="w-full h-[380px] object-cover transition-transform duration-1000 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition" />
@@ -125,7 +119,6 @@ const Home = () => {
               every project.
             </p>
 
-            {/* Stack */}
             <div className="flex flex-wrap gap-3 mt-8">
               {[
                 "HTML",
@@ -147,7 +140,6 @@ const Home = () => {
               ))}
             </div>
 
-            {/* Metrics */}
             <div className="grid grid-cols-3 gap-12 mt-16 text-center">
               <div>
                 <p className="text-2xl font-semibold">10+</p>
@@ -172,7 +164,6 @@ const Home = () => {
         </article>
       </div>
 
-      {/* Scroll Cue */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-500 text-xs tracking-widest animate-bounce">
         Scroll
       </div>

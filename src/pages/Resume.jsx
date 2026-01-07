@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const Resume = () => {
   return (
@@ -10,9 +9,11 @@ const Resume = () => {
         <p className="text-[11px] uppercase tracking-[0.35em] text-gray-500">
           Resume
         </p>
+
         <h2 className="mt-8 text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-purple-400 to-pink-400 animate-fade-in">
           My Resume
         </h2>
+
         <p className="mt-8 text-gray-400 text-sm sm:text-base leading-relaxed">
           Download or view my latest resume showcasing my technical skills,
           projects, and achievements.
@@ -21,22 +22,25 @@ const Resume = () => {
 
       {/* Resume Card */}
       <div className="max-w-4xl mx-auto relative z-10 bg-gray-900/50 backdrop-blur-xl border border-gray-700/40 rounded-3xl shadow-2xl p-12 flex flex-col md:flex-row gap-6 justify-center items-center animate-slide-up">
-        <Link
-  to="/public/Anas_Khan_CV 2026.docx"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="bg-teal-400 text-gray-900 px-8 py-3 rounded-xl shadow-lg hover:bg-teal-300 transition font-semibold"
->
-  View Resume
-</Link>
 
-<Link
-  to="/Anas_Khan_CV.pdf"
-  download
-  className="bg-gray-700 text-white px-8 py-3 rounded-xl shadow-lg hover:bg-gray-600 transition font-semibold"
->
-  Download Resume
-</Link>
+        {/* VIEW RESUME (PDF) */}
+        <a
+          href="/Anas_Khan_CV.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-teal-400 text-gray-900 px-8 py-3 rounded-xl shadow-lg hover:bg-teal-300 transition font-semibold"
+        >
+          View Resume
+        </a>
+
+        {/* DOWNLOAD RESUME (DOCX) */}
+        <a
+          href="/Anas_Khan_CV_2026.docx"
+          download
+          className="bg-gray-700 text-white px-8 py-3 rounded-xl shadow-lg hover:bg-gray-600 transition font-semibold"
+        >
+          Download Resume
+        </a>
       </div>
 
       {/* Floating Blobs */}

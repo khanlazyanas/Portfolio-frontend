@@ -25,7 +25,7 @@ const Resume = () => {
 
         {/* VIEW RESUME (PDF) */}
         <a
-          href="/Anas_Khan_CV.pdf"
+          href="/anaskhanpdf.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-teal-400 text-gray-900 px-8 py-3 rounded-xl shadow-lg hover:bg-teal-300 transition font-semibold"
@@ -35,7 +35,7 @@ const Resume = () => {
 
         {/* DOWNLOAD RESUME (DOCX) */}
         <a
-          href="/Anas_Khan_CV_2026.docx"
+          href="/Anas_Khan_NEW_CV.docx"
           download
           className="bg-gray-700 text-white px-8 py-3 rounded-xl shadow-lg hover:bg-gray-600 transition font-semibold"
         >

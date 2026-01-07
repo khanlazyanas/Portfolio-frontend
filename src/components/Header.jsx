@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "../assets/anas4.png";
 
+/* Drawer slide animation (same as before) */
 const drawerVariants = {
   hidden: { x: "100%" },
   visible: {
@@ -15,13 +16,25 @@ const drawerVariants = {
   },
 };
 
+/* NAV container → controls stagger */
+const navVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,   // ⭐ ek ek karke
+      delayChildren: 0.15,
+    },
+  },
+};
+
+/* Individual item animation */
 const itemVariants = {
-  hidden: { opacity: 0, y: 14 },
-  visible: (i) => ({
+  hidden: { opacity: 0, y: 20 },
+  visible: {
     opacity: 1,
     y: 0,
-    transition: { delay: 0.06 * i },
-  }),
+    transition: { duration: 0.45, ease: "easeOut" },
+  },
 };
 
 const Header = () => {
@@ -35,18 +48,16 @@ const Header = () => {
     ["/services", "Service"],
     ["/projects", "Projects"],
     ["/skills", "Skills"],
-    // ["/experience", "Experience"],
     ["/resume", "Resume"],
     ["/contact", "Contact"],
   ];
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 font-outfit">
-      {/* Screenshot-matched glass bar */}
+      {/* Desktop Header */}
       <div
         className="
-          relative
-          backdrop-blur-[18px]
+          relative backdrop-blur-[18px]
           bg-[linear-gradient(90deg,
             rgb(34,38,41)_0%,
             rgb(28,30,33)_50%,
@@ -55,54 +66,32 @@ const Header = () => {
           border-b border-white/5
         "
       >
-        {/* subtle top light */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.04),transparent_60%)] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 md:px-10 h-[76px] flex items-center justify-between relative z-10">
-
-          {/* Logo */}
-          <Link to="/" onClick={() => setOpen(false)} className="flex items-center">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 h-[76px] flex items-center justify-between">
+          <Link to="/" onClick={() => setOpen(false)}>
             <img
               src={logo}
               alt="Anas Khan"
-              className="h-10 md:h-12 invert select-none transition-transform duration-300 hover:scale-105"
+              className="h-10 md:h-12 invert select-none"
             />
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-12 text-[13px] tracking-[0.18em] uppercase font-lexend">
+          <nav className="hidden md:flex gap-12 text-[13px] tracking-[0.18em] uppercase font-lexend">
             {links.map(([path, label]) => (
               <Link
                 key={path}
                 to={path}
-                className={`relative transition-colors duration-300 ${
-                  isActive(path)
-                    ? "text-white"
-                    : "text-gray-400 hover:text-white"
-                }`}
+                className={isActive(path) ? "text-white" : "text-gray-400 hover:text-white"}
               >
                 {label}
-
-                {isActive(path) && (
-                  <span
-                    className="
-                      absolute left-0 -bottom-3 w-full h-[2px]
-                      bg-gradient-to-r from-teal-400 via-purple-400 to-pink-400
-                      rounded-full
-                      shadow-[0_0_8px_rgba(99,102,241,0.45)]
-                      animate-glow
-                    "
-                  />
-                )}
               </Link>
             ))}
           </nav>
 
-          {/* Mobile Toggle */}
           <button
             onClick={() => setOpen(true)}
-            className="md:hidden text-gray-300 hover:text-white transition"
-            aria-label="Open Menu"
+            className="md:hidden text-gray-300 hover:text-white"
           >
             <div className="space-y-2">
               <span className="block w-6 h-[2px] bg-white rounded-full" />
@@ -118,7 +107,7 @@ const Header = () => {
           <>
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.6 }}
+              animate={{ opacity: 0.55 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 bg-black z-40"
               onClick={() => setOpen(false)}
@@ -131,24 +120,31 @@ const Header = () => {
               exit="exit"
               className="
                 fixed top-0 right-0 z-50 h-full w-[85%] max-w-sm
-                bg-[linear-gradient(180deg,rgb(28,30,33),rgb(18,20,23))]
-                backdrop-blur-[20px]
+                backdrop-blur-[18px]
+                bg-[linear-gradient(90deg,
+                  rgb(34,38,41)_0%,
+                  rgb(28,30,33)_50%,
+                  rgb(36,32,38)_100%
+                )]
                 px-10 pt-28
               "
             >
-              <nav className="flex flex-col gap-10 font-lexend">
-                {links.map(([path, label], i) => (
+              {/* ⭐ NAV STAGGER CONTROLLER */}
+              <motion.nav
+                variants={navVariants}
+                initial="hidden"
+                animate="visible"
+                className="flex flex-col gap-10 font-lexend"
+              >
+                {links.map(([path, label]) => (
                   <motion.div
                     key={path}
-                    custom={i}
                     variants={itemVariants}
-                    initial="hidden"
-                    animate="visible"
                     onClick={() => setOpen(false)}
                   >
                     <Link
                       to={path}
-                      className={`text-2xl tracking-wide transition ${
+                      className={`text-2xl tracking-wide ${
                         isActive(path)
                           ? "text-white"
                           : "text-gray-400 hover:text-white"
@@ -158,30 +154,11 @@ const Header = () => {
                     </Link>
                   </motion.div>
                 ))}
-              </nav>
+              </motion.nav>
             </motion.aside>
           </>
         )}
       </AnimatePresence>
-
-      {/* Fonts + animation */}
-      <style>
-        {`
-          @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Lexend:wght@400;600;700;900&display=swap');
-
-          .font-outfit { font-family: 'Outfit', sans-serif; }
-          .font-lexend { font-family: 'Lexend', sans-serif; }
-
-          @keyframes glow {
-            0%,100% { opacity: 0.6; }
-            50% { opacity: 1; }
-          }
-
-          .animate-glow {
-            animation: glow 2.5s ease-in-out infinite;
-          }
-        `}
-      </style>
     </header>
   );
 };

@@ -3,6 +3,30 @@ import { Link } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
 import profileImage from "../assets/anas2.jpg";
 
+import {
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
+  SiReact,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiExpress,
+  SiMongodb,
+  SiOpenai,
+} from "react-icons/si";
+
+const techStack = [
+  { name: "HTML", icon: <SiHtml5 /> },
+  { name: "CSS", icon: <SiCss3 /> },
+  { name: "JavaScript", icon: <SiJavascript /> },
+  { name: "React", icon: <SiReact /> },
+  { name: "Tailwind", icon: <SiTailwindcss /> },
+  { name: "Node.js", icon: <SiNodedotjs /> },
+  { name: "Express", icon: <SiExpress /> },
+  { name: "MongoDB", icon: <SiMongodb /> },
+  { name: "AI Tools", icon: <SiOpenai /> },
+];
+
 const Home = () => {
   return (
     <section className="relative bg-black text-white px-6 sm:px-10 md:px-20 lg:px-28 pt-40 pb-44 overflow-hidden">
@@ -71,29 +95,29 @@ const Home = () => {
 
           <div className="mt-14 flex flex-wrap gap-10">
             <Link
-    to="/projects"
-    className="relative inline-flex items-center gap-3 text-sm font-medium text-white group"
-  >
-    <span className="absolute inset-0 rounded-full bg-white/5 blur-lg opacity-0 group-hover:opacity-100 transition" />
-    View Projects
-    <span className="text-xl group-hover:translate-x-1 transition-transform">
-      →
-    </span>
-  </Link>
+              to="/projects"
+              className="relative inline-flex items-center gap-3 text-sm font-medium text-white group"
+            >
+              <span className="absolute inset-0 rounded-full bg-white/5 blur-lg opacity-0 group-hover:opacity-100 transition" />
+              View Projects
+              <span className="text-xl group-hover:translate-x-1 transition-transform">
+                →
+              </span>
+            </Link>
 
-  <Link
-    to="/resume"
-    className="text-sm text-gray-400 hover:text-white transition"
-  >
-    Download Resume
-  </Link>
+            <Link
+              to="/resume"
+              className="text-sm text-gray-400 hover:text-white transition"
+            >
+              Download Resume
+            </Link>
           </div>
         </header>
 
         {/* HERO */}
         <article className="grid lg:grid-cols-2 gap-24 items-center relative z-10">
 
-          {/* Image (REFINED SIZE) */}
+          {/* Image */}
           <div className="relative max-w-[520px] mx-auto rounded-[3rem] overflow-hidden border border-white/10 backdrop-blur-xl group">
             <img
               src={profileImage}
@@ -120,23 +144,27 @@ const Home = () => {
               every project.
             </p>
 
+            {/* TECH STACK WITH ICONS */}
             <div className="flex flex-wrap gap-3 mt-8">
-              {[
-                "HTML",
-                "CSS",
-                "JavaScript",
-                "React",
-                "Tailwind",
-                "Node.js",
-                "Express",
-                "MongoDB",
-                "AI Tools",
-              ].map((tech, i) => (
+              {techStack.map((tech, i) => (
                 <span
                   key={i}
-                  className="text-[11px] px-4 py-1.5 rounded-full border border-gray-700 text-gray-300 hover:border-gray-500 transition"
+                  className="
+                    flex items-center gap-2
+                    text-[11px] px-4 py-1.5 rounded-full
+                    border border-gray-700
+                    text-gray-300
+                    backdrop-blur-md
+                    bg-white/5
+                    shadow-[0_0_15px_rgba(0,0,0,0.6)]
+                    hover:border-gray-500
+                    transition
+                  "
                 >
-                  {tech}
+                  <span className="text-sm text-gray-300">
+                    {tech.icon}
+                  </span>
+                  {tech.name}
                 </span>
               ))}
             </div>

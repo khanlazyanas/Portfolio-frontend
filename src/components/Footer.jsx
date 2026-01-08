@@ -194,6 +194,22 @@ const Footer = () => {
   {/* Icon */}
   <FaArrowUp className="relative z-10 text-lg transition-transform duration-300 group-hover:-translate-y-1 group-hover:rotate-[-6deg]" />
 </button>
+
+<a
+  href="https://wa.me/8429755694"
+  target="_blank"
+  rel="noreferrer"
+  className="absolute bottom-20 right-6 p-3 rounded-full border border-white/10 
+             text-white hover:text-white hover:border-white/30 
+             transition-all duration-300 animate-float group
+             shadow-[0_0_18px_rgba(255,255,255,0.25)] 
+             hover:shadow-[0_0_28px_rgba(255,255,255,0.45)]"
+>
+  <span className="absolute inset-0 rounded-full bg-white/10 blur-xl opacity-0 group-hover:opacity-100 transition" />
+
+  <FaWhatsapp className="relative z-10 text-lg transition-transform duration-300 group-hover:-translate-y-1 group-hover:rotate-[-6deg]" />
+</a>
+
     </footer>
   );
 };

@@ -4,8 +4,19 @@ import React from "react";
 import urbanGreensImg from "../assets/urbangreens.png";
 import bajajAutoImg from "../assets/bajajautosales.png";
 import weatherImg from "../assets/weather.png";
+import aiMockInterviewImg from "../assets/Ai-mock-interview.png"
 
 const projects = [
+  {
+  title: "AI-MOCK-INTERVIEW",
+  subtitle: "AI-Powered Interview Practice Platform",
+  description:
+    "An AI-driven mock interview platform currently under active development using the MERN stack and Tailwind CSS. The system is being built to simulate real interview experiences with AI-generated questions, resume-based assessments, performance feedback, and skill analysis. Focused on delivering a modern, responsive, and user-friendly interface while continuously enhancing core AI features.",
+  link: "https://ai-mock-interview-lac-two.vercel.app", // optional
+  image: aiMockInterviewImg,
+  tech: ["MERN Stack", "Tailwind CSS", "AI Integration", "JWT Auth"],
+}
+,
   {
     title: "UrbanGreens",
     subtitle: "Full-Stack Grocery Commerce Platform",

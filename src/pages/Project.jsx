@@ -1,29 +1,27 @@
 import React from "react";
 
-// ✅ IMPORT IMAGES (MOST IMPORTANT FIX)
 import urbanGreensImg from "../assets/urbangreens.png";
 import bajajAutoImg from "../assets/bajajautosales.png";
 import weatherImg from "../assets/weather.png";
-import aiMockInterviewImg from "../assets/Ai-mock-interview.png"
+import aiMockInterviewImg from "../assets/Ai-mock-interview.png";
 
 const projects = [
   {
-  title: "AI-MOCK-INTERVIEW",
-  subtitle: "AI-Powered Interview Practice Platform",
-  description:
-    "An AI-driven mock interview platform currently under active development using the MERN stack and Tailwind CSS. The system is being built to simulate real interview experiences with AI-generated questions, resume-based assessments, performance feedback, and skill analysis. Focused on delivering a modern, responsive, and user-friendly interface while continuously enhancing core AI features.",
-  link: "https://ai-mock-interview-lac-two.vercel.app", // optional
-  image: aiMockInterviewImg,
-  tech: ["MERN Stack", "Tailwind CSS", "AI Integration", "JWT Auth"],
-}
-,
+    title: "AI-MOCK-INTERVIEW",
+    subtitle: "AI-Powered Interview Practice Platform",
+    description:
+      "An AI-driven mock interview platform currently under active development using the MERN stack and Tailwind CSS. The system is being built to simulate real interview experiences with AI-generated questions, resume-based assessments, performance feedback, and skill analysis. Focused on delivering a modern, responsive, and user-friendly interface while continuously enhancing core AI features.",
+    link: "https://ai-mock-interview-lac-two.vercel.app",
+    image: aiMockInterviewImg,
+    tech: ["MERN Stack", "Tailwind CSS", "AI Integration", "JWT Auth"],
+  },
   {
     title: "UrbanGreens",
     subtitle: "Full-Stack Grocery Commerce Platform",
     description:
       "A production-ready grocery commerce platform engineered with the MERN stack and Tailwind CSS. Designed for scale and reliability, featuring secure authentication, product and order management, cart workflows, and Razorpay payment integration with a refined, high-performance user experience.",
     link: "https://urbangreens-frontend-n2hv3.vercel.app",
-    image: urbanGreensImg, // ✅ FIXED
+    image: urbanGreensImg,
     tech: ["MERN Stack", "Tailwind CSS", "Razorpay", "JWT Auth"],
   },
   {
@@ -32,7 +30,7 @@ const projects = [
     description:
       "An enterprise-grade automobile sales and service management system built using the MERN stack. Enables vehicle discovery, pricing transparency, customer enquiries, booking, and service workflows within a scalable, business-ready interface.",
     link: "https://nationalautosales.vercel.app",
-    image: bajajAutoImg, // ✅ FIXED
+    image: bajajAutoImg,
     tech: ["MERN Stack", "Tailwind CSS", "REST APIs"],
   },
   {
@@ -41,18 +39,18 @@ const projects = [
     description:
       "A modern React-based weather application delivering real-time forecasts, location search, and API-driven insights using OpenWeather, wrapped in a calm, responsive, and user-centric interface.",
     link: "https://anaskhanweathersearch.netlify.app/",
-    image: weatherImg, // ✅ FIXED
+    image: weatherImg,
     tech: ["React", "API Integration", "Tailwind CSS"],
   },
 ];
 
 const Projects = () => {
   return (
-    <section className="relative bg-black text-white px-6 sm:px-10 md:px-20 lg:px-28 pt-40 pb-44">
+    <section className="relative bg-black text-white px-6 sm:px-10 md:px-20 lg:px-28 pt-28 pb-32">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
-        <header className="mb-40 max-w-3xl">
+        <header className="mb-24 max-w-3xl">
           <p className="text-[11px] uppercase tracking-[0.35em] text-gray-500">
             Selected Work
           </p>
@@ -71,20 +69,20 @@ const Projects = () => {
         </header>
 
         {/* Projects */}
-        <div className="space-y-32">
+        <div className="space-y-20 sm:space-y-28 lg:space-y-32">
           {projects.map((project, idx) => (
             <article
               key={idx}
-              className="group grid lg:grid-cols-2 gap-16 items-center"
+              className="group grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center"
             >
               {/* Image */}
-              <div className="relative overflow-hidden rounded-[2.5rem]">
+              <div className="relative overflow-hidden rounded-[2rem] bg-[#0b1020]">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-[420px] object-cover transition-transform duration-1000 group-hover:scale-105"
+                  className="w-full h-[260px] sm:h-[340px] lg:h-[420px] object-contain transition-transform duration-1000 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
               </div>
 
               {/* Content */}
@@ -93,15 +91,15 @@ const Projects = () => {
                   {project.subtitle}
                 </p>
 
-                <h3 className="mt-4 text-3xl font-semibold text-white">
+                <h3 className="mt-3 text-2xl sm:text-3xl font-semibold text-white">
                   {project.title}
                 </h3>
 
-                <p className="mt-6 text-gray-400 text-sm leading-relaxed">
+                <p className="mt-4 sm:mt-6 text-gray-400 text-sm leading-relaxed">
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-3 mt-8">
+                <div className="flex flex-wrap gap-3 mt-6 sm:mt-8">
                   {project.tech.map((item, i) => (
                     <span
                       key={i}
@@ -112,7 +110,7 @@ const Projects = () => {
                   ))}
                 </div>
 
-                <div className="mt-12">
+                <div className="mt-8 sm:mt-12">
                   <a
                     href={project.link}
                     target="_blank"

@@ -64,7 +64,7 @@ const Home = () => {
               Anas Khan
             </span>
             <br />
-            <span className="text-gray-300">Software Engineer.</span>
+            <span className="text-gray-300">MERN Developer.</span>
           </h1>
 
           <div className="mt-8 text-teal-400 text-lg sm:text-xl font-mono h-8 font-medium">

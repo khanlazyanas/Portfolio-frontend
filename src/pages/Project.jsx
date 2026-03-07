@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ArrowRight, ExternalLink, X, Maximize2 } from "lucide-react";
 
 import urbanGreensImg from "../assets/urbangreens.png";
-import bajajAutoImg from "../assets/bajajautosales.png";
+import bajajAutoImg from "../assets/bajajnewimage.png";
 import weatherImg from "../assets/weather.png";
 import aiMockInterviewImg from "../assets/Ai-mock-interview.png";
 import weightlossimg from "../assets/drabubakar.png";

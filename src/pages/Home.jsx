@@ -13,7 +13,7 @@ import {
 // Images (Make sure paths are correct based on your folder structure)
 import profileImage from "../assets/anas2.jpg";
 import urbanGreensImg from "../assets/urbangreens.png";
-import bajajAutoImg from "../assets/bajajautosales.png";
+import bajajAutoImg from "../assets/bajajnewimage.png";
 import weatherImg from "../assets/weather.png";
 import aiMockInterviewImg from "../assets/Ai-mock-interview.png";
 import weightlossimg from "../assets/drabubakar.png";

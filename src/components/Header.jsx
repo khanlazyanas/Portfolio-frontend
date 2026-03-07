@@ -33,6 +33,7 @@ const Header = () => {
     ["/skills", "Skills"],
     ["/resume", "Resume"],
     ["/contact", "Contact"],
+    ["/blog", "Blog"],
   ];
 
   useEffect(() => {

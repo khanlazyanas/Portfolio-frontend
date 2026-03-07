@@ -12,6 +12,7 @@ import Experience from "./pages/Experiance";
 import Resume from "./pages/Resume";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Blog from "./pages/Blog";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/skills" element={<Skills />} />
             <Route path="/experience" element={<Experience />} />
             <Route path="/resume" element={<Resume />} />
+            <Route path="/blog" element={<Blog />} />
           </Routes>
         </div>
         <ToastContainer

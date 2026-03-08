@@ -70,9 +70,9 @@ const Resume = () => {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row items-center gap-4">
                 
-                {/* PDF Button (Primary) */}
+                {/* PDF Button (Primary) - FIX HERE */}
                 <a
-                  href="/public/Anas_Khan_CV6.pdf"
+                  href="/Anas_Khan_CV6.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-400 hover:to-blue-500 text-white font-bold px-8 py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(45,212,191,0.3)] hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] active:scale-[0.98]"
@@ -80,9 +80,9 @@ const Resume = () => {
                   <Eye size={18} /> View PDF
                 </a>
 
-                {/* DOCX Button (Secondary) */}
+                {/* DOCX Button (Secondary) - FIX HERE */}
                 <a
-                  href="/public/Anas_Khan_CV5.docx"
+                  href="/Anas_Khan_CV5.docx"
                   download
                   className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white font-semibold px-8 py-3.5 rounded-xl transition-all duration-300 hover:border-white/20 active:scale-[0.98]"
                 >

@@ -283,8 +283,8 @@ const Home = () => {
                   <p className="text-[10px] uppercase tracking-widest text-gray-500 font-semibold">Projects</p>
                 </div>
                 <div className="text-center border-l border-r border-white/10 group/stat">
-                  <p className="text-3xl font-bold text-white mb-1 group-hover/stat:scale-110 transition-transform">1<span className="text-teal-400">+</span></p>
-                  <p className="text-[10px] uppercase tracking-widest text-gray-500 font-semibold">Years Exp.</p>
+                  <p className="text-3xl font-bold text-white mb-1 group-hover/stat:scale-110 transition-transform">Junior Developer (Fresher)<span className="text-teal-400"></span></p>
+                  <p className="text-[10px] uppercase tracking-widest text-gray-500 font-semibold"></p>
                 </div>
                 <div className="text-center group/stat">
                   <p className="text-3xl font-bold text-white mb-1 group-hover/stat:scale-110 transition-transform">MERN</p>

@@ -70,7 +70,7 @@ const Resume = () => {
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row items-center gap-4">
                 
-                {/* PDF Button (Primary) - FIX HERE */}
+                {/* PDF Button (Primary) */}
                 <a
                   href="/Anas_Khan_CV6.pdf"
                   target="_blank"
@@ -80,7 +80,7 @@ const Resume = () => {
                   <Eye size={18} /> View PDF
                 </a>
 
-                {/* DOCX Button (Secondary) - FIX HERE */}
+                {/* DOCX Button (Secondary) */}
                 <a
                   href="/Anas_Khan_CV5.docx"
                   download

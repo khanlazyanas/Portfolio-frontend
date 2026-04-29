@@ -6,8 +6,28 @@ import bajajAutoImg from "../assets/bajajnewimage.png";
 import weatherImg from "../assets/weather.png";
 import aiMockInterviewImg from "../assets/Ai-mock-interview.png";
 import weightlossimg from "../assets/drabubakar.png";
+import bizflowimg from "../assets/bizzflow.png";
+
 
 const projects = [
+  {
+      title: "BIZFLOW",
+      subtitle: "Enterprise B2B SaaS & Workspace Management Platform",
+      description:
+        "A full-stack, multi-tenant SaaS application engineered on the MERN stack. Designed with an ultra-premium 'Deep Space' dark mode aesthetic, it features advanced security protocols including Google OAuth 2.0, Passwordless Magic Link (OTP) authentication, and strict cross-domain HTTP-only cookies. The robust backend architecture is equipped with automated cron jobs for data lifecycle management (Soft Delete/Recycle Bin), rate-limiting for API protection, and seamless invoice generation.",
+      link: "https://bizflow-saas-web.vercel.app", 
+      image: bizflowimg, 
+      tech: [
+        "React.js", 
+        "Node.js & Express", 
+        "MongoDB", 
+        "Google OAuth 2.0", 
+        "JWT Auth", 
+        "Tailwind CSS", 
+        "Framer Motion"
+      ],
+      glowColor: "bg-[#4f46e5]/20", 
+    },
   {
     title: "WEIGHTLOSS-DOC",
     subtitle: "Elite Bio-Medical & Metabolic Optimization Platform",

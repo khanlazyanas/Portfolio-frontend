@@ -82,7 +82,7 @@ const Resume = () => {
 
                 {/* DOCX Button (Secondary) */}
                 <a
-                  href="/Anas_Khan_CV5.docx"
+                  href="/Anas_Khan_CV-10.docx"
                   download
                   className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-gray-300 hover:text-white font-semibold px-8 py-3.5 rounded-xl transition-all duration-300 hover:border-white/20 active:scale-[0.98]"
                 >

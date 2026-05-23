@@ -18,6 +18,7 @@ import weatherImg from "../assets/weather.png";
 import aiMockInterviewImg from "../assets/Ai-mock-interview.png";
 import weightlossimg from "../assets/drabubakar.png";
 import bizflowimg from "../assets/bizzflow.png";
+import nexposimg from "../assets/nexpos.png";
 
 
 // ================= DATA ARRAYS ================= //
@@ -103,6 +104,24 @@ const projects = [
       "Framer Motion"
     ],
     glowColor: "bg-[#4f46e5]/20", 
+  },
+  {
+    title: "NEXPOS",
+    subtitle: "Enterprise-Grade Point of Sale & Retail Management System",
+    description:
+      "A next-generation, full-stack retail SaaS platform built on Next.js and MongoDB. Designed with an ultra-premium 'Silicon Valley' glassmorphic aesthetic, it features real-time inventory tracking, a dedicated CRM for 'Khata' (customer credit) management, and secure role-based access control (RBAC) via Next-Auth. The system boasts seamless Razorpay payment gateway integration, dynamic Recharts analytics dashboards, and an automated, print-ready thermal receipt generator, delivering a top-tier operational experience.",
+    link: "https://nexpos-azure.vercel.app", 
+    image: nexposimg, 
+    tech: [
+      "Next.js (App Router)", 
+      "React.js", 
+      "MongoDB & Mongoose", 
+      "Next-Auth (Auth.js)", 
+      "Tailwind CSS", 
+      "Razorpay Integration", 
+      "Recharts"
+    ],
+    glowColor: "bg-[#10b981]/20", 
   },
   {
     title: "WEIGHTLOSS-DOC",

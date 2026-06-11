@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
+import { motion } from "framer-motion";
 import { 
   ArrowRight, Download, Mail, Code2, MonitorSmartphone, 
   Server, Zap, Cloud, CheckCircle2, Quote, ExternalLink, X, Maximize2 
@@ -8,6 +9,7 @@ import {
 import {
   SiHtml5, SiCss3, SiJavascript, SiReact, SiTailwindcss,
   SiNodedotjs, SiExpress, SiMongodb, SiOpenai, SiGithub, SiLinkedin,
+  SiNextdotjs, SiFramer, SiJsonwebtokens
 } from "react-icons/si";
 
 // Images (Make sure paths are correct based on your folder structure)
@@ -20,18 +22,20 @@ import weightlossimg from "../assets/drabubakar.png";
 import bizflowimg from "../assets/bizzflow.png";
 import nexposimg from "../assets/nexpos.png";
 
-
 // ================= DATA ARRAYS ================= //
 
 const techStack = [
-  { name: "HTML", icon: <SiHtml5 />, hoverColor: "hover:text-[#E34F26] hover:border-[#E34F26]/50 hover:bg-[#E34F26]/10" },
-  { name: "CSS", icon: <SiCss3 />, hoverColor: "hover:text-[#1572B6] hover:border-[#1572B6]/50 hover:bg-[#1572B6]/10" },
-  { name: "JavaScript", icon: <SiJavascript />, hoverColor: "hover:text-[#F7DF1E] hover:border-[#F7DF1E]/50 hover:bg-[#F7DF1E]/10" },
+  { name: "Next.js", icon: <SiNextdotjs />, hoverColor: "hover:text-white hover:border-white/50 hover:bg-white/10" },
   { name: "React", icon: <SiReact />, hoverColor: "hover:text-[#61DAFB] hover:border-[#61DAFB]/50 hover:bg-[#61DAFB]/10" },
-  { name: "Tailwind", icon: <SiTailwindcss />, hoverColor: "hover:text-[#06B6D4] hover:border-[#06B6D4]/50 hover:bg-[#06B6D4]/10" },
   { name: "Node.js", icon: <SiNodedotjs />, hoverColor: "hover:text-[#339933] hover:border-[#339933]/50 hover:bg-[#339933]/10" },
   { name: "Express", icon: <SiExpress />, hoverColor: "hover:text-white hover:border-white/50 hover:bg-white/10" },
   { name: "MongoDB", icon: <SiMongodb />, hoverColor: "hover:text-[#47A248] hover:border-[#47A248]/50 hover:bg-[#47A248]/10" },
+  { name: "JavaScript", icon: <SiJavascript />, hoverColor: "hover:text-[#F7DF1E] hover:border-[#F7DF1E]/50 hover:bg-[#F7DF1E]/10" },
+  { name: "Tailwind", icon: <SiTailwindcss />, hoverColor: "hover:text-[#06B6D4] hover:border-[#06B6D4]/50 hover:bg-[#06B6D4]/10" },
+  { name: "Framer Motion", icon: <SiFramer />, hoverColor: "hover:text-[#0055FF] hover:border-[#0055FF]/50 hover:bg-[#0055FF]/10" },
+  { name: "JWT Auth", icon: <SiJsonwebtokens />, hoverColor: "hover:text-[#FB015B] hover:border-[#FB015B]/50 hover:bg-[#FB015B]/10" },
+  { name: "HTML5", icon: <SiHtml5 />, hoverColor: "hover:text-[#E34F26] hover:border-[#E34F26]/50 hover:bg-[#E34F26]/10" },
+  { name: "CSS3", icon: <SiCss3 />, hoverColor: "hover:text-[#1572B6] hover:border-[#1572B6]/50 hover:bg-[#1572B6]/10" },
   { name: "AI Tools", icon: <SiOpenai />, hoverColor: "hover:text-[#412991] hover:border-[#412991]/50 hover:bg-[#412991]/10" },
 ];
 
@@ -90,44 +94,25 @@ const projects = [
   {
     title: "BIZFLOW",
     subtitle: "Enterprise B2B SaaS & Workspace Management Platform",
-    description:
-      "A full-stack, multi-tenant SaaS application engineered on the MERN stack. Designed with an ultra-premium 'Deep Space' dark mode aesthetic, it features advanced security protocols including Google OAuth 2.0, Passwordless Magic Link (OTP) authentication, and strict cross-domain HTTP-only cookies. The robust backend architecture is equipped with automated cron jobs for data lifecycle management (Soft Delete/Recycle Bin), rate-limiting for API protection, and seamless invoice generation.",
+    description: "A full-stack, multi-tenant SaaS application engineered on the MERN stack. Designed with an ultra-premium 'Deep Space' dark mode aesthetic, it features advanced security protocols including Google OAuth 2.0, Passwordless Magic Link (OTP) authentication, and strict cross-domain HTTP-only cookies. The robust backend architecture is equipped with automated cron jobs for data lifecycle management (Soft Delete/Recycle Bin), rate-limiting for API protection, and seamless invoice generation.",
     link: "https://bizflow-saas-web.vercel.app", 
     image: bizflowimg, 
-    tech: [
-      "React.js", 
-      "Node.js & Express", 
-      "MongoDB", 
-      "Google OAuth 2.0", 
-      "JWT Auth", 
-      "Tailwind CSS", 
-      "Framer Motion"
-    ],
+    tech: ["React.js", "Node.js & Express", "MongoDB", "Google OAuth 2.0", "JWT Auth", "Tailwind CSS", "Framer Motion"],
     glowColor: "bg-[#4f46e5]/20", 
   },
   {
     title: "NEXPOS",
     subtitle: "Enterprise-Grade Point of Sale & Retail Management System",
-    description:
-      "A next-generation, full-stack retail SaaS platform built on Next.js and MongoDB. Designed with an ultra-premium 'Silicon Valley' glassmorphic aesthetic, it features real-time inventory tracking, a dedicated CRM for 'Khata' (customer credit) management, and secure role-based access control (RBAC) via Next-Auth. The system boasts seamless Razorpay payment gateway integration, dynamic Recharts analytics dashboards, and an automated, print-ready thermal receipt generator, delivering a top-tier operational experience.",
+    description: "A next-generation, full-stack retail SaaS platform built on Next.js and MongoDB. Designed with an ultra-premium 'Silicon Valley' glassmorphic aesthetic, it features real-time inventory tracking, a dedicated CRM for 'Khata' (customer credit) management, and secure role-based access control (RBAC) via Next-Auth. The system boasts seamless Razorpay payment gateway integration, dynamic Recharts analytics dashboards, and an automated, print-ready thermal receipt generator.",
     link: "https://nexpos-azure.vercel.app", 
     image: nexposimg, 
-    tech: [
-      "Next.js (App Router)", 
-      "React.js", 
-      "MongoDB & Mongoose", 
-      "Next-Auth (Auth.js)", 
-      "Tailwind CSS", 
-      "Razorpay Integration", 
-      "Recharts"
-    ],
+    tech: ["Next.js", "React.js", "MongoDB", "Next-Auth", "Tailwind CSS", "Razorpay", "Recharts"],
     glowColor: "bg-[#10b981]/20", 
   },
   {
     title: "WEIGHTLOSS-DOC",
     subtitle: "Elite Bio-Medical & Metabolic Optimization Platform",
-    description:
-      "A high-end clinical web application designed for a specialized metabolic clinic. The platform features an ultra-premium 'Silicon Valley' aesthetic, built with a focus on data-driven health optimization. It includes interactive biometric diagnostic tools (BMI), automated intake systems, and an evidence-based case study gallery. Engineered with a 'Quiet Luxury' design language to establish clinical authority and trust.",
+    description: "A high-end clinical web application designed for a specialized metabolic clinic. The platform features an ultra-premium 'Silicon Valley' aesthetic, built with a focus on data-driven health optimization. It includes interactive biometric diagnostic tools (BMI), automated intake systems, and an evidence-based case study gallery.",
     link: "https://weight-loss-doc.vercel.app",
     image: weightlossimg,
     tech: ["React.js", "Tailwind CSS v4", "Lucide Icons", "Framer Motion"],
@@ -136,18 +121,16 @@ const projects = [
   {
     title: "AI-MOCK-INTERVIEW",
     subtitle: "AI-Powered Interview Practice Platform",
-    description:
-      "An AI-driven mock interview platform currently under active development using the MERN stack and Tailwind CSS. The system is being built to simulate real interview experiences with AI-generated questions, resume-based assessments, performance feedback, and skill analysis. Focused on delivering a modern, responsive, and user-friendly interface.",
+    description: "An AI-driven mock interview platform currently under active development using the MERN stack and Tailwind CSS. The system is being built to simulate real interview experiences with AI-generated questions, resume-based assessments, performance feedback, and skill analysis.",
     link: "https://ai-mock-interview-lac-two.vercel.app",
     image: aiMockInterviewImg,
-    tech: ["MERN Stack", "Tailwind CSS", "AI Integration", "JWT Auth"],
+    tech: ["Next.js", "Tailwind CSS", "AI Integration", "JWT Auth"],
     glowColor: "bg-teal-500/20",
   },
   {
     title: "UrbanGreens",
     subtitle: "Full-Stack Grocery Commerce Platform",
-    description:
-      "A production-ready grocery commerce platform engineered with the MERN stack and Tailwind CSS. Designed for scale and reliability, featuring secure authentication, product and order management, cart workflows, and Razorpay payment integration with a refined, high-performance user experience.",
+    description: "A production-ready grocery commerce platform engineered with the MERN stack and Tailwind CSS. Designed for scale and reliability, featuring secure authentication, product and order management, cart workflows, and Razorpay payment integration with a refined, high-performance user experience.",
     link: "https://urbangreens-frontend-n2hv3.vercel.app",
     image: urbanGreensImg,
     tech: ["MERN Stack", "Tailwind CSS", "Razorpay", "JWT Auth"],
@@ -156,8 +139,7 @@ const projects = [
   {
     title: "Bajaj Auto Sales",
     subtitle: "Enterprise Automobile Sales & Service System",
-    description:
-      "An enterprise-grade automobile sales and service management system built using the MERN stack. Enables vehicle discovery, pricing transparency, customer enquiries, booking, and service workflows within a scalable, business-ready interface.",
+    description: "An enterprise-grade automobile sales and service management system built using the MERN stack. Enables vehicle discovery, pricing transparency, customer enquiries, booking, and service workflows within a scalable, business-ready interface.",
     link: "https://nationalautosales.vercel.app",
     image: bajajAutoImg,
     tech: ["MERN Stack", "Tailwind CSS", "REST APIs"],
@@ -166,8 +148,7 @@ const projects = [
   {
     title: "Weather Forecast",
     subtitle: "Real-Time Weather Intelligence App",
-    description:
-      "A modern React-based weather application delivering real-time forecasts, location search, and API-driven insights using OpenWeather, wrapped in a calm, responsive, and user-centric interface.",
+    description: "A modern React-based weather application delivering real-time forecasts, location search, and API-driven insights using OpenWeather, wrapped in a calm, responsive, and user-centric interface.",
     link: "https://anaskhanweathersearch.netlify.app/",
     image: weatherImg,
     tech: ["React", "API Integration", "Tailwind CSS"],
@@ -189,8 +170,22 @@ const Home = () => {
     }
   };
 
+  // Framer Motion Variants
+  const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 }
+    }
+  };
+
   return (
-    <main className="relative bg-[#050505] text-white selection:bg-teal-500/30 overflow-hidden">
+    <main className="relative bg-[#050505] text-white selection:bg-teal-500/30 overflow-hidden font-sans">
       
       {/* 🌟 Global Premium Background Grid & Glows */}
       <div className="fixed inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:70px_70px] opacity-[0.1] pointer-events-none z-0" />
@@ -207,8 +202,13 @@ const Home = () => {
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           
           {/* Header Content */}
-          <header className="max-w-3xl">
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-teal-500/10 border border-teal-500/20 text-[10px] sm:text-xs uppercase tracking-widest text-teal-400 mb-8 backdrop-blur-sm shadow-[0_0_20px_rgba(45,212,191,0.1)]">
+          <motion.header 
+            initial="hidden" 
+            animate="visible" 
+            variants={fadeUp} 
+            className="max-w-3xl"
+          >
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-teal-500/10 border border-teal-500/20 text-[10px] sm:text-xs uppercase tracking-widest text-teal-400 mb-8 backdrop-blur-sm shadow-[0_0_20px_rgba(45,212,191,0.1)] transition-transform hover:scale-105 cursor-default">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
@@ -222,16 +222,16 @@ const Home = () => {
                 Anas Khan
               </span>
               <br />
-              <span className="text-gray-300">MERN Developer.</span>
+              <span className="text-gray-300">Full-Stack Dev.</span>
             </h1>
 
             <div className="mt-8 text-teal-400 text-lg sm:text-xl font-mono h-8 font-medium">
               <span className="text-gray-500 mr-2">{">"}</span>
               <Typewriter
                 words={[
-                  "Full-Stack MERN Developer",
+                  "MERN & Next.js Developer",
                   "Building Scalable Web Apps",
-                  "Turning Coffee into Code ☕",
+                  "Creating Premium UI/UX",
                   "MongoDB • Express • React • Node",
                 ]}
                 loop={true}
@@ -275,17 +275,22 @@ const Home = () => {
                 Download Resume
               </Link>
             </div>
-          </header>
+          </motion.header>
 
           {/* Hero Image & Tech Stack */}
-          <article className="relative z-10">
+          <motion.article 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative z-10"
+          >
             {/* Holographic Floating Image Card */}
             <div className="relative max-w-[450px] mx-auto w-full group mb-12 lg:mb-16">
               <div className="absolute -inset-1 bg-gradient-to-r from-teal-500 via-blue-500 to-teal-500 rounded-[3rem] blur-md opacity-30 group-hover:opacity-60 transition duration-1000 animate-pulse"></div>
               <div className="relative rounded-[3rem] overflow-hidden border border-white/10 bg-[#0a0a0a] animate-[translateY_6s_ease-in-out_infinite] transform-gpu">
                 <img
                   src={profileImage}
-                  alt="Anas Khan"
+                  alt="Mohammed Iltaf"
                   className="w-full h-[450px] object-cover transition-transform duration-700 group-hover:scale-105 grayscale-[15%] group-hover:grayscale-0"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
@@ -302,64 +307,75 @@ const Home = () => {
                 Designing systems built <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-white">to last.</span>
               </h2>
 
-              {/* Dynamic Hover Tech Stack */}
-              <div className="flex flex-wrap gap-3 mb-10">
+              {/* Dynamic Hover Tech Stack with Framer Motion Stagger */}
+              <motion.div 
+                variants={staggerContainer}
+                initial="hidden"
+                animate="visible"
+                className="flex flex-wrap gap-3 mb-10"
+              >
                 {techStack.map((tech, i) => (
-                  <span
+                  <motion.span
                     key={i}
+                    variants={fadeUp}
                     className={`flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-full border border-white/10 text-gray-400 bg-white/5 backdrop-blur-md transition-all duration-300 cursor-default ${tech.hoverColor}`}
                   >
                     <span className="text-base">{tech.icon}</span>
                     {tech.name}
-                  </span>
+                  </motion.span>
                 ))}
-              </div>
+              </motion.div>
 
-              {/* Premium Stats Dashboard */}
+              {/* Premium Stats Dashboard (Updated to BCA / IGNOU) */}
               <div className="grid grid-cols-3 gap-6 p-6 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm transition-all duration-300 hover:bg-white/[0.04] hover:border-white/10 hover:shadow-[0_0_30px_rgba(255,255,255,0.02)] hover:-translate-y-1">
                 <div className="text-center group/stat">
-                  <p className="text-3xl font-bold text-white mb-1 group-hover/stat:scale-110 transition-transform">10<span className="text-teal-400">+</span></p>
+                  <p className="text-2xl sm:text-3xl font-bold text-white mb-1 group-hover/stat:scale-110 transition-transform">10<span className="text-teal-400">+</span></p>
                   <p className="text-[10px] uppercase tracking-widest text-gray-500 font-semibold">Projects</p>
                 </div>
-                <div className="text-center border-l border-r border-white/10 group/stat">
-                  <p className="text-3xl font-bold text-white mb-1 group-hover/stat:scale-110 transition-transform">Junior Developer (Fresher)<span className="text-teal-400"></span></p>
-                  <p className="text-[10px] uppercase tracking-widest text-gray-500 font-semibold"></p>
+                <div className="text-center border-l border-r border-white/10 group/stat px-2">
+                  <p className="text-xl sm:text-2xl font-bold text-white mb-1 group-hover/stat:scale-105 transition-transform">BCA</p>
+                  <p className="text-[10px] uppercase tracking-widest text-gray-500 font-semibold leading-tight">IGNOU</p>
                 </div>
                 <div className="text-center group/stat">
-                  <p className="text-3xl font-bold text-white mb-1 group-hover/stat:scale-110 transition-transform">MERN</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-white mb-1 group-hover/stat:scale-110 transition-transform">MERN</p>
                   <p className="text-[10px] uppercase tracking-widest text-gray-500 font-semibold">Stack</p>
                 </div>
               </div>
             </div>
-          </article>
+          </motion.article>
         </div>
       </section>
 
       {/* ================= SECTION 2: SERVICES ================= */}
       <section id="services" className="relative z-10 px-6 sm:px-10 md:px-20 lg:px-28 py-24 max-w-7xl mx-auto border-t border-white/5">
-        <header className="mb-20 max-w-3xl">
+        <motion.header 
+          initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp}
+          className="mb-20 max-w-3xl"
+        >
           <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-xs uppercase tracking-widest text-gray-300 mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
             My Services
           </div>
-
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter leading-tight mb-6">
             Solutions designed <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-blue-500 to-teal-400 bg-[length:200%_auto] animate-[gradient_3s_linear_infinite]">
               for real-world scale.
             </span>
           </h2>
-
           <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-2xl">
             I help individuals and teams design, build, and refine web applications that are incredibly fast, scalable, and maintainable — not just visually appealing.
           </p>
-        </header>
+        </motion.header>
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
           {servicesData.map((service, idx) => (
-            <div 
+            <motion.div 
               key={idx}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1, duration: 0.5 }}
               className={`group relative p-8 rounded-3xl bg-white/[0.02] border border-white/5 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_10px_40px_rgba(0,0,0,0.5)] ${service.borderGlow} ${idx === 0 || idx === 3 ? "md:col-span-2 lg:col-span-2" : "col-span-1"}`}
             >
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/[0.01] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
@@ -372,14 +388,14 @@ const Home = () => {
               <p className="text-gray-400 text-sm leading-relaxed">
                 {service.description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Process & Philosophy */}
         <div className="grid lg:grid-cols-2 gap-20 items-start">
           {/* How I Work */}
-          <div>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-teal-400 font-semibold mb-8">
               <span className="w-8 h-[1px] bg-teal-400"></span> How I Work
             </div>
@@ -396,10 +412,10 @@ const Home = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Philosophy */}
-          <div>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
             <div className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-blue-400 font-semibold mb-8">
               <span className="w-8 h-[1px] bg-blue-400"></span> Philosophy
             </div>
@@ -409,29 +425,30 @@ const Home = () => {
                 “Good software is not defined by features — but by how well it holds up over time under <span className="text-blue-400">real-world pressure.</span>”
               </blockquote>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ================= SECTION 3: PROJECTS ================= */}
       <section id="projects" className="relative z-10 px-6 sm:px-10 md:px-20 lg:px-28 py-24 pb-44 max-w-7xl mx-auto border-t border-white/5">
-        <header className="mb-24 max-w-3xl">
+        <motion.header 
+          initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
+          className="mb-24 max-w-3xl"
+        >
           <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-xs uppercase tracking-widest text-gray-300 mb-8 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
             Selected Work
           </div>
-
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter leading-tight mb-6 text-white">
             Designing & engineering <br className="hidden sm:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-blue-500 to-teal-400 bg-[length:200%_auto] animate-[gradient_3s_linear_infinite]">
               premium digital products.
             </span>
           </h2>
-
           <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-2xl font-medium">
             A curated collection of production-grade applications built with a focus on clarity, scalability, performance, and timeless user experience.
           </p>
-        </header>
+        </motion.header>
 
         {/* Projects Grid */}
         <div className="space-y-32 lg:space-y-40">
@@ -439,7 +456,14 @@ const Home = () => {
             const isEven = idx % 2 === 0;
 
             return (
-              <article key={idx} className="group relative grid lg:grid-cols-12 gap-10 sm:gap-16 items-center">
+              <motion.article 
+                key={idx} 
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                className="group relative grid lg:grid-cols-12 gap-10 sm:gap-16 items-center"
+              >
                 {/* IMAGE SECTION */}
                 <div className={`lg:col-span-7 relative ${isEven ? "lg:order-1" : "lg:order-2"}`}>
                   <div className={`absolute inset-0 ${project.glowColor} blur-[80px] rounded-full opacity-0 group-hover:opacity-50 transition-opacity duration-700 pointer-events-none`}></div>
@@ -496,7 +520,7 @@ const Home = () => {
                     </a>
                   </div>
                 </div>
-              </article>
+              </motion.article>
             );
           })}
         </div>
@@ -504,8 +528,9 @@ const Home = () => {
 
       {/* ================= IMAGE MODAL (GALLERY VIEW) ================= */}
       {selectedImg && (
-        <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-xl animate-in fade-in duration-300 p-4"
+        <motion.div 
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4"
           onClick={() => setSelectedImg(null)}
         >
           <button 
@@ -515,17 +540,19 @@ const Home = () => {
             <X size={32} />
           </button>
           
-          <div className="relative max-w-6xl w-full">
+          <motion.div 
+            initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            className="relative max-w-6xl w-full"
+          >
             <img 
               src={selectedImg} 
               alt="Project Full View" 
-              className="w-full h-auto max-h-[85vh] object-contain rounded-xl shadow-2xl border border-white/10 animate-in zoom-in duration-300"
+              className="w-full h-auto max-h-[85vh] object-contain rounded-xl shadow-2xl border border-white/10"
             />
             <div className="absolute -inset-10 bg-teal-500/10 blur-[100px] -z-10 rounded-full"></div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
-
     </main>
   );
 };

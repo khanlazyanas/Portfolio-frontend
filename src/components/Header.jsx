@@ -1,57 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Menu } from "lucide-react";
+import { FaGithub, FaLinkedin, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
-// ================= FRAMER MOTION VARIANTS =================
-const drawerVariants = {
-  hidden: { x: "100%", opacity: 0 },
+// ================= PREMIUM BEZIER CURVES & VARIANTS =================
+const transitionCurve = [0.22, 1, 0.36, 1]; // Ultra-smooth Apple-like curve
+
+const modalVariants = {
+  hidden: { opacity: 0, scale: 0.95, y: 20 },
   visible: { 
-    x: 0, 
     opacity: 1, 
-    transition: { 
-      type: "spring", 
-      stiffness: 400, 
-      damping: 40,
-      mass: 1,
-      when: "beforeChildren"
-    } 
+    scale: 1, 
+    y: 0,
+    transition: { duration: 0.6, ease: transitionCurve, when: "beforeChildren", staggerChildren: 0.1 } 
   },
   exit: { 
-    x: "100%", 
     opacity: 0, 
-    transition: { 
-      duration: 0.4, 
-      ease: [0.32, 0.72, 0, 1] 
-    } 
+    scale: 0.95, 
+    y: 20, 
+    transition: { duration: 0.4, ease: transitionCurve } 
   },
 };
 
-const navVariants = {
-  hidden: {},
+const linkRevealVariants = {
+  hidden: { y: "150%", opacity: 0, rotate: 5 },
   visible: { 
-    transition: { 
-      staggerChildren: 0.08, 
-      delayChildren: 0.1 
-    } 
-  },
-  exit: {
-    transition: {
-      staggerChildren: 0.04,
-      staggerDirection: -1
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, x: 40, filter: "blur(4px)" },
-  visible: { 
+    y: 0, 
     opacity: 1, 
-    x: 0, 
-    filter: "blur(0px)",
-    transition: { type: "spring", stiffness: 300, damping: 24 } 
+    rotate: 0,
+    transition: { duration: 0.8, ease: transitionCurve } 
   },
-  exit: { opacity: 0, x: 20, transition: { duration: 0.2 } }
+  exit: { y: "100%", opacity: 0, transition: { duration: 0.3 } }
 };
 
 const Header = () => {
@@ -66,9 +45,7 @@ const Header = () => {
     ["/services", "Services"],
     ["/projects", "Projects"],
     ["/skills", "Skills"],
-    ["/resume", "Resume"],
     ["/contact", "Contact"],
-    ["/blog", "Blog"],
   ];
 
   useEffect(() => {
@@ -97,8 +74,6 @@ const Header = () => {
           
           {/* Logo Section */}
           <Link to="/" onClick={() => setOpen(false)} className="group relative z-10 flex items-center gap-4 cursor-pointer">
-            
-            {/* The Monogram Badge */}
             <motion.div 
               whileHover={{ scale: 1.05, rotate: 3 }}
               whileTap={{ scale: 0.95 }}
@@ -106,7 +81,6 @@ const Header = () => {
             >
               <div className="absolute inset-0 bg-teal-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
               <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:animate-[shimmer_1.5s_infinite]"></div>
-
               <span className="relative z-10 font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-500 text-lg sm:text-xl tracking-tighter drop-shadow-lg">
                 AK
               </span>
@@ -117,11 +91,9 @@ const Header = () => {
               <span className="text-[18px] sm:text-[22px] font-semibold text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-gray-400 transition-all duration-500 group-hover:text-white">
                 Anas
               </span>
-              
               <span className="text-[18px] sm:text-[22px] font-black text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-blue-500 to-teal-300 ml-2.5 drop-shadow-[0_0_12px_rgba(45,212,191,0.4)] transition-all duration-500 group-hover:drop-shadow-[0_0_20px_rgba(45,212,191,0.8)]">
                 Khan
               </span>
-
               <span className="relative flex h-2 w-2 ml-3 mb-1">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500 shadow-[0_0_8px_#2dd4bf]"></span>
@@ -134,136 +106,135 @@ const Header = () => {
             {links.map(([path, label]) => {
               const active = isActive(path);
               return (
-                <Link
-                  key={path}
-                  to={path}
-                  className="relative py-2 group transition-all duration-300"
-                >
+                <Link key={path} to={path} className="relative py-2 group transition-all duration-300">
                   <span className={`relative z-10 transition-colors duration-300 flex items-center gap-2 ${
                     active ? "text-teal-300 drop-shadow-[0_0_8px_rgba(45,212,191,0.5)]" : "text-gray-400 group-hover:text-white"
                   }`}>
                     {label}
                   </span>
-
                   <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] rounded-full bg-gradient-to-r from-transparent via-teal-400 to-transparent transition-all duration-500 ${
-                    active 
-                      ? "w-full opacity-100 shadow-[0_0_15px_rgba(45,212,191,0.8)]" 
-                      : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
+                    active ? "w-full opacity-100 shadow-[0_0_15px_rgba(45,212,191,0.8)]" : "w-0 opacity-0 group-hover:w-full group-hover:opacity-100"
                   }`}></span>
                 </Link>
               );
             })}
           </nav>
 
-          {/* Hamburger Menu Icon */}
+          {/* ================= CUSTOM ANIMATED HAMBURGER ICON ================= */}
           <button
-            onClick={() => setOpen(true)}
-            className="lg:hidden p-3 text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 rounded-2xl border border-white/10 transition-all duration-300 relative z-10 active:scale-90 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+            onClick={() => setOpen(!open)}
+            className="lg:hidden relative z-[60] w-12 h-12 flex flex-col justify-center items-center gap-[6px] bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-colors duration-300 shadow-lg"
           >
-            <Menu size={22} />
+            <motion.span
+              animate={open ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.4, ease: transitionCurve }}
+              className="w-5 h-[2px] bg-white rounded-full block"
+            ></motion.span>
+            <motion.span
+              animate={open ? { opacity: 0, scale: 0 } : { opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+              className="w-5 h-[2px] bg-teal-400 rounded-full block shadow-[0_0_8px_rgba(45,212,191,0.8)]"
+            ></motion.span>
+            <motion.span
+              animate={open ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.4, ease: transitionCurve }}
+              className="w-5 h-[2px] bg-white rounded-full block"
+            ></motion.span>
           </button>
         </div>
       </div>
 
-      {/* ================= ULTRA PREMIUM MOBILE DRAWER ================= */}
+      {/* ================= ULTRA PREMIUM FLOATING MOBILE MODAL ================= */}
       <AnimatePresence>
         {open && (
           <>
-            {/* Deep Frosted Glass Backdrop */}
+            {/* Ultra Dark Blur Backdrop */}
             <motion.div
               initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-              animate={{ opacity: 1, backdropFilter: "blur(16px)" }}
+              animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
               exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-              transition={{ duration: 0.4 }}
-              className="fixed inset-0 bg-[#050505]/80 z-40 lg:hidden"
+              transition={{ duration: 0.5 }}
+              className="fixed inset-0 bg-[#050505]/60 z-40 lg:hidden"
               onClick={() => setOpen(false)}
             />
 
-            {/* Premium Sidebar */}
-            <motion.aside
-              variants={drawerVariants}
+            {/* Floating Glassmorphism Menu Panel */}
+            <motion.div
+              variants={modalVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="fixed top-0 right-0 z-50 h-[100dvh] w-[85%] max-w-[400px] bg-gradient-to-b from-[#0a0a0a]/95 to-[#050505]/95 backdrop-blur-3xl border-l border-white/10 flex flex-col lg:hidden shadow-[-40px_0_80px_rgba(0,0,0,0.9)]"
+              className="fixed inset-4 md:inset-x-20 top-24 bottom-6 z-50 bg-[#0a0a0a]/80 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] flex flex-col overflow-hidden shadow-[0_0_80px_rgba(0,0,0,0.9)] lg:hidden"
             >
-              
-              {/* Drawer Header */}
-              <div className="flex items-center justify-between p-8 border-b border-white/10 relative overflow-hidden">
-                {/* Subtle Header Glow */}
-                <div className="absolute top-[-50%] right-[-50%] w-full h-full bg-teal-500/10 blur-[60px] pointer-events-none z-0"></div>
-                
-                <div className="flex items-baseline font-sans uppercase tracking-[0.2em] relative z-10">
-                  <span className="text-[16px] font-semibold text-gray-300">Anas</span>
-                  <span className="text-[16px] font-black text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-400 ml-2 drop-shadow-md">Khan</span>
-                  <span className="relative flex h-1.5 w-1.5 ml-2 mb-0.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-teal-500 shadow-[0_0_8px_#2dd4bf]"></span>
-                  </span>
-                </div>
+              {/* Internal Glow Effects */}
+              <div className="absolute top-[-20%] right-[-20%] w-[300px] h-[300px] bg-teal-500/20 blur-[100px] pointer-events-none z-0 rounded-full"></div>
+              <div className="absolute bottom-[-20%] left-[-20%] w-[300px] h-[300px] bg-blue-500/20 blur-[100px] pointer-events-none z-0 rounded-full"></div>
 
-                <motion.button 
-                  whileTap={{ scale: 0.85 }}
-                  onClick={() => setOpen(false)}
-                  className="p-3 text-gray-400 hover:text-white hover:bg-white/10 border border-transparent hover:border-white/10 rounded-full transition-all duration-300 z-10 hover:rotate-90 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]"
-                >
-                  <X size={22} />
-                </motion.button>
-              </div>
-
-              {/* Drawer Links (Staggered Animation) */}
-              <div className="flex-1 overflow-y-auto px-10 pt-12 pb-6 custom-scrollbar relative z-10">
-                <motion.nav
-                  variants={navVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  className="flex flex-col gap-6"
-                >
-                  {links.map(([path, label]) => (
-                    <motion.div key={path} variants={itemVariants}>
+              {/* Huge Typography Links (Mask Reveal Effect) */}
+              <div className="flex-1 flex flex-col justify-center px-8 sm:px-12 relative z-10 gap-4 sm:gap-6">
+                {links.map(([path, label]) => (
+                  <div key={path} className="overflow-hidden">
+                    <motion.div variants={linkRevealVariants}>
                       <Link
                         to={path}
                         onClick={() => setOpen(false)}
-                        className={`group flex items-center justify-between text-xl tracking-[0.2em] uppercase font-extrabold py-5 border-b border-white/5 transition-all duration-500 hover:border-white/15 ${
-                          isActive(path) ? "text-teal-400 pl-4 bg-white/[0.02] rounded-xl" : "text-gray-500 hover:text-white hover:pl-3"
+                        className={`group flex items-center justify-between transition-colors duration-300 ${
+                          isActive(path) ? "text-white" : "text-gray-500 hover:text-white"
                         }`}
                       >
-                        <span className="relative overflow-hidden inline-block pb-1">
+                        <span className={`text-4xl sm:text-5xl font-black uppercase tracking-tighter ${isActive(path) ? "text-transparent bg-clip-text bg-gradient-to-r from-teal-300 to-white drop-shadow-[0_0_15px_rgba(45,212,191,0.5)]" : ""}`}>
                           {label}
-                          {/* Hover Underline Slide */}
-                          <span className="absolute left-0 bottom-0 w-full h-[2px] bg-teal-400 transform -translate-x-[101%] group-hover:translate-x-0 transition-transform duration-500 ease-out shadow-[0_0_10px_#2dd4bf]"></span>
                         </span>
                         
-                        {/* Active Dot Indicator */}
-                        <div className={`transition-all duration-500 pr-4 ${isActive(path) ? "opacity-100 scale-100" : "opacity-0 scale-50"}`}>
-                           <div className="w-2.5 h-2.5 rounded-full bg-teal-400 shadow-[0_0_15px_rgba(45,212,191,0.8)]"></div>
-                        </div>
+                        {/* Interactive Arrow on Active/Hover */}
+                        <span className={`h-[2px] bg-teal-400 transition-all duration-500 ease-out shadow-[0_0_15px_rgba(45,212,191,0.8)] ${
+                          isActive(path) ? "w-12 sm:w-20 opacity-100" : "w-0 opacity-0 group-hover:w-12"
+                        }`}></span>
                       </Link>
                     </motion.div>
-                  ))}
-                </motion.nav>
+                  </div>
+                ))}
               </div>
 
-              {/* Drawer Footer Connect */}
+              {/* Premium Footer with Social Grid */}
               <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.5 }}
-                className="p-8 border-t border-white/10 bg-gradient-to-t from-white/[0.03] to-transparent relative z-10"
+                variants={linkRevealVariants}
+                className="p-8 bg-gradient-to-t from-white/[0.05] to-transparent border-t border-white/10 relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6"
               >
-                <p className="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold mb-4">Let's Connect</p>
-                <a href="mailto:anaskhan995620@gmail.com" className="text-[15px] font-medium text-gray-300 hover:text-teal-400 transition-colors duration-300 drop-shadow-sm">
-                  anaskhan995620@gmail.com
-                </a>
+                <div>
+                  <p className="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold mb-2 text-center sm:text-left">Let's Connect</p>
+                  <a href="mailto:anaskhan995620@gmail.com" className="text-sm font-semibold text-gray-300 hover:text-teal-400 transition-colors">
+                    anaskhan995620@gmail.com
+                  </a>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <SocialLink href="https://github.com" icon={<FaGithub size={20} />} />
+                  <SocialLink href="https://linkedin.com" icon={<FaLinkedin size={20} />} />
+                  <SocialLink href="https://instagram.com" icon={<FaInstagram size={20} />} />
+                  <SocialLink href="https://wa.me/918429755694" icon={<FaWhatsapp size={20} />} />
+                </div>
               </motion.div>
-              
-            </motion.aside>
+            </motion.div>
           </>
         )}
       </AnimatePresence>
     </header>
   );
 };
+
+// Sleek Social Link Component for Mobile Menu Footer
+function SocialLink({ href, icon }) {
+  return (
+    <a 
+      href={href} 
+      target="_blank" 
+      rel="noreferrer"
+      className="p-3 bg-white/5 border border-white/10 rounded-full text-gray-400 hover:text-white hover:bg-teal-500/20 hover:border-teal-500/50 transition-all duration-300 hover:shadow-[0_0_15px_rgba(45,212,191,0.3)] active:scale-90"
+    >
+      {icon}
+    </a>
+  );
+}
 
 export default Header;

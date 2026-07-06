@@ -21,6 +21,7 @@ import aiMockInterviewImg from "../assets/Ai-mock-interview.png";
 import weightlossimg from "../assets/drabubakar.png";
 import bizflowimg from "../assets/bizzflow.png";
 import nexposimg from "../assets/nexpos.png";
+import taskmindimg from "../assets/taskmind.png";
 
 // ================= DATA ARRAYS ================= //
 
@@ -117,6 +118,15 @@ const projects = [
     image: weightlossimg,
     tech: ["React.js", "Tailwind CSS v4", "Lucide Icons", "Framer Motion"],
     glowColor: "bg-[#10b9bd]/20",
+  },
+  {
+    title: "TASKMIND AI",
+    subtitle: "AI-Powered SaaS Task Manager & Automated Workspace",
+    description: "A highly intelligent, automated task management platform built with Next.js and the MERN architecture. It features a context-aware AI assistant utilizing the Google Gemini API with custom function calling for real-time database operations via natural language. The backend is robustly engineered with background Vercel Cron Jobs for automated daily reminders, native OS-level Push Notifications via the Web Push API, and an interactive drag-and-drop Kanban board for seamless workflow execution.",
+    link: "https://taskmind-ai-three.vercel.app", 
+    image: taskmindimg, 
+    tech: ["Next.js", "MongoDB", "Google Gemini API", "Vercel Cron", "Web Push API", "Tailwind CSS", "dnd-kit", "Shadcn UI"],
+    glowColor: "bg-[#10b981]/20", 
   },
   {
     title: "AI-MOCK-INTERVIEW",

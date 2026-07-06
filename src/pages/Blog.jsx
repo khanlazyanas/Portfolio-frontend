@@ -6,6 +6,27 @@ import { FaCalendarAlt, FaClock, FaArrowRight, FaTags, FaTimes } from "react-ico
 const blogData = [
   {
     id: 1,
+    title: "Engineering TaskMind AI: Context-Aware SaaS & Background Automation",
+    excerpt: "A deep dive into integrating Google Gemini API for intelligent task management, Vercel Cron Jobs, and OS-level Web Push notifications.",
+    content: `
+      <p class="text-gray-300 leading-relaxed mb-6 text-lg">Modern SaaS applications must go beyond basic CRUD operations. For <strong>TaskMind AI</strong>, the objective was to build an intelligent, self-sustaining workspace that actively assists the user through natural language and background automation.</p>
+      
+      <h3 class="text-2xl font-bold text-white mt-10 mb-4 border-l-4 border-emerald-500 pl-4">Context-Aware AI Integration</h3>
+      <p class="text-gray-300 leading-relaxed mb-6">Integrating the <strong>Google Gemini API</strong> wasn't just about adding a chatbot. By leveraging advanced function calling, the LLM directly interacts with the MongoDB database. Users can seamlessly create, update, or reschedule tasks using natural language, effectively turning the AI into a real-time, intelligent database controller.</p>
+      
+      <h3 class="text-2xl font-bold text-white mt-10 mb-4 border-l-4 border-emerald-500 pl-4">Serverless Background Automation</h3>
+      <p class="text-gray-300 leading-relaxed mb-6">To ensure users never miss a deadline, the backend architecture relies on strictly timed <strong>Vercel Cron Jobs</strong>. Instead of running continuous server processes, a highly optimized Next.js API route is triggered daily, querying the database for due tasks and securely handling the background logic via serverless infrastructure.</p>
+
+      <h3 class="text-2xl font-bold text-white mt-10 mb-4 border-l-4 border-emerald-500 pl-4">Native OS Push Notifications</h3>
+      <p class="text-gray-300 leading-relaxed mb-6">Closing the loop on automation meant delivering alerts even when the browser is closed. By implementing the <strong>Web Push API</strong> paired with securely stored VAPID keys, TaskMind authenticates with device-level notification services, providing a native, OS-level application experience directly from the web.</p>
+    `,
+    date: "July 07, 2026",
+    category: "AI & Automation",
+    readTime: "6 min read",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop"
+  },
+  {
+    id: 2,
     title: "Architecting NEXPOS: Next-Gen Enterprise Retail SaaS",
     excerpt: "How I engineered a scalable Point of Sale system using Next.js, Next-Auth, MongoDB, and Razorpay.",
     content: `
@@ -26,7 +47,7 @@ const blogData = [
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop"
   },
   {
-    id: 2,
+    id: 3,
     title: "Building BIZFLOW: Multi-Tenant SaaS on the MERN Stack",
     excerpt: "Deep dive into the backend architecture of Bizflow, featuring JWT, OAuth 2.0, and automated cron jobs.",
     content: `
@@ -44,7 +65,7 @@ const blogData = [
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1000&auto=format&fit=crop"
   },
   {
-    id: 3,
+    id: 4,
     title: "Engineering 'Quiet Luxury' in Healthcare UIs",
     excerpt: "How I built the WeightLoss-Doc platform with an ultra-premium aesthetic and interactive biometric tools.",
     content: `
@@ -62,7 +83,7 @@ const blogData = [
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop"
   },
   {
-    id: 4,
+    id: 5,
     title: "Applying BCA Fundamentals to Real-World Scalability",
     excerpt: "How core computer science concepts from my BCA studies shape the way I build production-ready databases.",
     content: `

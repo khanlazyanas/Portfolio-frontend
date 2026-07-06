@@ -13,7 +13,7 @@ import {
 } from "react-icons/si";
 
 // Images (Make sure paths are correct based on your folder structure)
-import profileImage from "../assets/anas1.jpg";
+import profileImage from "../assets/anaskhan1.jpg";
 import urbanGreensImg from "../assets/urbangreens.png";
 import bajajAutoImg from "../assets/bajajnewimage.png";
 import weatherImg from "../assets/weather.png";

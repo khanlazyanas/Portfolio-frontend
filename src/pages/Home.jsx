@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
-import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue, useMouse } from "framer-motion";
+// FIXED: Removed 'useMouse', keeping only what is actually needed
+import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { 
   ArrowRight, Download, Mail, Code2, MonitorSmartphone, 
   Server, Zap, Cloud, CheckCircle2, Quote, ExternalLink, X, Maximize2,
@@ -14,7 +15,7 @@ import {
 } from "react-icons/si";
 
 // ================= ASSETS ================= //
-import profileImage from "../assets/anaskhan1.jpg";
+import profileImage from "../assets/anas2.jpg";
 import urbanGreensImg from "../assets/urbangreens.png";
 import bajajAutoImg from "../assets/bajajnewimage.png";
 import weatherImg from "../assets/weather.png";
@@ -285,7 +286,7 @@ const MagneticButton = ({ children, className, href }) => {
     const { height, width, left, top } = ref.current.getBoundingClientRect();
     const middleX = clientX - (left + width / 2);
     const middleY = clientY - (top + height / 2);
-    setPosition({ x: middleX * 0.3, y: middleY * 0.3 }); // Increased magnetism
+    setPosition({ x: middleX * 0.3, y: middleY * 0.3 });
   };
 
   const reset = () => {
@@ -411,6 +412,12 @@ const Home = () => {
     visible: { opacity: 1, y: 0, rotate: 0, transition: { type: "spring", stiffness: 60, damping: 20, mass: 1 } }
   };
 
+  // FIXED: Added fadeUp variants which caused the white screen crash earlier
+  const fadeUp = {
+    hidden: { opacity: 0, y: 60, scale: 0.95 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 70, damping: 20, mass: 1 } }
+  };
+
   const staggerContainer = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } }
@@ -441,7 +448,7 @@ const Home = () => {
         style={{ scaleX }}
       />
 
-      {/* ================= SECTION 1: HERO (THE MACBOOK PRO VIBE) ================= */}
+      {/* ================= SECTION 1: HERO ================= */}
       <section id="hero" className="relative z-10 min-h-[100vh] flex items-center pt-32 pb-20 px-6 sm:px-10 md:px-20 lg:px-28 max-w-[1800px] mx-auto">
         <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-center w-full relative">
           

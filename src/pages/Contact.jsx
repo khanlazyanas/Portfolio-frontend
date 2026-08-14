@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { 
   FaLinkedin, 
   FaGithub, 
@@ -18,9 +19,168 @@ import {
 } from "lucide-react"; 
 import { toast } from "react-toastify";
 
+// ================= ULTRA PREMIUM SUB-COMPONENTS ================= //
+
+// 1. Mouse Spotlight Card
+const SpotlightCard = ({ children, className, glowColor = "rgba(255, 255, 255, 0.15)" }) => {
+  const divRef = useRef(null);
+  const [isFocused, setIsFocused] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [opacity, setOpacity] = useState(0);
+
+  const handleMouseMove = (e) => {
+    if (!divRef.current || isFocused) return;
+    const rect = divRef.current.getBoundingClientRect();
+    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  const handleFocus = () => { setIsFocused(true); setOpacity(1); };
+  const handleBlur = () => { setIsFocused(false); setOpacity(0); };
+  const handleMouseEnter = () => setOpacity(1);
+  const handleMouseLeave = () => setOpacity(0);
+
+  return (
+    <div
+      ref={divRef}
+      onMouseMove={handleMouseMove}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`relative overflow-hidden rounded-[2rem] sm:rounded-[3rem] border border-white/[0.05] bg-[#050505]/60 backdrop-blur-3xl shadow-2xl transition-all duration-500 group ${className}`}
+    >
+      <div
+        className="pointer-events-none absolute -inset-px transition duration-500 z-0"
+        style={{
+          opacity,
+          background: `radial-gradient(1000px circle at ${position.x}px ${position.y}px, ${glowColor}, transparent 40%)`,
+        }}
+      />
+      <div className="relative z-10 h-full">{children}</div>
+    </div>
+  );
+};
+
+// 2. Heavy Magnetic Button Wrapper
+const MagneticButton = ({ children, className, href, onClick, target }) => {
+  const ref = useRef(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  useEffect(() => {
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
+
+  const handleMouse = (e) => {
+    if (isTouchDevice) return;
+    const { clientX, clientY } = e;
+    const { height, width, left, top } = ref.current.getBoundingClientRect();
+    const middleX = clientX - (left + width / 2);
+    const middleY = clientY - (top + height / 2);
+    setPosition({ x: middleX * 0.4, y: middleY * 0.4 });
+  };
+
+  const reset = () => setPosition({ x: 0, y: 0 });
+
+  const content = (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouse}
+      onMouseLeave={reset}
+      animate={{ x: position.x, y: position.y }}
+      transition={{ type: "spring", stiffness: 100, damping: 10, mass: 0.3 }}
+      className={className}
+      onClick={onClick}
+    >
+      {children}
+    </motion.div>
+  );
+
+  if (href) {
+    if (href.startsWith('#') || href.startsWith('mailto') || href.startsWith('tel') || href.startsWith('http')) {
+      return <a href={href} target={target} rel={target === '_blank' ? "noopener noreferrer" : undefined} className="inline-block w-full sm:w-auto">{content}</a>;
+    }
+    return <Link to={href} className="inline-block w-full sm:w-auto">{content}</Link>;
+  }
+  return <div className="inline-block w-full sm:w-auto cursor-pointer">{content}</div>;
+};
+
+// 3. Custom Animated Cursor with Spring Trailer
+const CustomCursor = () => {
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
+  
+  const [isHovering, setIsHovering] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) return;
+
+    setIsVisible(true);
+
+    const moveCursor = (e) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+    };
+
+    const handleMouseOver = (e) => {
+      setIsHovering(
+        e.target.tagName.toLowerCase() === 'button' ||
+        e.target.tagName.toLowerCase() === 'a' ||
+        e.target.closest('button') ||
+        e.target.closest('a') ||
+        e.target.classList.contains('cursor-hover-target')
+      );
+    };
+
+    window.addEventListener("mousemove", moveCursor);
+    window.addEventListener("mouseover", handleMouseOver);
+    return () => {
+      window.removeEventListener("mousemove", moveCursor);
+      window.removeEventListener("mouseover", handleMouseOver);
+    };
+  }, [cursorX, cursorY]);
+
+  if (!isVisible) return null;
+
+  return (
+    <>
+      <motion.div
+        className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference hidden md:block"
+        style={{ x: cursorX, y: cursorY, translateX: "-50%", translateY: "-50%" }}
+        animate={{ scale: isHovering ? 0 : 1 }}
+        transition={{ duration: 0.15 }}
+      />
+      <motion.div
+        className="fixed top-0 left-0 w-16 h-16 border border-white/30 rounded-full pointer-events-none z-[9998] mix-blend-difference items-center justify-center backdrop-blur-[2px] hidden md:flex"
+        style={{ x: cursorXSpring, y: cursorYSpring, translateX: "-50%", translateY: "-50%" }}
+        animate={{
+          scale: isHovering ? 2.5 : 1,
+          backgroundColor: isHovering ? "rgba(255,255,255,1)" : "rgba(255,255,255,0)",
+          border: isHovering ? "none" : "1px solid rgba(255,255,255,0.3)"
+        }}
+        transition={{ duration: 0.15 }}
+      >
+        {isHovering && <span className="text-[5px] font-extrabold text-black uppercase tracking-[0.3em]">View</span>}
+      </motion.div>
+    </>
+  );
+};
+
+
+// ================= MAIN COMPONENT ================= //
+
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sending, setSending] = useState(false);
+  const containerRef = useRef(null);
+
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -48,12 +208,13 @@ const Contact = () => {
       toast.success("Message sent! I’ll get back to you soon. 🚀", {
         theme: "dark",
         position: "bottom-right",
-        style: { background: "#111827", color: "#fff", border: "1px solid rgba(255,255,255,0.1)" }
+        style: { background: "#0a0a0a", color: "#fff", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "16px" }
       });
     } catch {
       toast.error("Network error. Please try later.", { 
         theme: "dark",
-        style: { background: "#111827", color: "#fff", border: "1px solid rgba(255,255,255,0.1)" }
+        position: "bottom-right",
+        style: { background: "#0a0a0a", color: "#fff", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "16px" }
       });
     } finally {
       setSending(false);
@@ -69,125 +230,143 @@ const Contact = () => {
     },
   };
 
+  const revealVariants = {
+    hidden: { opacity: 0, y: 100, rotate: 2 },
+    visible: { opacity: 1, y: 0, rotate: 0, transition: { type: "spring", stiffness: 50, damping: 25, mass: 1 } }
+  };
+
   const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+    hidden: { opacity: 0, y: 40, scale: 0.95 },
+    show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 60, damping: 20, mass: 1 } },
   };
 
   return (
-    <section className="relative bg-[#050505] text-white px-6 sm:px-10 md:px-20 lg:px-28 pt-32 pb-44 overflow-hidden selection:bg-teal-500/30 font-sans">
+    <main ref={containerRef} className="relative bg-[#000000] text-white px-4 sm:px-10 md:px-20 lg:px-28 pt-28 sm:pt-40 pb-32 sm:pb-48 overflow-hidden selection:bg-teal-500/30 font-sans antialiased cursor-auto md:cursor-none">
       
-      {/* 🌟 Ultra-Premium Background Glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[600px] h-[600px] bg-teal-600/10 rounded-full blur-[150px] pointer-events-none z-0"></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none z-0"></div>
-      
-      {/* Subtle Texture Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:70px_70px] opacity-[0.15] pointer-events-none z-0" />
+      <CustomCursor />
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      {/* 🌟 Ultra-Premium Background Glows */}
+      <div className="fixed inset-0 z-0 pointer-events-none bg-black overflow-hidden">
+        <div className="absolute top-[-10%] right-[-10%] w-[120vw] sm:w-[60vw] h-[120vw] sm:h-[60vw] rounded-full bg-teal-900/15 sm:bg-teal-900/20 blur-[150px] sm:blur-[250px] mix-blend-screen animate-[pulse_15s_ease-in-out_infinite]" />
+        <div className="absolute bottom-[-20%] left-[-10%] w-[130vw] sm:w-[70vw] h-[130vw] sm:h-[70vw] rounded-full bg-blue-900/15 sm:bg-blue-900/20 blur-[150px] sm:blur-[250px] mix-blend-screen animate-[pulse_20s_ease-in-out_infinite_reverse]" />
+        
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:70px_70px] sm:bg-[size:150px_150px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)] opacity-80 md:opacity-95" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.06] mix-blend-overlay pointer-events-none" />
+      </div>
+
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-[2px] md:h-[4px] bg-gradient-to-r from-teal-400 via-blue-500 to-purple-500 z-[999] origin-left shadow-[0_0_20px_rgba(20,184,166,0.8)]"
+        style={{ scaleX }}
+      />
+
+      <div className="max-w-[1920px] mx-auto relative z-10">
 
         {/* ================= HEADER ================= */}
         <motion.header 
-          initial="hidden" whileInView="show" viewport={{ once: true, margin: "-50px" }} variants={fadeUp}
-          className="mb-24 max-w-3xl"
+          initial="hidden" animate="show" variants={containerVariants}
+          className="mb-20 sm:mb-40 flex flex-col items-center text-center max-w-6xl mx-auto"
         >
-          <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white/[0.03] border border-white/10 text-[10px] sm:text-xs uppercase tracking-widest text-teal-400 mb-8 backdrop-blur-md shadow-[0_0_30px_rgba(45,212,191,0.05)] cursor-default transition-transform hover:scale-105">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
-            </span>
+          <motion.div variants={revealVariants} className="inline-flex items-center gap-3 sm:gap-4 px-6 sm:px-10 py-3 sm:py-5 rounded-full bg-white/[0.02] border border-white/[0.1] text-[10px] sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] text-gray-300 mb-8 sm:mb-14 backdrop-blur-3xl shadow-2xl cursor-hover-target">
+            <Send className="w-4 h-4 sm:w-5 sm:h-5 text-teal-400" />
             Contact Me
+          </motion.div>
+          
+          <div className="overflow-hidden pb-4 w-full">
+            <motion.h1 variants={revealVariants} className="text-[14vw] sm:text-[9rem] lg:text-[11rem] font-bold tracking-tighter leading-[0.8] relative whitespace-nowrap">
+              <span className="text-transparent outline-text drop-shadow-2xl mix-blend-plus-lighter">LET'S</span>
+            </motion.h1>
+          </div>
+          <div className="overflow-hidden pb-10 w-full">
+            <motion.h1 variants={revealVariants} className="text-[14vw] sm:text-[9rem] lg:text-[11rem] font-bold tracking-tighter leading-[0.8] relative whitespace-nowrap">
+              <span className="text-white pb-2 sm:pb-4 inline-block drop-shadow-[0_20px_40px_rgba(255,255,255,0.15)] md:drop-shadow-[0_40px_80px_rgba(255,255,255,0.15)]">CONNECT.</span>
+            </motion.h1>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-6">
-            Let’s build something <br className="hidden sm:block" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-blue-500 to-teal-400 bg-[length:200%_auto] animate-[gradient_3s_linear_infinite]">
-              meaningful together.
-            </span>
-          </h2>
-
-          <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-2xl font-medium">
+          <motion.p variants={revealVariants} className="text-gray-400 text-lg sm:text-3xl font-light tracking-wide leading-[1.6] sm:leading-[1.8] max-w-4xl px-4 mix-blend-plus-lighter">
             Have a project, idea, or collaboration in mind? I’m always open to discussing new opportunities and engineering scalable digital products.
-          </p>
+          </motion.p>
         </motion.header>
 
         {/* ================= CONTENT GRID ================= */}
         <motion.div 
-          variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true }}
-          className="grid lg:grid-cols-12 gap-16 items-start"
+          variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-50px" }}
+          className="grid lg:grid-cols-12 gap-12 sm:gap-16 items-start"
         >
 
           {/* 📱 LEFT: Contact Info & Socials (Col Span 5) */}
-          <motion.div variants={fadeUp} className="lg:col-span-5 space-y-10">
+          <motion.div variants={fadeUp} className="lg:col-span-5 space-y-10 sm:space-y-12">
             
-            <div className="space-y-5">
+            <div className="space-y-4 sm:space-y-6">
               {/* Info Card 1: Phone */}
-              <a href="tel:+918429755694" className="flex items-center gap-5 p-6 rounded-3xl bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 hover:bg-[#111111] hover:border-teal-500/30 transition-all duration-500 group shadow-lg hover:shadow-[0_15px_40px_-15px_rgba(45,212,191,0.2)]">
-                <div className="w-14 h-14 rounded-full bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 group-hover:scale-110 group-hover:bg-teal-500/20 transition-all duration-500">
-                  <Phone size={22} />
+              <MagneticButton href="tel:+918429755694" className="w-full">
+                <div className="flex items-center gap-5 sm:gap-6 p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 hover:bg-[#111111] hover:border-teal-500/30 transition-all duration-500 group shadow-lg hover:shadow-[0_15px_40px_-15px_rgba(45,212,191,0.2)] cursor-hover-target w-full">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 group-hover:scale-110 group-hover:bg-teal-500/20 transition-all duration-500 shrink-0">
+                    <Phone size={24} />
+                  </div>
+                  <div className="text-left overflow-hidden">
+                    <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-[0.2em] sm:tracking-widest mb-1 sm:mb-1.5 font-bold">Call Me</p>
+                    <p className="text-base sm:text-xl text-white font-light tracking-wide truncate">+91 84297 55694</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-[11px] text-gray-500 uppercase tracking-widest mb-1.5 font-bold">Call Me</p>
-                  <p className="text-white font-semibold tracking-wide">+91 84297 55694</p>
-                </div>
-              </a>
+              </MagneticButton>
 
               {/* Info Card 2: Email */}
-              <a href="mailto:anaskhan995620@gmail.com" className="flex items-center gap-5 p-6 rounded-3xl bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 hover:bg-[#111111] hover:border-blue-500/30 transition-all duration-500 group shadow-lg hover:shadow-[0_15px_40px_-15px_rgba(59,130,246,0.2)]">
-                <div className="w-14 h-14 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 group-hover:bg-blue-500/20 transition-all duration-500">
-                  <Mail size={22} />
+              <MagneticButton href="mailto:anaskhan995620@gmail.com" className="w-full">
+                <div className="flex items-center gap-5 sm:gap-6 p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 hover:bg-[#111111] hover:border-blue-500/30 transition-all duration-500 group shadow-lg hover:shadow-[0_15px_40px_-15px_rgba(59,130,246,0.2)] cursor-hover-target w-full">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 group-hover:bg-blue-500/20 transition-all duration-500 shrink-0">
+                    <Mail size={24} />
+                  </div>
+                  <div className="text-left overflow-hidden">
+                    <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-[0.2em] sm:tracking-widest mb-1 sm:mb-1.5 font-bold">Email Me</p>
+                    <p className="text-base sm:text-xl text-white font-light tracking-wide truncate">anaskhan995620@gmail.com</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-[11px] text-gray-500 uppercase tracking-widest mb-1.5 font-bold">Email Me</p>
-                  <p className="text-white font-semibold tracking-wide">anaskhan995620@gmail.com</p>
-                </div>
-              </a>
+              </MagneticButton>
 
               {/* Info Card 3: Location */}
-              <div className="flex items-center gap-5 p-6 rounded-3xl bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 hover:bg-[#111111] hover:border-purple-500/30 transition-all duration-500 group shadow-lg hover:shadow-[0_15px_40px_-15px_rgba(168,85,247,0.2)]">
-                <div className="w-14 h-14 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 group-hover:bg-purple-500/20 transition-all duration-500">
-                  <MapPin size={22} />
+              <MagneticButton className="w-full">
+                <div className="flex items-center gap-5 sm:gap-6 p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 hover:bg-[#111111] hover:border-purple-500/30 transition-all duration-500 group shadow-lg hover:shadow-[0_15px_40px_-15px_rgba(168,85,247,0.2)] cursor-hover-target w-full">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 group-hover:bg-purple-500/20 transition-all duration-500 shrink-0">
+                    <MapPin size={24} />
+                  </div>
+                  <div className="text-left overflow-hidden">
+                    <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-[0.2em] sm:tracking-widest mb-1 sm:mb-1.5 font-bold">Location</p>
+                    <p className="text-base sm:text-xl text-white font-light tracking-wide truncate">Kanpur, India (IST)</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-[11px] text-gray-500 uppercase tracking-widest mb-1.5 font-bold">Location</p>
-                  <p className="text-white font-semibold tracking-wide">Lucknow, India (IST)</p>
-                </div>
-              </div>
+              </MagneticButton>
             </div>
 
             {/* Socials Box */}
-            <div className="pt-8 border-t border-white/10">
-              <p className="text-[11px] uppercase tracking-[0.2em] text-gray-400 mb-6 font-bold">
+            <div className="pt-8 sm:pt-10 border-t border-white/10 text-center sm:text-left">
+              <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-gray-500 mb-6 sm:mb-8 font-bold">
                 Follow my journey
               </p>
-              <div className="flex flex-wrap gap-4 text-xl">
-                <SocialIcon href="https://linkedin.com/in/khan-anas-a26b66364/" icon={<FaLinkedin />} hover="hover:text-[#0A66C2] hover:bg-[#0A66C2]/10 hover:border-[#0A66C2]/50" />
-                <SocialIcon href="https://github.com/khanlazyanas/anaskhanportfolio" icon={<FaGithub />} hover="hover:text-white hover:bg-white/10 hover:border-white/50" />
-                <SocialIcon href="https://instagram.com/khan_anas842" icon={<FaInstagram />} hover="hover:text-[#E1306C] hover:bg-[#E1306C]/10 hover:border-[#E1306C]/50" />
-                <SocialIcon href="https://wa.me/918429755694" icon={<FaWhatsapp />} hover="hover:text-[#25D366] hover:bg-[#25D366]/10 hover:border-[#25D366]/50" />
-                <SocialIcon href="https://youtube.com/@khananas2318" icon={<FaYoutube />} hover="hover:text-[#FF0000] hover:bg-[#FF0000]/10 hover:border-[#FF0000]/50" />
+              <div className="flex flex-wrap justify-center sm:justify-start gap-4 sm:gap-6 text-xl sm:text-2xl">
+                <SocialIcon href="https://linkedin.com/in/khan-anas-a26b66364/" icon={<FaLinkedin />} hoverColor="rgba(10, 102, 194, 0.4)" hoverText="hover:text-[#0A66C2]" />
+                <SocialIcon href="https://github.com/khanlazyanas/anaskhanportfolio" icon={<FaGithub />} hoverColor="rgba(255, 255, 255, 0.4)" hoverText="hover:text-white" />
+                <SocialIcon href="https://instagram.com/khan_anas842" icon={<FaInstagram />} hoverColor="rgba(225, 48, 108, 0.4)" hoverText="hover:text-[#E1306C]" />
+                <SocialIcon href="https://wa.me/918429755694" icon={<FaWhatsapp />} hoverColor="rgba(37, 211, 102, 0.4)" hoverText="hover:text-[#25D366]" />
+                <SocialIcon href="https://youtube.com/@khananas2318" icon={<FaYoutube />} hoverColor="rgba(255, 0, 0, 0.4)" hoverText="hover:text-[#FF0000]" />
               </div>
             </div>
 
           </motion.div>
 
           {/* 📝 RIGHT: Ultra-Premium Glassmorphism Form (Col Span 7) */}
-          <motion.div variants={fadeUp} className="lg:col-span-7">
-            <div className="bg-[#0a0a0a]/80 backdrop-blur-2xl border border-white/10 p-8 sm:p-12 rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.7)] relative overflow-hidden group/form">
+          <motion.div variants={fadeUp} className="lg:col-span-7 mt-8 lg:mt-0">
+            <SpotlightCard glowColor="rgba(45, 212, 191, 0.15)" className="p-8 sm:p-12 lg:p-16 rounded-[2.5rem] sm:rounded-[4rem] group/form">
               
-              {/* Decorative Background Glows inside Form */}
-              <div className="absolute -top-32 -right-32 w-64 h-64 bg-teal-500/10 blur-[80px] rounded-full pointer-events-none transition-opacity duration-700 opacity-50 group-hover/form:opacity-100"></div>
-              <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none transition-opacity duration-700 opacity-50 group-hover/form:opacity-100"></div>
-
               <div className="relative z-10">
-                <h3 className="text-3xl font-bold text-white mb-3 tracking-tight">Send a Message</h3>
-                <p className="text-gray-400 text-sm mb-10 font-medium">Fill out the form below and I'll get back to you within 24 hours.</p>
+                <h3 className="text-3xl sm:text-5xl font-bold text-white mb-4 sm:mb-6 tracking-tight group-hover/form:text-transparent group-hover/form:bg-clip-text group-hover/form:bg-gradient-to-r group-hover/form:from-white group-hover/form:to-gray-400 transition-colors duration-500">Send a Message</h3>
+                <p className="text-gray-400 text-base sm:text-xl mb-10 sm:mb-12 font-light leading-[1.6]">Fill out the form below and I'll get back to you within 24 hours.</p>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
                   
                   {/* Name Input */}
-                  <div className="relative group">
-                    <User className="absolute left-5 top-[20px] text-gray-500 group-focus-within:text-teal-400 transition-colors duration-300" size={20} />
+                  <div className="relative group cursor-hover-target">
+                    <User className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-teal-400 transition-colors duration-300 z-10" size={24} />
                     <input
                       type="text"
                       name="name"
@@ -195,13 +374,13 @@ const Contact = () => {
                       onChange={handleChange}
                       placeholder="Your Full Name"
                       required
-                      className="w-full bg-[#111111]/80 border border-white/5 rounded-2xl pl-14 pr-5 py-5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-teal-500/50 focus:bg-[#151515] focus:ring-4 focus:ring-teal-500/10 transition-all duration-300"
+                      className="w-full bg-[#111111]/80 backdrop-blur-md border border-white/5 rounded-2xl sm:rounded-[2rem] pl-16 sm:pl-20 pr-6 py-5 sm:py-6 text-base sm:text-lg text-white placeholder-gray-600 focus:outline-none focus:border-teal-500/50 focus:bg-[#151515] focus:ring-4 focus:ring-teal-500/10 transition-all duration-300 relative z-0"
                     />
                   </div>
 
                   {/* Email Input */}
-                  <div className="relative group">
-                    <Mail className="absolute left-5 top-[20px] text-gray-500 group-focus-within:text-teal-400 transition-colors duration-300" size={20} />
+                  <div className="relative group cursor-hover-target">
+                    <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-400 transition-colors duration-300 z-10" size={24} />
                     <input
                       type="email"
                       name="email"
@@ -209,13 +388,13 @@ const Contact = () => {
                       onChange={handleChange}
                       placeholder="Email Address"
                       required
-                      className="w-full bg-[#111111]/80 border border-white/5 rounded-2xl pl-14 pr-5 py-5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-teal-500/50 focus:bg-[#151515] focus:ring-4 focus:ring-teal-500/10 transition-all duration-300"
+                      className="w-full bg-[#111111]/80 backdrop-blur-md border border-white/5 rounded-2xl sm:rounded-[2rem] pl-16 sm:pl-20 pr-6 py-5 sm:py-6 text-base sm:text-lg text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:bg-[#151515] focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 relative z-0"
                     />
                   </div>
 
                   {/* Message Textarea */}
-                  <div className="relative group">
-                    <MessageSquare className="absolute left-5 top-[20px] text-gray-500 group-focus-within:text-teal-400 transition-colors duration-300" size={20} />
+                  <div className="relative group cursor-hover-target">
+                    <MessageSquare className="absolute left-6 top-6 sm:top-8 text-gray-500 group-focus-within:text-purple-400 transition-colors duration-300 z-10" size={24} />
                     <textarea
                       name="message"
                       rows="5"
@@ -223,52 +402,83 @@ const Contact = () => {
                       onChange={handleChange}
                       placeholder="Tell me about your project..."
                       required
-                      className="w-full bg-[#111111]/80 border border-white/5 rounded-2xl pl-14 pr-5 py-5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-teal-500/50 focus:bg-[#151515] focus:ring-4 focus:ring-teal-500/10 transition-all duration-300 resize-none custom-scrollbar"
+                      className="w-full bg-[#111111]/80 backdrop-blur-md border border-white/5 rounded-2xl sm:rounded-[2.5rem] pl-16 sm:pl-20 pr-6 py-6 sm:py-8 text-base sm:text-lg text-white placeholder-gray-600 focus:outline-none focus:border-purple-500/50 focus:bg-[#151515] focus:ring-4 focus:ring-purple-500/10 transition-all duration-300 resize-none custom-scrollbar relative z-0"
                     />
                   </div>
 
                   {/* Submit Button */}
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="submit"
-                    disabled={sending}
-                    className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-400 hover:to-blue-500 text-white font-bold py-5 rounded-2xl transition-all duration-300 shadow-[0_10px_30px_-10px_rgba(45,212,191,0.5)] disabled:opacity-70 mt-6"
-                  >
-                    {sending ? (
-                      <>
-                        <Loader2 className="animate-spin" size={20} />
-                        Sending Message...
-                      </>
-                    ) : (
-                      <>
-                        Send Message <Send size={18} className="transition-transform group-hover:translate-x-1" />
-                      </>
-                    )}
-                  </motion.button>
+                  <div className="pt-4 sm:pt-6">
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      type="submit"
+                      disabled={sending}
+                      className="w-full flex items-center justify-center gap-3 sm:gap-4 bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-400 hover:to-blue-500 text-white font-bold py-5 sm:py-6 rounded-2xl sm:rounded-[2rem] transition-all duration-300 shadow-[0_10px_30px_-10px_rgba(45,212,191,0.5)] disabled:opacity-70 group cursor-hover-target"
+                    >
+                      {sending ? (
+                        <>
+                          <Loader2 className="animate-spin" size={24} />
+                          <span className="text-base sm:text-xl tracking-wider">Sending Message...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-base sm:text-xl tracking-widest uppercase">Transmit Message</span>
+                          <Send size={20} className="transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-1" />
+                        </>
+                      )}
+                    </motion.button>
+                  </div>
                 </form>
               </div>
-
-            </div>
+            </SpotlightCard>
           </motion.div>
 
         </motion.div>
       </div>
-    </section>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        .outline-text {
+          -webkit-text-stroke: 1px rgba(255, 255, 255, 0.7);
+          color: transparent;
+        }
+        @media (min-width: 768px) {
+          .outline-text {
+            -webkit-text-stroke: 3px rgba(255, 255, 255, 0.8);
+          }
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 4px; border: 1px solid #111; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+        body {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          text-rendering: optimizeLegibility;
+        }
+      `}} />
+    </main>
   );
 };
 
-// Reusable Social Icon Component with enhanced hover states
-function SocialIcon({ href, icon, hover }) {
+// Reusable Social Icon Component using Magnetic logic
+function SocialIcon({ href, icon, hoverColor, hoverText }) {
   return (
-    <a 
-      href={href} 
-      target="_blank" 
-      rel="noreferrer"
-      className={`p-4 rounded-2xl border border-white/5 bg-[#0a0a0a]/80 text-gray-400 backdrop-blur-md transition-all duration-300 ${hover} hover:-translate-y-1.5 shadow-lg hover:shadow-xl flex items-center justify-center`}
-    >
-      {icon}
-    </a>
+    <MagneticButton href={href} target="_blank">
+      <div 
+        className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-white/10 bg-[#0a0a0a]/80 text-gray-400 backdrop-blur-md transition-all duration-500 ${hoverText} shadow-lg flex items-center justify-center cursor-hover-target`}
+        style={{ '--tw-ring-color': hoverColor }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = hoverColor.replace('0.4', '0.8');
+          e.currentTarget.style.boxShadow = `0 10px 30px -10px ${hoverColor}`;
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+          e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
+        }}
+      >
+        {icon}
+      </div>
+    </MagneticButton>
   );
 }
 

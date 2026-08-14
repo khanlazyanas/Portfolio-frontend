@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
-// FIXED: Removed 'useMouse', keeping only what is actually needed
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { 
   ArrowRight, Download, Mail, Code2, MonitorSmartphone, 
   Server, Zap, Cloud, CheckCircle2, Quote, ExternalLink, X, Maximize2,
-  Github, Linkedin, Send, MapPin, Sparkles, Terminal, ChevronRight
+  Github, Linkedin, Send, MapPin, Sparkles, Terminal, Layers
 } from "lucide-react"; 
 import {
   SiHtml5, SiCss3, SiJavascript, SiReact, SiTailwindcss,
@@ -111,7 +110,7 @@ const projects = [
   {
     title: "BIZFLOW",
     subtitle: "Enterprise B2B SaaS & Workspace Management Platform",
-    description: "A full-stack, multi-tenant SaaS application engineered on the MERN stack. Designed with an ultra-premium 'Deep Space' dark mode aesthetic, it features advanced security protocols including Google OAuth 2.0, Passwordless Magic Link (OTP) authentication, and strict cross-domain HTTP-only cookies. The robust backend architecture is equipped with automated cron jobs for data lifecycle management (Soft Delete/Recycle Bin), rate-limiting for API protection, and seamless invoice generation.",
+    description: "A full-stack, multi-tenant SaaS application engineered on the MERN stack. Designed with an ultra-premium 'Deep Space' dark mode aesthetic, it features advanced security protocols including Google OAuth 2.0, Passwordless Magic Link (OTP) authentication, and strict cross-domain HTTP-only cookies. The robust backend architecture is equipped with automated cron jobs for data lifecycle management.",
     link: "https://bizflow-saas-web.vercel.app", 
     image: bizflowimg, 
     tech: ["React.js", "Node.js", "MongoDB", "OAuth 2.0", "JWT", "Tailwind", "Framer"],
@@ -120,7 +119,7 @@ const projects = [
   {
     title: "NEXPOS",
     subtitle: "Enterprise-Grade Point of Sale & Retail Management System",
-    description: "A next-generation, full-stack retail SaaS platform built on Next.js and MongoDB. Designed with an ultra-premium 'Silicon Valley' glassmorphic aesthetic, it features real-time inventory tracking, a dedicated CRM for 'Khata' (customer credit) management, and secure role-based access control (RBAC) via Next-Auth. The system boasts seamless Razorpay payment gateway integration, dynamic Recharts analytics dashboards, and an automated, print-ready thermal receipt generator.",
+    description: "A next-generation, full-stack retail SaaS platform built on Next.js and MongoDB. Designed with an ultra-premium 'Silicon Valley' glassmorphic aesthetic, it features real-time inventory tracking, a dedicated CRM for 'Khata' (customer credit) management, and secure role-based access control (RBAC) via Next-Auth. Boasts seamless Razorpay payment gateway integration.",
     link: "https://nexpos-azure.vercel.app", 
     image: nexposimg, 
     tech: ["Next.js", "MongoDB", "Next-Auth", "Tailwind CSS", "Razorpay", "Recharts"],
@@ -138,7 +137,7 @@ const projects = [
   {
     title: "TASKMIND AI",
     subtitle: "AI-Powered SaaS Task Manager & Automated Workspace",
-    description: "A highly intelligent, automated task management platform built with Next.js and the MERN architecture. It features a context-aware AI assistant utilizing the Google Gemini API with custom function calling for real-time database operations via natural language. The backend is robustly engineered with background Vercel Cron Jobs for automated daily reminders, native OS-level Push Notifications via the Web Push API, and an interactive drag-and-drop Kanban board for seamless workflow execution.",
+    description: "A highly intelligent, automated task management platform built with Next.js and the MERN architecture. It features a context-aware AI assistant utilizing the Google Gemini API with custom function calling for real-time database operations via natural language. Engineered with background Vercel Cron Jobs for automated daily reminders.",
     link: "https://taskmind-ai-three.vercel.app", 
     image: taskmindimg, 
     tech: ["Next.js", "MongoDB", "Google Gemini", "Vercel Cron", "dnd-kit"],
@@ -182,10 +181,39 @@ const projects = [
   },
 ];
 
+// ================= 2000x PREMIUM SUB-COMPONENTS ================= //
 
-// ================= 1000x PREMIUM SUB-COMPONENTS ================= //
+// 1. Dynamic Floating Navigation (Dynamic Island Style)
+const FloatingNav = ({ scrollToSection }) => {
+  return (
+    <motion.nav 
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.5 }}
+      className="fixed top-6 left-1/2 -translate-x-1/2 z-[999] px-8 py-4 bg-[#0a0a0a]/80 border border-white/10 rounded-full backdrop-blur-3xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] flex items-center gap-8 cursor-hover-target"
+    >
+      <div className="flex items-center gap-2 mr-4">
+        <div className="w-2 h-2 rounded-full bg-teal-500 animate-pulse" />
+        <span className="text-white font-bold tracking-widest text-sm uppercase">Anas.</span>
+      </div>
+      <div className="h-4 w-[1px] bg-white/20 hidden sm:block" />
+      <div className="hidden sm:flex items-center gap-6">
+        {['services', 'projects', 'contact'].map((item) => (
+          <a 
+            key={item}
+            href={`#${item}`} 
+            onClick={(e) => scrollToSection(e, item)}
+            className="text-xs font-semibold uppercase tracking-[0.2em] text-gray-400 hover:text-white transition-colors duration-300"
+          >
+            {item}
+          </a>
+        ))}
+      </div>
+    </motion.nav>
+  );
+};
 
-// 1. Mouse Spotlight Card (Apple-style interactive border glow)
+// 2. Mouse Spotlight Card (Apple-style interactive border glow)
 const SpotlightCard = ({ children, className, glowColor = "rgba(255, 255, 255, 0.1)" }) => {
   const divRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
@@ -233,7 +261,7 @@ const SpotlightCard = ({ children, className, glowColor = "rgba(255, 255, 255, 0
   );
 };
 
-// 2. 3D Magnetic Tilt Component (Silicon Valley Depth Effect)
+// 3. 3D Magnetic Tilt Component
 const TiltWrapper = ({ children, className }) => {
   const ref = useRef(null);
   const x = useMotionValue(0);
@@ -276,8 +304,8 @@ const TiltWrapper = ({ children, className }) => {
   );
 };
 
-// 3. Magnetic Button Wrapper (High-end Physics Interaction)
-const MagneticButton = ({ children, className, href }) => {
+// 4. Magnetic Button Wrapper
+const MagneticButton = ({ children, className, href, onClick }) => {
   const ref = useRef(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
@@ -301,6 +329,7 @@ const MagneticButton = ({ children, className, href }) => {
       animate={{ x: position.x, y: position.y }}
       transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
       className={className}
+      onClick={onClick}
     >
       {children}
     </motion.div>
@@ -308,14 +337,14 @@ const MagneticButton = ({ children, className, href }) => {
 
   if (href) {
     if (href.startsWith('#')) {
-      return <a href={href} className="inline-block">{content}</a>;
+      return <a href={href} className="inline-block w-full sm:w-auto">{content}</a>;
     }
-    return <Link to={href} className="inline-block">{content}</Link>;
+    return <Link to={href} className="inline-block w-full sm:w-auto">{content}</Link>;
   }
-  return content;
+  return <div className="inline-block w-full sm:w-auto">{content}</div>;
 };
 
-// 4. Custom Animated Cursor (Awwwards Standard)
+// 5. Custom Animated Cursor
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
@@ -364,14 +393,104 @@ const CustomCursor = () => {
         animate={{
           x: mousePosition.x - 24,
           y: mousePosition.y - 24,
-          scale: isHovering ? 2 : 1,
+          scale: isHovering ? 2.5 : 1,
           backgroundColor: isHovering ? "rgba(255,255,255,1)" : "rgba(255,255,255,0)",
         }}
         transition={{ type: "spring", stiffness: 150, damping: 20, mass: 0.5 }}
       >
-        {isHovering && <span className="text-[5px] font-extrabold text-black uppercase tracking-[0.2em]">View</span>}
+        {isHovering && <span className="text-[4px] font-extrabold text-black uppercase tracking-[0.2em]">View</span>}
       </motion.div>
     </>
+  );
+};
+
+// 6. True Parallax Project Card
+const ProjectCard = ({ project, idx, setSelectedImg, stickyTop }) => {
+  const cardRef = useRef(null);
+  
+  // Track scroll specifically for THIS card to create an internal image parallax
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Moves the image up and down inside its container as you scroll
+  const yImage = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+
+  return (
+    <motion.article 
+      ref={cardRef}
+      initial={{ opacity: 0, y: 200, rotateX: 5 }}
+      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+      className="lg:sticky flex flex-col overflow-hidden rounded-[3rem] border border-white/[0.1] bg-[#030303] shadow-[0_-30px_60px_rgba(0,0,0,0.95)] mb-10 lg:mb-48 last:mb-0 transform-gpu"
+      style={{ top: stickyTop }}
+    >
+      <div className="grid lg:grid-cols-12 h-full min-h-[750px] relative">
+        
+        {/* Internal ambient glow for the card */}
+        <div className="absolute top-[-30%] left-[-20%] w-[600px] h-[600px] blur-[200px] rounded-full pointer-events-none z-0 opacity-40 transition-colors duration-1000" style={{ backgroundColor: project.glowColor.replace('0.15', '0.5') }} />
+
+        {/* Left Content Area */}
+        <div className="lg:col-span-5 p-12 sm:p-20 flex flex-col justify-between border-r border-white/[0.05] relative z-20 bg-black/60 backdrop-blur-3xl">
+          <div>
+            <div className="flex items-center gap-6 mb-12">
+              <span className="text-lg font-mono text-gray-500 font-bold block">0{idx + 1}</span>
+              <div className={`h-[2px] w-24 bg-gradient-to-r from-white to-transparent`} />
+              <span className="text-xs uppercase tracking-[0.4em] text-gray-400 font-bold">{project.subtitle}</span>
+            </div>
+            
+            <h3 className="text-5xl sm:text-7xl font-bold text-white mb-10 tracking-tighter uppercase leading-[0.9] drop-shadow-xl">
+              {project.title}
+            </h3>
+            
+            <p className="text-gray-400 text-xl leading-[1.8] font-light mb-14">
+              {project.description}
+            </p>
+            
+            {/* Tech Stack Tags */}
+            <div className="flex flex-wrap gap-4 mb-14">
+              {project.tech.map((item, i) => (
+                <span key={i} className="text-xs font-bold uppercase tracking-[0.2em] px-6 py-3 rounded-full border border-white/10 text-gray-300 bg-white/[0.03] backdrop-blur-xl shadow-lg">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <MagneticButton href={project.link} className="group flex items-center justify-between px-10 py-6 rounded-full border border-white/20 bg-white/[0.05] hover:bg-white text-white hover:text-black transition-all duration-700 w-fit gap-10 cursor-hover-target backdrop-blur-2xl shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+            <span className="text-sm font-extrabold tracking-[0.25em] uppercase">Launch Platform</span>
+            <div className="w-10 h-10 rounded-full bg-black/10 flex items-center justify-center group-hover:bg-black transition-colors">
+              <ArrowRight size={18} className="group-hover:translate-x-1 group-hover:-rotate-45 group-hover:text-white transition-all duration-500" />
+            </div>
+          </MagneticButton>
+        </div>
+
+        {/* Right Image Area (True Parallax Interactive Visual) */}
+        <div className="lg:col-span-7 relative group cursor-hover-target overflow-hidden h-[500px] lg:h-auto bg-[#080808]" onClick={() => setSelectedImg(project.image)}>
+          <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-1000 z-10" />
+          
+          {/* Parallax Image Container */}
+          <motion.div style={{ y: yImage }} className="absolute inset-[-20%] w-[140%] h-[140%]">
+            <img 
+              src={project.image} 
+              alt={project.title} 
+              loading="lazy"
+              className="w-full h-full object-cover object-center transition-transform duration-[4000ms] group-hover:scale-105 grayscale-[20%] group-hover:grayscale-0"
+            />
+          </motion.div>
+          
+          {/* Hover expand icon */}
+          <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+            <div className="w-28 h-28 bg-black/70 backdrop-blur-2xl rounded-full flex items-center justify-center border border-white/20 scale-50 group-hover:scale-100 transition-transform duration-700 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+               <Maximize2 className="text-white" size={36} strokeWidth={1.5} />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </motion.article>
   );
 };
 
@@ -392,27 +511,35 @@ const Home = () => {
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   // Hero Parallax effects
-  const yHeroText = useTransform(scrollYProgress, [0, 0.3], [0, 300]);
+  const yHeroText = useTransform(scrollYProgress, [0, 0.3], [0, 250]);
   const opacityHero = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
   const scaleHeroImage = useTransform(scrollYProgress, [0, 0.3], [1, 1.15]);
-  const yHeroImage = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
+  const yHeroImage = useTransform(scrollYProgress, [0, 0.3], [0, 150]);
 
   // Smooth scroll handler
   const scrollToSection = (e, id) => {
     e.preventDefault();
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      const offset = 100; // Account for floating nav
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
     }
   };
 
   // Reusable Reveal Animation (Staggered text mask effect)
   const revealVariants = {
-    hidden: { opacity: 0, y: 100, rotate: 5 },
+    hidden: { opacity: 0, y: 120, rotate: 3 },
     visible: { opacity: 1, y: 0, rotate: 0, transition: { type: "spring", stiffness: 60, damping: 20, mass: 1 } }
   };
 
-  // FIXED: Added fadeUp variants which caused the white screen crash earlier
   const fadeUp = {
     hidden: { opacity: 0, y: 60, scale: 0.95 },
     visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 70, damping: 20, mass: 1 } }
@@ -420,15 +547,16 @@ const Home = () => {
 
   const staggerContainer = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } }
+    visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } }
   };
 
   return (
     <main ref={containerRef} className="relative bg-[#000000] text-white selection:bg-white selection:text-black overflow-hidden font-sans antialiased cursor-none">
       
       <CustomCursor />
+      <FloatingNav scrollToSection={scrollToSection} />
 
-      {/* 🌟 1000x Ultra Premium Liquid Mesh Background */}
+      {/* 🌟 2000x Ultra Premium Liquid Mesh Background */}
       <div className="fixed inset-0 z-0 pointer-events-none bg-black">
         {/* Deep, rich, slow-moving orbs */}
         <div className="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-teal-900/15 blur-[180px] mix-blend-screen animate-[pulse_12s_ease-in-out_infinite]" />
@@ -449,7 +577,7 @@ const Home = () => {
       />
 
       {/* ================= SECTION 1: HERO ================= */}
-      <section id="hero" className="relative z-10 min-h-[100vh] flex items-center pt-32 pb-20 px-6 sm:px-10 md:px-20 lg:px-28 max-w-[1800px] mx-auto">
+      <section id="hero" className="relative z-10 min-h-[100vh] flex items-center pt-40 pb-20 px-6 sm:px-10 md:px-20 lg:px-28 max-w-[1800px] mx-auto">
         <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-center w-full relative">
           
           {/* Header Content with Heavy Parallax & Masking */}
@@ -467,20 +595,20 @@ const Home = () => {
               <span className="text-xs font-bold tracking-[0.3em] uppercase text-gray-300">Available For Impact</span>
             </motion.div>
 
-            {/* Masked Typography (Awwwards Style) */}
-            <div className="overflow-hidden pb-4">
-              <motion.h1 variants={revealVariants} className="text-7xl sm:text-8xl lg:text-[9.5rem] font-bold tracking-tighter leading-[0.85] relative">
-                <span className="text-white drop-shadow-2xl">ANAS</span>
+            {/* Masked Hollow Typography (Awwwards Style) */}
+            <div className="overflow-hidden pb-2 -ml-2">
+              <motion.h1 variants={revealVariants} className="text-[5.5rem] sm:text-[7.5rem] lg:text-[10rem] font-bold tracking-tighter leading-[0.85] relative">
+                <span className="text-transparent outline-text drop-shadow-2xl">ANAS</span>
               </motion.h1>
             </div>
-            <div className="overflow-hidden pb-6">
-              <motion.h1 variants={revealVariants} className="text-7xl sm:text-8xl lg:text-[9.5rem] font-bold tracking-tighter leading-[0.85] relative">
-                <span className="text-transparent bg-clip-text bg-gradient-to-b from-gray-200 via-gray-400 to-gray-700 pb-4 inline-block">KHAN.</span>
+            <div className="overflow-hidden pb-6 -ml-2">
+              <motion.h1 variants={revealVariants} className="text-[5.5rem] sm:text-[7.5rem] lg:text-[10rem] font-bold tracking-tighter leading-[0.85] relative">
+                <span className="text-white pb-4 inline-block drop-shadow-[0_20px_40px_rgba(255,255,255,0.1)]">KHAN.</span>
               </motion.h1>
             </div>
 
             {/* Typewriter Terminal */}
-            <motion.div variants={revealVariants} className="flex items-center gap-5 bg-[#0a0a0a]/80 border border-white/[0.08] px-8 py-5 rounded-[2rem] backdrop-blur-2xl mb-12 w-full max-w-xl shadow-[0_20px_40px_rgba(0,0,0,0.5)]">
+            <motion.div variants={revealVariants} className="flex items-center gap-5 bg-[#0a0a0a]/80 border border-white/[0.08] px-8 py-5 rounded-[2rem] backdrop-blur-2xl mb-12 w-full max-w-xl shadow-[0_20px_40px_rgba(0,0,0,0.5)] cursor-hover-target">
               <Terminal size={28} className="text-teal-400" />
               <div className="text-teal-400 text-xl sm:text-3xl font-mono tracking-tight font-light h-10 flex items-center">
                 <Typewriter
@@ -496,13 +624,13 @@ const Home = () => {
             </motion.p>
 
             {/* Magnetic Action Buttons */}
-            <motion.div variants={revealVariants} className="flex flex-wrap items-center gap-8">
-              <MagneticButton href="#projects" className="group relative px-12 py-6 bg-white text-black font-semibold rounded-full overflow-hidden flex items-center gap-4 shadow-[0_0_50px_rgba(255,255,255,0.2)] cursor-pointer hover:scale-105 transition-transform duration-500">
+            <motion.div variants={revealVariants} className="flex flex-wrap items-center gap-8 w-full sm:w-auto">
+              <MagneticButton href="#projects" onClick={(e) => scrollToSection(e, 'projects')} className="group relative px-12 py-6 bg-white text-black font-semibold rounded-full overflow-hidden flex items-center justify-center gap-4 shadow-[0_0_50px_rgba(255,255,255,0.2)] cursor-pointer hover:scale-105 transition-transform duration-500 w-full sm:w-auto">
                 <span className="text-sm uppercase tracking-[0.2em] font-bold">Explore Masterpieces</span>
                 <ArrowRight size={20} className="group-hover:translate-x-2 group-hover:-rotate-45 transition-transform duration-500" />
               </MagneticButton>
               
-              <MagneticButton href="/resume" className="group px-12 py-6 bg-transparent border border-white/[0.2] text-white rounded-full hover:bg-white/[0.05] flex items-center gap-4 backdrop-blur-2xl transition-colors duration-500 cursor-pointer">
+              <MagneticButton href="/resume" className="group px-12 py-6 bg-transparent border border-white/[0.2] text-white rounded-full hover:bg-white/[0.05] flex items-center justify-center gap-4 backdrop-blur-2xl transition-colors duration-500 cursor-pointer w-full sm:w-auto">
                 <Download size={20} className="text-gray-400 group-hover:text-white transition-colors" />
                 <span className="text-sm font-bold tracking-[0.15em] uppercase">Download Dossier</span>
               </MagneticButton>
@@ -514,13 +642,13 @@ const Home = () => {
             initial={{ opacity: 0, filter: "blur(40px)", scale: 0.8 }} 
             animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }} 
             transition={{ type: "spring", stiffness: 40, damping: 20, delay: 0.4 }}
-            className="lg:col-span-5 relative w-full h-full flex flex-col justify-center perspective-1000"
+            className="lg:col-span-5 relative w-full h-full flex flex-col justify-center perspective-1000 mt-16 lg:mt-0"
           >
             <TiltWrapper className="w-full">
               <div className="grid grid-cols-2 gap-6 w-full">
                 {/* Main Image Frame with Deep Parallax */}
                 <motion.div style={{ scale: scaleHeroImage, y: yHeroImage }} className="col-span-2 rounded-[3rem] overflow-hidden border border-white/[0.1] relative group h-[450px] sm:h-[600px] shadow-[0_30px_80px_rgba(0,0,0,0.9)] cursor-hover-target bg-[#050505]">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 opacity-90" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 opacity-90 pointer-events-none" />
                   <img src={profileImage} alt="Anas Khan" loading="eager" className="w-full h-full object-cover transition-transform duration-[4000ms] group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0" />
                   
                   {/* Floating Elements */}
@@ -584,7 +712,7 @@ const Home = () => {
         {/* Section Header */}
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="mb-32 flex flex-col items-center text-center max-w-5xl mx-auto">
           <motion.div variants={revealVariants} className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white/[0.02] border border-white/[0.1] text-xs uppercase tracking-[0.25em] text-gray-300 mb-12 backdrop-blur-2xl shadow-2xl">
-            <Sparkles size={16} className="text-blue-400" />
+            <Layers size={16} className="text-blue-400" />
             Core Capabilities
           </motion.div>
           <div className="overflow-hidden pb-4">
@@ -626,7 +754,7 @@ const Home = () => {
             <h3 className="text-5xl sm:text-7xl font-bold tracking-tighter mb-10 text-white leading-[0.9]">Engineering <br/><span className="text-transparent bg-clip-text bg-gradient-to-b from-gray-400 to-gray-700">Methodology.</span></h3>
             <p className="text-2xl text-gray-400 font-light leading-relaxed mb-16">A systematic, uncompromising approach to transforming complex business requirements into elegant, high-performance software architecture.</p>
             
-            <SpotlightCard glowColor="rgba(59, 130, 246, 0.15)" className="p-16">
+            <SpotlightCard glowColor="rgba(59, 130, 246, 0.15)" className="p-16 cursor-hover-target">
               <Quote className="text-white/10 w-32 h-32 mb-12 group-hover:scale-110 transition-transform duration-1000" />
               <blockquote className="text-4xl font-medium text-gray-300 leading-[1.3] tracking-tight">
                 “Good software is not defined by features — but by how well it holds up over time under <span className="text-white font-bold drop-shadow-lg">real-world pressure.</span>”
@@ -666,7 +794,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ================= SECTION 3: THE SHOWCASE (3D STICKY STACKING PREMIUM CARDS) ================= */}
+      {/* ================= SECTION 3: THE SHOWCASE (TRUE PARALLAX STICKY STACKING CARDS) ================= */}
       <section id="projects" className="relative z-10 py-48 px-6 sm:px-10 md:px-20 lg:px-28 max-w-[1800px] mx-auto border-t border-white/[0.05]">
         
         <motion.header initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="mb-48 flex flex-col items-center text-center max-w-6xl mx-auto">
@@ -684,88 +812,25 @@ const Home = () => {
           </motion.p>
         </motion.header>
 
-        {/* 3D Sticky Stacking Cards Layout */}
+        {/* 3D Sticky Stacking Cards Layout with Parallax Extracted to Custom Component */}
         <div className="flex flex-col gap-10 lg:gap-0 relative perspective-1000">
           {projects.map((project, idx) => {
-            const stickyTop = `calc(10vh + ${idx * 40}px)`; // Dynamic stack calculation
-            
+            const stickyTop = `calc(15vh + ${idx * 40}px)`; // Dynamic stack calculation
             return (
-              <motion.article 
-                key={idx}
-                initial={{ opacity: 0, y: 200, rotateX: 10 }}
-                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                className="lg:sticky flex flex-col overflow-hidden rounded-[3rem] border border-white/[0.1] bg-[#030303] shadow-[0_-30px_60px_rgba(0,0,0,0.95)] mb-10 lg:mb-48 last:mb-0 transform-gpu"
-                style={{ top: stickyTop }}
-              >
-                <div className="grid lg:grid-cols-12 h-full min-h-[750px] relative">
-                  
-                  {/* Internal ambient glow for the card */}
-                  <div className="absolute top-[-30%] left-[-20%] w-[600px] h-[600px] blur-[200px] rounded-full pointer-events-none z-0 opacity-40 transition-colors duration-1000" style={{ backgroundColor: project.glowColor.replace('0.15', '0.5') }} />
-
-                  {/* Left Content Area */}
-                  <div className="lg:col-span-5 p-12 sm:p-20 flex flex-col justify-between border-r border-white/[0.05] relative z-20 bg-black/60 backdrop-blur-3xl">
-                    <div>
-                      <div className="flex items-center gap-6 mb-12">
-                        <span className="text-lg font-mono text-gray-500 font-bold block">0{idx + 1}</span>
-                        <div className={`h-[2px] w-24 bg-gradient-to-r from-white to-transparent`} />
-                        <span className="text-xs uppercase tracking-[0.4em] text-gray-400 font-bold">{project.subtitle}</span>
-                      </div>
-                      
-                      <h3 className="text-5xl sm:text-7xl font-bold text-white mb-10 tracking-tighter uppercase leading-[0.9] drop-shadow-xl">
-                        {project.title}
-                      </h3>
-                      
-                      <p className="text-gray-400 text-xl leading-[1.8] font-light mb-14">
-                        {project.description}
-                      </p>
-                      
-                      {/* Tech Stack Tags */}
-                      <div className="flex flex-wrap gap-4 mb-14">
-                        {project.tech.map((item, i) => (
-                          <span key={i} className="text-xs font-bold uppercase tracking-[0.2em] px-6 py-3 rounded-full border border-white/10 text-gray-300 bg-white/[0.03] backdrop-blur-xl shadow-lg">
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <MagneticButton href={project.link} className="group flex items-center justify-between px-10 py-6 rounded-full border border-white/20 bg-white/[0.05] hover:bg-white text-white hover:text-black transition-all duration-700 w-fit gap-10 cursor-hover-target backdrop-blur-2xl shadow-[0_0_30px_rgba(255,255,255,0.05)]">
-                      <span className="text-sm font-extrabold tracking-[0.25em] uppercase">Launch Platform</span>
-                      <div className="w-10 h-10 rounded-full bg-black/10 flex items-center justify-center group-hover:bg-black transition-colors">
-                        <ArrowRight size={18} className="group-hover:translate-x-1 group-hover:-rotate-45 group-hover:text-white transition-all duration-500" />
-                      </div>
-                    </MagneticButton>
-                  </div>
-
-                  {/* Right Image Area (Massive Interactive Visual) */}
-                  <div className="lg:col-span-7 relative group cursor-hover-target overflow-hidden h-[500px] lg:h-auto bg-[#080808]" onClick={() => setSelectedImg(project.image)}>
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-1000 z-10" />
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      loading="lazy"
-                      className="w-full h-full object-cover object-top transition-transform duration-[4000ms] group-hover:scale-110 grayscale-[20%] group-hover:grayscale-0"
-                    />
-                    
-                    {/* Hover expand icon */}
-                    <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-                      <div className="w-28 h-28 bg-black/70 backdrop-blur-2xl rounded-full flex items-center justify-center border border-white/20 scale-50 group-hover:scale-100 transition-transform duration-700 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-                         <Maximize2 className="text-white" size={36} strokeWidth={1.5} />
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </motion.article>
+              <ProjectCard 
+                key={idx} 
+                project={project} 
+                idx={idx} 
+                setSelectedImg={setSelectedImg} 
+                stickyTop={stickyTop} 
+              />
             );
           })}
         </div>
       </section>
 
       {/* ================= SECTION 4: CONTACT / FOOTER (ULTRA PREMIUM GLASSMORPHISM) ================= */}
-      <section className="relative z-10 py-48 px-6 sm:px-10 border-t border-white/[0.05] flex flex-col items-center overflow-hidden">
+      <section id="contact" className="relative z-10 py-48 px-6 sm:px-10 border-t border-white/[0.05] flex flex-col items-center overflow-hidden">
         
         {/* Massive Background Glow */}
         <div className="absolute bottom-[-60%] left-[50%] -translate-x-1/2 w-[120vw] h-[120vw] rounded-full bg-teal-900/15 blur-[250px] mix-blend-screen pointer-events-none animate-[pulse_15s_ease-in-out_infinite]" />
@@ -782,7 +847,7 @@ const Home = () => {
           </p>
 
           {/* Premium Contact Form UI */}
-          <SpotlightCard glowColor="rgba(20, 184, 166, 0.2)" className="w-full max-w-4xl p-12 sm:p-20 mb-32 cursor-hover-target">
+          <SpotlightCard glowColor="rgba(20, 184, 166, 0.2)" className="w-full max-w-4xl p-12 sm:p-20 mb-32 cursor-hover-target text-left">
             <form className="flex flex-col gap-12" onSubmit={(e) => e.preventDefault()}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
                 <div className="relative group">
@@ -868,11 +933,16 @@ const Home = () => {
           0% { transform: translateX(-33.33%); }
           100% { transform: translateX(0%); }
         }
+        /* Custom hollow text effect for Anas */
+        .outline-text {
+          -webkit-text-stroke: 2px rgba(255, 255, 255, 0.6);
+          color: transparent;
+        }
         /* Custom sleek scrollbar */
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #111; border-radius: 5px; border: 1px solid #222; }
-        ::-webkit-scrollbar-thumb:hover { background: #333; }
+        ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 5px; border: 1px solid #333; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
         /* Ultra smooth font rendering */
         body {
           -webkit-font-smoothing: antialiased;

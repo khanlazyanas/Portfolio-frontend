@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
-import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue, useMotionTemplate } from "framer-motion";
 import { 
   ArrowRight, Download, Mail, Code2, MonitorSmartphone, 
-  Server, Zap, Cloud, Quote, X, Maximize2,
+  Server, Zap, Cloud, Quote, ExternalLink, X, Maximize2,
   Github, Linkedin, Send, MapPin, Sparkles, Terminal, Layers
 } from "lucide-react"; 
 import {
@@ -45,35 +45,35 @@ const servicesData = [
     title: "Full-Stack Web Development",
     description: "End-to-end development of production-ready web applications — from frontend interfaces to backend logic, APIs, and databases. Built with long-term scalability in mind.",
     icon: <Code2 size={28} strokeWidth={1.5} />,
-    color: "group-hover:text-teal-400 group-hover:drop-shadow-[0_0_15px_rgba(45,212,191,0.5)]",
+    color: "group-hover:text-teal-400 group-hover:drop-shadow-[0_0_20px_rgba(45,212,191,0.8)]",
     colSpan: "md:col-span-2 lg:col-span-2"
   },
   {
     title: "Frontend Engineering & UX",
     description: "Crafting clean, responsive, and accessible user interfaces that feel fast, intuitive, and consistent across all devices and screen sizes.",
     icon: <MonitorSmartphone size={28} strokeWidth={1.5} />,
-    color: "group-hover:text-blue-400 group-hover:drop-shadow-[0_0_15px_rgba(96,165,250,0.5)]",
+    color: "group-hover:text-blue-400 group-hover:drop-shadow-[0_0_20px_rgba(96,165,250,0.8)]",
     colSpan: "col-span-1"
   },
   {
     title: "Backend & API Architecture",
     description: "Designing secure and scalable backend systems, RESTful APIs, authentication flows, and data models that perfectly support business growth.",
     icon: <Server size={28} strokeWidth={1.5} />,
-    color: "group-hover:text-purple-400 group-hover:drop-shadow-[0_0_15px_rgba(192,132,252,0.5)]",
+    color: "group-hover:text-purple-400 group-hover:drop-shadow-[0_0_20px_rgba(192,132,252,0.8)]",
     colSpan: "col-span-1"
   },
   {
     title: "Performance Optimization",
     description: "Improving load times, reducing bottlenecks, and optimizing both frontend and backend performance for a seamless user experience.",
     icon: <Zap size={28} strokeWidth={1.5} />,
-    color: "group-hover:text-yellow-400 group-hover:drop-shadow-[0_0_15px_rgba(250,204,21,0.5)]",
+    color: "group-hover:text-yellow-400 group-hover:drop-shadow-[0_0_20px_rgba(250,204,21,0.8)]",
     colSpan: "md:col-span-2 lg:col-span-2"
   },
   {
     title: "Deployment & Scalability",
     description: "Preparing applications for real-world traffic — cloud deployment, environment setup, CI/CD pipelines, and robust scalability planning.",
     icon: <Cloud size={28} strokeWidth={1.5} />,
-    color: "group-hover:text-emerald-400 group-hover:drop-shadow-[0_0_15px_rgba(52,211,153,0.5)]",
+    color: "group-hover:text-emerald-400 group-hover:drop-shadow-[0_0_20px_rgba(52,211,153,0.8)]",
     colSpan: "md:col-span-3 lg:col-span-3"
   }
 ];
@@ -114,7 +114,7 @@ const projects = [
     link: "https://bizflow-saas-web.vercel.app", 
     image: bizflowimg, 
     tech: ["React.js", "Node.js", "MongoDB", "OAuth 2.0", "JWT", "Tailwind", "Framer"],
-    glowColor: "rgba(79, 70, 229, 0.25)", 
+    glowColor: "rgba(79, 70, 229, 0.35)", 
   },
   {
     title: "NEXPOS",
@@ -123,7 +123,7 @@ const projects = [
     link: "https://nexpos-azure.vercel.app", 
     image: nexposimg, 
     tech: ["Next.js", "MongoDB", "Next-Auth", "Tailwind CSS", "Razorpay", "Recharts"],
-    glowColor: "rgba(16, 185, 129, 0.25)", 
+    glowColor: "rgba(16, 185, 129, 0.35)", 
   },
   {
     title: "WEIGHTLOSS-DOC",
@@ -132,7 +132,7 @@ const projects = [
     link: "https://weight-loss-doc.vercel.app",
     image: weightlossimg,
     tech: ["React.js", "Tailwind CSS v4", "Lucide Icons", "Framer Motion"],
-    glowColor: "rgba(6, 182, 212, 0.25)",
+    glowColor: "rgba(6, 182, 212, 0.35)",
   },
   {
     title: "TASKMIND AI",
@@ -141,7 +141,7 @@ const projects = [
     link: "https://taskmind-ai-three.vercel.app", 
     image: taskmindimg, 
     tech: ["Next.js", "MongoDB", "Google Gemini", "Vercel Cron", "dnd-kit"],
-    glowColor: "rgba(59, 130, 246, 0.25)", 
+    glowColor: "rgba(59, 130, 246, 0.35)", 
   },
   {
     title: "AI-MOCK-INTERVIEW",
@@ -150,7 +150,7 @@ const projects = [
     link: "https://ai-mock-interview-lac-two.vercel.app",
     image: aiMockInterviewImg,
     tech: ["Next.js", "Tailwind CSS", "AI Integration", "JWT Auth"],
-    glowColor: "rgba(20, 184, 166, 0.25)",
+    glowColor: "rgba(20, 184, 166, 0.35)",
   },
   {
     title: "UrbanGreens",
@@ -159,7 +159,7 @@ const projects = [
     link: "https://urbangreens-frontend-n2hv3.vercel.app",
     image: urbanGreensImg,
     tech: ["MERN Stack", "Tailwind CSS", "Razorpay", "JWT Auth"],
-    glowColor: "rgba(34, 197, 94, 0.25)",
+    glowColor: "rgba(34, 197, 94, 0.35)",
   },
   {
     title: "National Auto Sales",
@@ -168,7 +168,7 @@ const projects = [
     link: "https://nationalautosales.vercel.app",
     image: bajajAutoImg,
     tech: ["MERN Stack", "Tailwind CSS", "REST APIs"],
-    glowColor: "rgba(79, 70, 229, 0.25)",
+    glowColor: "rgba(79, 70, 229, 0.35)",
   },
   {
     title: "Weather Forecast",
@@ -177,7 +177,7 @@ const projects = [
     link: "https://anaskhanweathersearch.netlify.app/",
     image: weatherImg,
     tech: ["React", "API Integration", "Tailwind CSS"],
-    glowColor: "rgba(168, 85, 247, 0.25)",
+    glowColor: "rgba(168, 85, 247, 0.35)",
   },
 ];
 
@@ -188,8 +188,8 @@ const Preloader = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const duration = 1500;
-    const interval = 15;
+    const duration = 2200; 
+    const interval = 20;
     const steps = duration / interval;
     let currentStep = 0;
 
@@ -198,7 +198,7 @@ const Preloader = ({ onComplete }) => {
       setProgress(Math.min(100, Math.floor((currentStep / steps) * 100)));
       if (currentStep >= steps) {
         clearInterval(timer);
-        setTimeout(onComplete, 300);
+        setTimeout(onComplete, 600);
       }
     }, interval);
 
@@ -207,35 +207,43 @@ const Preloader = ({ onComplete }) => {
 
   return (
     <motion.div 
-      initial={{ y: 0 }}
-      exit={{ y: "-100%", transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
-      className="fixed inset-0 z-[99999] bg-[#030303] flex flex-col items-center justify-center pointer-events-none"
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] } }}
+      className="fixed inset-0 z-[99999] bg-[#000000] flex flex-col items-center justify-center pointer-events-none"
     >
-      <div className="overflow-hidden mb-4">
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05] mix-blend-overlay" />
+      <div className="overflow-hidden mb-8 relative z-10">
         <motion.h1 
-          initial={{ y: 100 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-4xl sm:text-6xl font-bold tracking-[0.4em] uppercase text-white"
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="text-5xl sm:text-7xl font-bold tracking-[0.5em] uppercase text-transparent outline-text-preloader"
         >
           ANAS KHAN
         </motion.h1>
       </div>
-      <div className="w-64 h-[2px] bg-white/10 rounded-full overflow-hidden mt-8">
+      <div className="w-80 h-[1px] bg-white/10 relative overflow-hidden z-10">
         <motion.div 
-          className="h-full bg-white"
+          className="absolute top-0 left-0 h-full bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)]"
           initial={{ width: "0%" }}
           animate={{ width: `${progress}%` }}
           transition={{ duration: 0.1, ease: "linear" }}
         />
       </div>
-      <p className="text-gray-500 font-mono text-sm mt-4 tracking-widest">{progress}%</p>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="flex items-center gap-4 mt-8 z-10"
+      >
+        <span className="text-gray-500 font-mono text-xs tracking-[0.4em] uppercase">Loading Experience</span>
+        <span className="text-white font-mono text-sm tracking-widest">{progress}%</span>
+      </motion.div>
     </motion.div>
   );
 };
 
-// 2. Mouse Spotlight Card
-const SpotlightCard = ({ children, className, glowColor = "rgba(255, 255, 255, 0.15)" }) => {
+// 2. Ultra-Fluid Mouse Spotlight Card
+const SpotlightCard = ({ children, className, glowColor = "rgba(255, 255, 255, 0.1)" }) => {
   const divRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -260,13 +268,13 @@ const SpotlightCard = ({ children, className, glowColor = "rgba(255, 255, 255, 0
       onBlur={handleBlur}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden rounded-[3rem] border border-white/[0.05] bg-[#050505]/60 backdrop-blur-3xl shadow-2xl transition-all duration-500 group ${className}`}
+      className={`relative overflow-hidden rounded-[3rem] border border-white/[0.04] bg-[#030303]/60 backdrop-blur-3xl shadow-2xl transition-all duration-700 group ${className}`}
     >
       <div
-        className="pointer-events-none absolute -inset-px transition duration-500 z-0"
+        className="pointer-events-none absolute -inset-px transition duration-700 z-0"
         style={{
           opacity,
-          background: `radial-gradient(1000px circle at ${position.x}px ${position.y}px, ${glowColor}, transparent 40%)`,
+          background: `radial-gradient(1200px circle at ${position.x}px ${position.y}px, ${glowColor}, transparent 40%)`,
         }}
       />
       <div className="relative z-10 h-full">{children}</div>
@@ -274,17 +282,17 @@ const SpotlightCard = ({ children, className, glowColor = "rgba(255, 255, 255, 0
   );
 };
 
-// 3. True 3D Magnetic Tilt Component (Silicon Valley Depth Effect)
+// 3. True 3D Magnetic Tilt Component with preserve-3d
 const TiltWrapper = ({ children, className }) => {
   const ref = useRef(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const mouseXSpring = useSpring(x, { stiffness: 80, damping: 25 });
-  const mouseYSpring = useSpring(y, { stiffness: 80, damping: 25 });
+  const mouseXSpring = useSpring(x, { stiffness: 60, damping: 30 });
+  const mouseYSpring = useSpring(y, { stiffness: 60, damping: 30 });
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["12deg", "-12deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-12deg", "12deg"]);
 
   const handleMouseMove = (e) => {
     if (!ref.current) return;
@@ -307,7 +315,7 @@ const TiltWrapper = ({ children, className }) => {
       style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       className={className}
     >
-      <div style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }} className="w-full h-full">
+      <div style={{ transform: "translateZ(80px)", transformStyle: "preserve-3d" }} className="w-full h-full">
         {children}
       </div>
     </motion.div>
@@ -324,7 +332,7 @@ const MagneticButton = ({ children, className, href, onClick }) => {
     const { height, width, left, top } = ref.current.getBoundingClientRect();
     const middleX = clientX - (left + width / 2);
     const middleY = clientY - (top + height / 2);
-    setPosition({ x: middleX * 0.4, y: middleY * 0.4 });
+    setPosition({ x: middleX * 0.5, y: middleY * 0.5 });
   };
 
   const reset = () => setPosition({ x: 0, y: 0 });
@@ -335,7 +343,7 @@ const MagneticButton = ({ children, className, href, onClick }) => {
       onMouseMove={handleMouse}
       onMouseLeave={reset}
       animate={{ x: position.x, y: position.y }}
-      transition={{ type: "spring", stiffness: 120, damping: 10, mass: 0.2 }}
+      transition={{ type: "spring", stiffness: 100, damping: 10, mass: 0.3 }}
       className={className}
       onClick={onClick}
     >
@@ -350,13 +358,22 @@ const MagneticButton = ({ children, className, href, onClick }) => {
   return <div className="inline-block w-full sm:w-auto">{content}</div>;
 };
 
-// 5. Custom Animated Cursor
+// 5. Custom Animated Cursor with Spring Trailer
 const CustomCursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+  const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
+  
   const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
-    const updateMousePosition = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
+    const moveCursor = (e) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+    };
+
     const handleMouseOver = (e) => {
       setIsHovering(
         e.target.tagName.toLowerCase() === 'button' ||
@@ -367,94 +384,91 @@ const CustomCursor = () => {
       );
     };
 
-    window.addEventListener("mousemove", updateMousePosition);
+    window.addEventListener("mousemove", moveCursor);
     window.addEventListener("mouseover", handleMouseOver);
     return () => {
-      window.removeEventListener("mousemove", updateMousePosition);
+      window.removeEventListener("mousemove", moveCursor);
       window.removeEventListener("mouseover", handleMouseOver);
     };
-  }, []);
+  }, [cursorX, cursorY]);
 
   return (
     <>
       <motion.div
         className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[9999] mix-blend-difference"
-        animate={{ x: mousePosition.x - 4, y: mousePosition.y - 4, scale: isHovering ? 0 : 1 }}
-        transition={{ type: "tween", ease: "backOut", duration: 0.05 }}
+        style={{ x: cursorX, y: cursorY, translateX: "-50%", translateY: "-50%" }}
+        animate={{ scale: isHovering ? 0 : 1 }}
+        transition={{ duration: 0.15 }}
       />
       <motion.div
-        className="fixed top-0 left-0 w-14 h-14 border border-white/40 rounded-full pointer-events-none z-[9998] mix-blend-difference flex items-center justify-center backdrop-blur-[2px]"
+        className="fixed top-0 left-0 w-16 h-16 border border-white/30 rounded-full pointer-events-none z-[9998] mix-blend-difference flex items-center justify-center backdrop-blur-[2px]"
+        style={{ x: cursorXSpring, y: cursorYSpring, translateX: "-50%", translateY: "-50%" }}
         animate={{
-          x: mousePosition.x - 28, y: mousePosition.y - 28,
-          scale: isHovering ? 2.5 : 1,
+          scale: isHovering ? 2 : 1,
           backgroundColor: isHovering ? "rgba(255,255,255,1)" : "rgba(255,255,255,0)",
-          border: isHovering ? "none" : "1px solid rgba(255,255,255,0.4)"
+          border: isHovering ? "none" : "1px solid rgba(255,255,255,0.3)"
         }}
-        transition={{ type: "spring", stiffness: 120, damping: 20, mass: 0.5 }}
+        transition={{ duration: 0.15 }}
       >
-        {isHovering && <span className="text-[4px] font-extrabold text-black uppercase tracking-[0.2em]">View</span>}
+        {isHovering && <span className="text-[5px] font-extrabold text-black uppercase tracking-[0.3em]">View</span>}
       </motion.div>
     </>
   );
 };
 
-// 6. True Parallax Project Card with Glass Glare
+// 6. True Parallax Project Card with Dynamic Mesh Glare & 3D Layering
 const ProjectCard = ({ project, idx, setSelectedImg, stickyTop }) => {
   const cardRef = useRef(null);
-  const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
   
   const { scrollYProgress } = useScroll({ target: cardRef, offset: ["start end", "end start"] });
-  const yImage = useTransform(scrollYProgress, [0, 1], ["-25%", "25%"]);
+  const yImage = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
+  
+  // Custom glowing border tracking
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const background = useMotionTemplate`radial-gradient(800px circle at ${mouseX}px ${mouseY}px, rgba(255,255,255,0.15), transparent 60%)`;
 
-  const handleCardMouseMove = (e) => {
+  const handleMouseMove = (e) => {
     if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    setGlarePos({ x, y });
+    const { left, top } = cardRef.current.getBoundingClientRect();
+    mouseX.set(e.clientX - left);
+    mouseY.set(e.clientY - top);
   };
 
   return (
     <motion.article 
       ref={cardRef}
-      onMouseMove={handleCardMouseMove}
-      initial={{ opacity: 0, y: 200, rotateX: 5 }}
+      onMouseMove={handleMouseMove}
+      initial={{ opacity: 0, y: 250, rotateX: 10 }}
       whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-      className="lg:sticky flex flex-col overflow-hidden rounded-[3rem] border border-white/[0.05] bg-[#030303] shadow-[0_-40px_100px_rgba(0,0,0,0.95)] mb-10 lg:mb-48 last:mb-0 transform-gpu group/card"
+      transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+      className="lg:sticky flex flex-col overflow-hidden rounded-[3rem] border border-white/[0.04] bg-[#020202] shadow-[0_-50px_100px_rgba(0,0,0,0.95)] mb-10 lg:mb-48 last:mb-0 transform-gpu group/card"
       style={{ top: stickyTop }}
     >
-      <div className="grid lg:grid-cols-12 h-full min-h-[800px] relative overflow-hidden">
-        
-        {/* Dynamic Glass Glare Overlay */}
-        <div 
-          className="absolute inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0 group-hover/card:opacity-100 mix-blend-overlay"
-          style={{ background: `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(255,255,255,0.2) 0%, transparent 50%)` }}
-        />
-        
-        {/* Deep ambient glow */}
-        <div className="absolute top-[-30%] left-[-20%] w-[1000px] h-[1000px] blur-[300px] rounded-full pointer-events-none z-0 opacity-50 transition-colors duration-1000" style={{ backgroundColor: project.glowColor.replace('0.25', '0.6') }} />
+      <motion.div className="absolute inset-0 z-50 pointer-events-none opacity-0 group-hover/card:opacity-100 transition-opacity duration-500" style={{ background }} />
 
-        {/* Left Content Area */}
-        <div className="lg:col-span-5 p-12 sm:p-20 flex flex-col justify-between border-r border-white/[0.05] relative z-20 bg-black/50 backdrop-blur-[40px]">
+      <div className="grid lg:grid-cols-12 h-full min-h-[850px] relative overflow-hidden">
+        
+        <div className="absolute top-[-40%] left-[-30%] w-[1200px] h-[1200px] blur-[300px] rounded-full pointer-events-none z-0 opacity-40 transition-colors duration-1000" style={{ backgroundColor: project.glowColor.replace('0.25', '0.6') }} />
+
+        <div className="lg:col-span-5 p-12 sm:p-24 flex flex-col justify-between border-r border-white/[0.05] relative z-20 bg-black/30 backdrop-blur-[50px]">
           <div>
-            <div className="flex items-center gap-6 mb-12">
-              <span className="text-xl font-mono text-gray-500 font-bold block">0{idx + 1}</span>
+            <div className="flex items-center gap-8 mb-14">
+              <span className="text-2xl font-mono text-white/50 font-bold block">0{idx + 1}</span>
               <div className={`h-[2px] w-24 bg-gradient-to-r from-white to-transparent`} />
-              <span className="text-xs uppercase tracking-[0.4em] text-gray-400 font-bold">{project.subtitle}</span>
+              <span className="text-sm uppercase tracking-[0.5em] text-white/60 font-bold">{project.subtitle}</span>
             </div>
             
-            <h3 className="text-6xl sm:text-7xl font-bold text-white mb-10 tracking-tighter uppercase leading-[0.85] drop-shadow-2xl">
+            <h3 className="text-7xl sm:text-8xl font-bold text-white mb-12 tracking-tighter uppercase leading-[0.85] drop-shadow-2xl">
               {project.title}
             </h3>
             
-            <p className="text-gray-400 text-xl leading-[1.8] font-light mb-14 mix-blend-plus-lighter">
+            <p className="text-gray-400 text-2xl leading-[1.8] font-light mb-16 mix-blend-plus-lighter">
               {project.description}
             </p>
             
-            {/* Tech Stack Tags */}
-            <div className="flex flex-wrap gap-4 mb-14">
+            <div className="flex flex-wrap gap-4 mb-16">
               {project.tech.map((item, i) => (
                 <span key={i} className="text-xs font-bold uppercase tracking-[0.2em] px-6 py-3 rounded-full border border-white/10 text-gray-300 bg-white/[0.02] backdrop-blur-xl shadow-lg hover:bg-white/10 transition-colors cursor-hover-target">
                   {item}
@@ -463,30 +477,29 @@ const ProjectCard = ({ project, idx, setSelectedImg, stickyTop }) => {
             </div>
           </div>
 
-          <MagneticButton href={project.link} className="group relative overflow-hidden flex items-center justify-between px-10 py-6 rounded-full border border-white/20 bg-white/[0.03] hover:bg-white text-white hover:text-black transition-all duration-700 w-fit gap-10 cursor-hover-target backdrop-blur-3xl shadow-[0_0_40px_rgba(255,255,255,0.05)]">
-            <span className="relative z-10 text-sm font-extrabold tracking-[0.25em] uppercase">Launch Platform</span>
-            <div className="relative z-10 w-10 h-10 rounded-full bg-black/10 flex items-center justify-center group-hover:bg-black transition-colors">
-              <ArrowRight size={18} className="group-hover:translate-x-1 group-hover:-rotate-45 group-hover:text-white transition-all duration-500" />
+          <MagneticButton href={project.link} className="group relative overflow-hidden flex items-center justify-between px-12 py-8 rounded-full border border-white/20 bg-white/[0.02] hover:bg-white text-white hover:text-black transition-all duration-700 w-fit gap-12 cursor-hover-target backdrop-blur-3xl shadow-[0_0_40px_rgba(255,255,255,0.05)]">
+            <span className="relative z-10 text-sm font-extrabold tracking-[0.3em] uppercase">Launch Platform</span>
+            <div className="relative z-10 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-black transition-colors">
+              <ArrowRight size={20} className="group-hover:translate-x-1 group-hover:-rotate-45 group-hover:text-white transition-all duration-500" />
             </div>
           </MagneticButton>
         </div>
 
-        {/* Right Image Area (True Parallax Interactive Visual) */}
         <div className="lg:col-span-7 relative group cursor-hover-target overflow-hidden h-[500px] lg:h-auto bg-[#080808]" onClick={() => setSelectedImg(project.image)}>
-          <div className="absolute inset-0 bg-black/50 group-hover:bg-transparent transition-colors duration-1000 z-10" />
+          <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-1000 z-10" />
           
           <motion.div style={{ y: yImage }} className="absolute inset-[-25%] w-[150%] h-[150%]">
             <img 
               src={project.image} 
               alt={project.title} 
               loading="lazy"
-              className="w-full h-full object-cover object-center transition-transform duration-[4000ms] group-hover:scale-[1.03] grayscale-[20%] group-hover:grayscale-0"
+              className="w-full h-full object-cover object-center transition-transform duration-[5000ms] group-hover:scale-[1.05] grayscale-[20%] group-hover:grayscale-0"
             />
           </motion.div>
           
           <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
-            <div className="w-32 h-32 bg-black/70 backdrop-blur-3xl rounded-full flex items-center justify-center border border-white/20 scale-50 group-hover:scale-100 transition-transform duration-700 shadow-[0_0_80px_rgba(0,0,0,0.8)]">
-               <Maximize2 className="text-white" size={40} strokeWidth={1.5} />
+            <div className="w-36 h-36 bg-black/60 backdrop-blur-3xl rounded-full flex items-center justify-center border border-white/10 scale-50 group-hover:scale-100 transition-transform duration-700 shadow-[0_0_80px_rgba(0,0,0,0.8)]">
+               <Maximize2 className="text-white" size={44} strokeWidth={1} />
             </div>
           </div>
         </div>
@@ -502,15 +515,14 @@ const Home = () => {
   const [selectedImg, setSelectedImg] = useState(null);
   const [loading, setLoading] = useState(true);
   
-  // FIXED: No target ref for useScroll to prevent hydration crashes!
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
-  // Hero Parallax effects
-  const yHeroText = useTransform(scrollYProgress, [0, 0.3], [0, 250]);
-  const opacityHero = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const scaleHeroImage = useTransform(scrollYProgress, [0, 0.3], [1, 1.15]);
-  const yHeroImage = useTransform(scrollYProgress, [0, 0.3], [0, 150]);
+  // Deep Hero Parallax
+  const yHeroText = useTransform(scrollYProgress, [0, 0.4], [0, 400]);
+  const opacityHero = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
+  const scaleHeroImage = useTransform(scrollYProgress, [0, 0.4], [1, 1.25]);
+  const yHeroImage = useTransform(scrollYProgress, [0, 0.4], [0, 250]);
 
   const scrollToSection = (e, id) => {
     e.preventDefault();
@@ -523,18 +535,18 @@ const Home = () => {
   };
 
   const revealVariants = {
-    hidden: { opacity: 0, y: 150, rotate: 3 },
-    visible: { opacity: 1, y: 0, rotate: 0, transition: { type: "spring", stiffness: 50, damping: 25, mass: 1 } }
+    hidden: { opacity: 0, y: 150, rotate: 2 },
+    visible: { opacity: 1, y: 0, rotate: 0, transition: { type: "spring", stiffness: 40, damping: 25, mass: 1 } }
   };
 
   const fadeUp = {
-    hidden: { opacity: 0, y: 60, scale: 0.95 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 60, damping: 20, mass: 1 } }
+    hidden: { opacity: 0, y: 80, scale: 0.95 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 50, damping: 25, mass: 1 } }
   };
 
   const staggerContainer = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.2, delayChildren: 0.1 } }
+    visible: { opacity: 1, transition: { staggerChildren: 0.25, delayChildren: 0.2 } }
   };
 
   return (
@@ -549,22 +561,22 @@ const Home = () => {
         
         {/* 🌟 20000x Ultra Premium Liquid Mesh Background */}
         <div className="fixed inset-0 z-0 pointer-events-none bg-black">
-          <div className="absolute top-[-20%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-teal-900/15 blur-[200px] mix-blend-screen animate-[pulse_14s_ease-in-out_infinite]" />
-          <div className="absolute bottom-[-30%] right-[-10%] w-[70vw] h-[70vw] rounded-full bg-indigo-900/15 blur-[200px] mix-blend-screen animate-[pulse_18s_ease-in-out_infinite_reverse]" />
-          <div className="absolute top-[30%] right-[30%] w-[50vw] h-[50vw] rounded-full bg-fuchsia-900/10 blur-[200px] mix-blend-screen animate-[pulse_22s_ease-in-out_infinite]" />
+          <div className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] rounded-full bg-teal-900/15 blur-[250px] mix-blend-screen animate-[pulse_14s_ease-in-out_infinite]" />
+          <div className="absolute bottom-[-30%] right-[-10%] w-[80vw] h-[80vw] rounded-full bg-indigo-900/15 blur-[250px] mix-blend-screen animate-[pulse_18s_ease-in-out_infinite_reverse]" />
+          <div className="absolute top-[30%] right-[30%] w-[60vw] h-[60vw] rounded-full bg-fuchsia-900/10 blur-[250px] mix-blend-screen animate-[pulse_22s_ease-in-out_infinite]" />
           
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:120px_120px]" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)] opacity-90" />
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.08] mix-blend-overlay pointer-events-none" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:150px_150px]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#000000_100%)] opacity-95" />
+          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.06] mix-blend-overlay pointer-events-none" />
         </div>
 
         <motion.div 
-          className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-teal-500 via-blue-500 to-purple-500 z-[999] origin-left shadow-[0_0_20px_rgba(20,184,166,0.8)]"
+          className="fixed top-0 left-0 right-0 h-[4px] bg-gradient-to-r from-teal-400 via-blue-500 to-purple-500 z-[999] origin-left shadow-[0_0_20px_rgba(20,184,166,0.8)]"
           style={{ scaleX }}
         />
 
         {/* ================= SECTION 1: HERO ================= */}
-        <section id="hero" className="relative z-10 min-h-[100vh] flex items-center pt-32 pb-20 px-6 sm:px-10 md:px-20 lg:px-28 max-w-[1800px] mx-auto">
+        <section id="hero" className="relative z-10 min-h-[100vh] flex items-center pt-32 pb-20 px-6 sm:px-10 md:px-20 lg:px-28 max-w-[1920px] mx-auto">
           <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-center w-full relative">
             
             <motion.header 
@@ -572,28 +584,28 @@ const Home = () => {
               initial="hidden" animate="visible" variants={staggerContainer} 
               className="lg:col-span-7 flex flex-col items-start relative z-20"
             >
-              <motion.div variants={revealVariants} className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-white/[0.03] border border-white/[0.1] backdrop-blur-3xl mb-12 shadow-[0_0_40px_rgba(255,255,255,0.05)] cursor-hover-target overflow-hidden">
+              <motion.div variants={revealVariants} className="inline-flex items-center gap-5 px-8 py-4 rounded-full bg-white/[0.02] border border-white/[0.08] backdrop-blur-3xl mb-14 shadow-[0_0_50px_rgba(255,255,255,0.05)] cursor-hover-target overflow-hidden">
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,1)]"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 shadow-[0_0_20px_rgba(16,185,129,1)]"></span>
                 </span>
-                <span className="text-xs font-bold tracking-[0.3em] uppercase text-gray-300">Available For Impact</span>
+                <span className="text-xs font-bold tracking-[0.4em] uppercase text-gray-300">Available For Impact</span>
               </motion.div>
 
-              <div className="overflow-hidden pb-4 -ml-2">
-                <motion.h1 variants={revealVariants} className="text-[6rem] sm:text-[9rem] lg:text-[12rem] font-bold tracking-tighter leading-[0.8] relative">
+              <div className="overflow-hidden pb-4 -ml-3">
+                <motion.h1 variants={revealVariants} className="text-[7rem] sm:text-[11rem] lg:text-[14rem] font-bold tracking-tighter leading-[0.8] relative">
                   <span className="text-transparent outline-text drop-shadow-2xl mix-blend-plus-lighter">ANAS</span>
                 </motion.h1>
               </div>
-              <div className="overflow-hidden pb-8 -ml-2">
-                <motion.h1 variants={revealVariants} className="text-[6rem] sm:text-[9rem] lg:text-[12rem] font-bold tracking-tighter leading-[0.8] relative">
-                  <span className="text-white pb-4 inline-block drop-shadow-[0_30px_60px_rgba(255,255,255,0.2)]">KHAN.</span>
+              <div className="overflow-hidden pb-10 -ml-3">
+                <motion.h1 variants={revealVariants} className="text-[7rem] sm:text-[11rem] lg:text-[14rem] font-bold tracking-tighter leading-[0.8] relative">
+                  <span className="text-white pb-4 inline-block drop-shadow-[0_40px_80px_rgba(255,255,255,0.15)]">KHAN.</span>
                 </motion.h1>
               </div>
 
-              <motion.div variants={revealVariants} className="flex items-center gap-5 bg-[#0a0a0a]/80 border border-white/[0.08] px-8 py-5 rounded-[2rem] backdrop-blur-2xl mb-12 w-full max-w-xl shadow-[0_20px_40px_rgba(0,0,0,0.5)] cursor-hover-target">
-                <Terminal size={28} className="text-teal-400 drop-shadow-[0_0_10px_rgba(45,212,191,0.5)]" />
-                <div className="text-teal-400 text-xl sm:text-3xl font-mono tracking-tight font-light h-10 flex items-center">
+              <motion.div variants={revealVariants} className="flex items-center gap-6 bg-[#0a0a0a]/90 border border-white/[0.08] px-10 py-6 rounded-[2.5rem] backdrop-blur-3xl mb-14 w-full max-w-2xl shadow-[0_30px_60px_rgba(0,0,0,0.8)] cursor-hover-target">
+                <Terminal size={32} className="text-teal-400 drop-shadow-[0_0_15px_rgba(45,212,191,0.6)]" />
+                <div className="text-teal-400 text-2xl sm:text-4xl font-mono tracking-tight font-light h-10 flex items-center">
                   <Typewriter
                     words={["MERN Stack Architect", "Next.js Specialist", "Premium UI Engineer"]}
                     loop={true} cursor cursorStyle="█" typeSpeed={50} deleteSpeed={30} delaySpeed={3000}
@@ -601,61 +613,61 @@ const Home = () => {
                 </div>
               </motion.div>
 
-              <motion.p variants={revealVariants} className="text-gray-400 text-xl sm:text-2xl leading-[1.8] max-w-3xl font-light tracking-wide mb-16 mix-blend-plus-lighter">
+              <motion.p variants={revealVariants} className="text-gray-400 text-2xl sm:text-3xl leading-[1.8] max-w-4xl font-light tracking-wide mb-20 mix-blend-plus-lighter">
                 I engineer scalable digital ecosystems. Focused on clean modular architecture, seamless fluid interactions, and high-performance backend infrastructure that stands the test of time.
               </motion.p>
 
               <motion.div variants={revealVariants} className="flex flex-wrap items-center gap-8 w-full sm:w-auto">
-                <MagneticButton href="#projects" onClick={(e) => scrollToSection(e, 'projects')} className="group relative px-12 py-6 bg-white text-black font-semibold rounded-full overflow-hidden flex items-center justify-center gap-4 shadow-[0_0_50px_rgba(255,255,255,0.2)] cursor-pointer hover:scale-105 transition-transform duration-500 w-full sm:w-auto">
-                  <span className="text-sm uppercase tracking-[0.2em] font-bold z-10">Explore Masterpieces</span>
-                  <ArrowRight size={20} className="group-hover:translate-x-2 group-hover:-rotate-45 transition-transform duration-500 z-10" />
+                <MagneticButton href="#projects" onClick={(e) => scrollToSection(e, 'projects')} className="group relative px-14 py-8 bg-white text-black font-semibold rounded-full overflow-hidden flex items-center justify-center gap-6 shadow-[0_0_80px_rgba(255,255,255,0.25)] cursor-pointer hover:scale-[1.02] transition-transform duration-500 w-full sm:w-auto">
+                  <span className="text-sm uppercase tracking-[0.3em] font-extrabold z-10">Explore Masterpieces</span>
+                  <ArrowRight size={22} className="group-hover:translate-x-2 group-hover:-rotate-45 transition-transform duration-500 z-10" />
                   <div className="absolute inset-0 bg-gradient-to-r from-gray-200 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </MagneticButton>
                 
-                <MagneticButton href="/resume" className="group px-12 py-6 bg-transparent border border-white/[0.2] text-white rounded-full hover:bg-white/[0.08] flex items-center justify-center gap-4 backdrop-blur-2xl transition-colors duration-500 cursor-pointer w-full sm:w-auto">
-                  <Download size={20} className="text-gray-400 group-hover:text-white transition-colors" />
-                  <span className="text-sm font-bold tracking-[0.15em] uppercase">Download Dossier</span>
+                <MagneticButton href="/resume" className="group px-14 py-8 bg-transparent border border-white/[0.2] text-white rounded-full hover:bg-white/[0.05] flex items-center justify-center gap-6 backdrop-blur-3xl transition-colors duration-500 cursor-pointer w-full sm:w-auto">
+                  <Download size={22} className="text-gray-400 group-hover:text-white transition-colors" />
+                  <span className="text-sm font-extrabold tracking-[0.2em] uppercase">Download Dossier</span>
                 </MagneticButton>
               </motion.div>
             </motion.header>
 
             <motion.article 
-              initial={{ opacity: 0, filter: "blur(40px)", scale: 0.8 }} 
+              initial={{ opacity: 0, filter: "blur(50px)", scale: 0.8 }} 
               animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }} 
-              transition={{ type: "spring", stiffness: 40, damping: 20, delay: 0.8 }}
-              className="lg:col-span-5 relative w-full h-full flex flex-col justify-center perspective-1000 mt-16 lg:mt-0"
+              transition={{ type: "spring", stiffness: 40, damping: 25, delay: 0.8 }}
+              className="lg:col-span-5 relative w-full h-full flex flex-col justify-center perspective-1000 mt-20 lg:mt-0"
             >
               <TiltWrapper className="w-full">
-                <div className="grid grid-cols-2 gap-6 w-full relative z-10">
-                  <motion.div style={{ scale: scaleHeroImage, y: yHeroImage }} className="col-span-2 rounded-[3rem] overflow-hidden border border-white/[0.1] relative group h-[450px] sm:h-[600px] shadow-[0_30px_80px_rgba(0,0,0,0.95)] cursor-hover-target bg-[#050505]">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 opacity-90 pointer-events-none" />
-                    <img src={profileImage} alt="Anas Khan" loading="eager" className="w-full h-full object-cover transition-transform duration-[4000ms] group-hover:scale-110 grayscale-[30%] group-hover:grayscale-0" />
+                <div className="grid grid-cols-2 gap-8 w-full relative z-10">
+                  <motion.div style={{ scale: scaleHeroImage, y: yHeroImage }} className="col-span-2 rounded-[4rem] overflow-hidden border border-white/[0.08] relative group h-[500px] sm:h-[700px] shadow-[0_40px_100px_rgba(0,0,0,0.95)] cursor-hover-target bg-[#050505]">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 opacity-95 pointer-events-none" />
+                    <img src={profileImage} alt="Anas Khan" loading="eager" className="w-full h-full object-cover transition-transform duration-[5000ms] group-hover:scale-110 grayscale-[40%] group-hover:grayscale-0" />
                     
-                    <div className="absolute top-8 right-8 z-20 px-5 py-2.5 bg-black/60 backdrop-blur-xl rounded-full border border-white/10 flex items-center gap-3 shadow-2xl">
-                      <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,1)]" />
-                      <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-white">System Online</span>
+                    <div className="absolute top-10 right-10 z-20 px-6 py-3 bg-black/60 backdrop-blur-2xl rounded-full border border-white/10 flex items-center gap-4 shadow-2xl">
+                      <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse shadow-[0_0_15px_rgba(34,197,94,1)]" />
+                      <span className="text-xs font-bold uppercase tracking-[0.3em] text-white">System Online</span>
                     </div>
                     
-                    <div className="absolute bottom-12 left-12 z-20 flex flex-col gap-4" style={{ transform: "translateZ(30px)" }}>
-                      <div className="flex items-center gap-2 text-teal-400 bg-black/50 w-fit px-4 py-2 rounded-full backdrop-blur-xl border border-white/10">
-                        <MapPin size={16} />
-                        <p className="text-[10px] uppercase tracking-[0.25em] font-bold">Operating From</p>
+                    <div className="absolute bottom-16 left-16 z-20 flex flex-col gap-6" style={{ transform: "translateZ(40px)" }}>
+                      <div className="flex items-center gap-3 text-teal-400 bg-black/50 w-fit px-5 py-2.5 rounded-full backdrop-blur-2xl border border-white/10">
+                        <MapPin size={18} />
+                        <p className="text-xs uppercase tracking-[0.3em] font-bold">Operating From</p>
                       </div>
-                      <p className="text-5xl font-bold text-white tracking-tighter drop-shadow-[0_10px_20px_rgba(0,0,0,1)]">Lucknow, IN.</p>
+                      <p className="text-6xl sm:text-7xl font-bold text-white tracking-tighter drop-shadow-[0_15px_30px_rgba(0,0,0,1)]">Lucknow, IN.</p>
                     </div>
                   </motion.div>
 
-                  <SpotlightCard className="p-10 flex flex-col justify-center items-center group cursor-hover-target">
-                    <p className="text-7xl font-bold text-white mb-4 group-hover:scale-110 transition-transform duration-700 drop-shadow-2xl">10<span className="text-teal-500">+</span></p>
-                    <p className="text-[11px] uppercase tracking-[0.3em] text-gray-500 font-bold text-center">Architected <br/>Projects</p>
+                  <SpotlightCard className="p-12 flex flex-col justify-center items-center group cursor-hover-target rounded-[3rem]">
+                    <p className="text-8xl font-bold text-white mb-6 group-hover:scale-110 transition-transform duration-700 drop-shadow-2xl">10<span className="text-teal-500">+</span></p>
+                    <p className="text-xs uppercase tracking-[0.4em] text-gray-500 font-bold text-center">Architected <br/>Projects</p>
                   </SpotlightCard>
 
-                  <SpotlightCard className="p-10 flex flex-col justify-center items-center group cursor-hover-target">
-                    <div className="flex gap-5 mb-6">
-                      <SocialIcon href="https://github.com" icon={<SiGithub size={24} />} />
-                      <SocialIcon href="https://linkedin.com" icon={<SiLinkedin size={24} />} />
+                  <SpotlightCard className="p-12 flex flex-col justify-center items-center group cursor-hover-target rounded-[3rem]">
+                    <div className="flex gap-6 mb-8">
+                      <SocialIcon href="https://github.com" icon={<SiGithub size={28} />} />
+                      <SocialIcon href="https://linkedin.com" icon={<SiLinkedin size={28} />} />
                     </div>
-                    <p className="text-[11px] uppercase tracking-[0.3em] text-gray-500 font-bold text-center">Global <br/>Network</p>
+                    <p className="text-xs uppercase tracking-[0.4em] text-gray-500 font-bold text-center">Global <br/>Network</p>
                   </SpotlightCard>
                 </div>
               </TiltWrapper>
@@ -664,99 +676,99 @@ const Home = () => {
         </section>
 
         {/* ================= MARQUEE TECH BANNER ================= */}
-        <section className="relative z-20 py-16 border-y border-white/[0.05] bg-[#020202] overflow-hidden flex flex-col gap-10 mask-edges">
+        <section className="relative z-20 py-20 border-y border-white/[0.05] bg-[#020202] overflow-hidden flex flex-col gap-12 mask-edges">
           <div className="flex w-[200%] animate-[marquee_40s_linear_infinite] items-center">
             {[...techStack, ...techStack, ...techStack].map((tech, idx) => (
-              <div key={idx} className="flex items-center gap-6 mx-14 opacity-30 hover:opacity-100 transition-opacity duration-500 cursor-hover-target grayscale hover:grayscale-0">
-                <span className="text-5xl text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">{tech.icon}</span>
-                <span className="text-3xl font-extrabold tracking-[0.2em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-600">{tech.name}</span>
+              <div key={idx} className="flex items-center gap-8 mx-16 opacity-30 hover:opacity-100 transition-opacity duration-500 cursor-hover-target grayscale hover:grayscale-0">
+                <span className="text-6xl text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">{tech.icon}</span>
+                <span className="text-4xl font-extrabold tracking-[0.2em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-600">{tech.name}</span>
               </div>
             ))}
           </div>
           <div className="flex w-[200%] animate-[marquee_40s_linear_infinite_reverse] items-center">
             {[...techStack, ...techStack, ...techStack].reverse().map((tech, idx) => (
-              <div key={idx} className="flex items-center gap-6 mx-14 opacity-30 hover:opacity-100 transition-opacity duration-500 cursor-hover-target grayscale hover:grayscale-0">
-                <span className="text-5xl text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">{tech.icon}</span>
-                <span className="text-3xl font-extrabold tracking-[0.2em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-gray-600 to-white">{tech.name}</span>
+              <div key={idx} className="flex items-center gap-8 mx-16 opacity-30 hover:opacity-100 transition-opacity duration-500 cursor-hover-target grayscale hover:grayscale-0">
+                <span className="text-6xl text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.5)]">{tech.icon}</span>
+                <span className="text-4xl font-extrabold tracking-[0.2em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-gray-600 to-white">{tech.name}</span>
               </div>
             ))}
           </div>
         </section>
 
         {/* ================= SECTION 2: SERVICES & METHODOLOGY ================= */}
-        <section id="services" className="relative z-10 px-6 sm:px-10 md:px-20 lg:px-28 py-48 max-w-[1800px] mx-auto border-t border-white/[0.05]">
+        <section id="services" className="relative z-10 px-6 sm:px-10 md:px-20 lg:px-28 py-56 max-w-[1920px] mx-auto border-t border-white/[0.05]">
           
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="mb-32 flex flex-col items-center text-center max-w-5xl mx-auto">
-            <motion.div variants={revealVariants} className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white/[0.02] border border-white/[0.1] text-xs uppercase tracking-[0.25em] text-gray-300 mb-12 backdrop-blur-2xl shadow-2xl">
-              <Layers size={16} className="text-blue-400" />
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={staggerContainer} className="mb-40 flex flex-col items-center text-center max-w-6xl mx-auto">
+            <motion.div variants={revealVariants} className="inline-flex items-center gap-4 px-10 py-5 rounded-full bg-white/[0.02] border border-white/[0.1] text-sm uppercase tracking-[0.3em] text-gray-300 mb-14 backdrop-blur-3xl shadow-2xl">
+              <Layers size={20} className="text-blue-400" />
               Core Capabilities
             </motion.div>
             <div className="overflow-hidden pb-4">
-              <motion.h2 variants={revealVariants} className="text-6xl sm:text-7xl lg:text-[8rem] font-bold tracking-tighter mb-4 leading-[0.9]">
+              <motion.h2 variants={revealVariants} className="text-7xl sm:text-8xl lg:text-[9rem] font-bold tracking-tighter mb-4 leading-[0.9]">
                 Architecting solutions
               </motion.h2>
             </div>
             <div className="overflow-hidden pb-8">
-              <motion.h2 variants={revealVariants} className="text-6xl sm:text-7xl lg:text-[8rem] font-bold tracking-tighter mb-10 leading-[0.9]">
+              <motion.h2 variants={revealVariants} className="text-7xl sm:text-8xl lg:text-[9rem] font-bold tracking-tighter mb-12 leading-[0.9]">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-600 via-white to-gray-600">
                   for real-world scale.
                 </span>
               </motion.h2>
             </div>
-            <motion.p variants={revealVariants} className="text-gray-400 text-2xl font-light tracking-wide leading-[1.8] max-w-4xl">
+            <motion.p variants={revealVariants} className="text-gray-400 text-3xl font-light tracking-wide leading-[1.8] max-w-5xl">
               I don't just write code. I help visionary teams design, build, and refine entire digital ecosystems that are incredibly fast, scalable, and secure.
             </motion.p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-48">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 mb-56">
             {servicesData.map((service, idx) => (
               <motion.div key={idx} variants={revealVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} className={service.colSpan}>
-                <SpotlightCard glowColor="rgba(255,255,255,0.15)" className="p-12 sm:p-14 h-full cursor-hover-target">
-                  <div className={`w-24 h-24 rounded-[2rem] bg-[#0a0a0a] flex items-center justify-center mb-12 text-gray-500 transition-all duration-700 border border-white/[0.08] shadow-inner ${service.color}`}>
+                <SpotlightCard glowColor="rgba(255,255,255,0.15)" className="p-14 sm:p-16 h-full cursor-hover-target rounded-[4rem]">
+                  <div className={`w-28 h-28 rounded-[2.5rem] bg-[#0a0a0a] flex items-center justify-center mb-14 text-gray-500 transition-all duration-700 border border-white/[0.08] shadow-inner ${service.color}`}>
                     {service.icon}
                   </div>
-                  <h3 className="text-3xl sm:text-4xl font-bold text-white mb-6 tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-500 transition-all duration-700 leading-tight">{service.title}</h3>
-                  <p className="text-gray-400 text-xl leading-[1.8] font-light">{service.description}</p>
+                  <h3 className="text-4xl sm:text-5xl font-bold text-white mb-8 tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-500 transition-all duration-700 leading-tight">{service.title}</h3>
+                  <p className="text-gray-400 text-2xl leading-[1.8] font-light">{service.description}</p>
                 </SpotlightCard>
               </motion.div>
             ))}
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-24 items-start mt-20">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="lg:col-span-5 sticky top-48">
-              <h3 className="text-5xl sm:text-7xl font-bold tracking-tighter mb-10 text-white leading-[0.9]">Engineering <br/><span className="text-transparent bg-clip-text bg-gradient-to-b from-gray-400 to-gray-700">Methodology.</span></h3>
-              <p className="text-2xl text-gray-400 font-light leading-relaxed mb-16">A systematic, uncompromising approach to transforming complex business requirements into elegant, high-performance software architecture.</p>
+          <div className="grid lg:grid-cols-12 gap-32 items-start mt-20">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="lg:col-span-5 sticky top-56">
+              <h3 className="text-6xl sm:text-8xl font-bold tracking-tighter mb-12 text-white leading-[0.9]">Engineering <br/><span className="text-transparent bg-clip-text bg-gradient-to-b from-gray-400 to-gray-700">Methodology.</span></h3>
+              <p className="text-3xl text-gray-400 font-light leading-relaxed mb-20">A systematic, uncompromising approach to transforming complex business requirements into elegant, high-performance software architecture.</p>
               
-              <SpotlightCard glowColor="rgba(59, 130, 246, 0.2)" className="p-16 cursor-hover-target">
-                <Quote className="text-white/10 w-32 h-32 mb-12 group-hover:scale-110 transition-transform duration-1000" />
-                <blockquote className="text-4xl font-medium text-gray-300 leading-[1.3] tracking-tight">
-                  “Good software is not defined by features — but by how well it holds up over time under <span className="text-white font-bold drop-shadow-lg">real-world pressure.</span>”
+              <SpotlightCard glowColor="rgba(59, 130, 246, 0.2)" className="p-20 cursor-hover-target rounded-[4rem]">
+                <Quote className="text-white/10 w-40 h-40 mb-14 group-hover:scale-110 transition-transform duration-1000" />
+                <blockquote className="text-5xl font-medium text-gray-300 leading-[1.3] tracking-tight">
+                  “Good software is not defined by features — but by how well it holds up over time under <span className="text-white font-bold drop-shadow-2xl">real-world pressure.</span>”
                 </blockquote>
               </SpotlightCard>
             </motion.div>
 
-            <div className="lg:col-span-7 relative pt-10">
-              <div className="absolute top-0 bottom-0 left-[35px] w-[2px] bg-white/10">
+            <div className="lg:col-span-7 relative pt-12">
+              <div className="absolute top-0 bottom-0 left-[45px] w-[2px] bg-white/10">
                  <motion.div 
-                   className="absolute top-0 w-full bg-gradient-to-b from-teal-500 via-blue-500 to-purple-500 shadow-[0_0_15px_rgba(59,130,246,0.8)]"
+                   className="absolute top-0 w-full bg-gradient-to-b from-teal-500 via-blue-500 to-purple-500 shadow-[0_0_20px_rgba(59,130,246,0.8)]"
                    style={{ height: useTransform(scrollYProgress, [0.3, 0.7], ["0%", "100%"]) }}
                  />
               </div>
               
-              <div className="flex flex-col gap-24">
+              <div className="flex flex-col gap-32">
                 {processSteps.map((step, idx) => (
                   <motion.div 
                     key={idx} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={revealVariants}
-                    className="relative pl-28 group cursor-hover-target"
+                    className="relative pl-36 group cursor-hover-target"
                   >
-                    <div className="absolute left-[24px] top-3 w-6 h-6 rounded-full border-[4px] border-[#000] bg-gray-600 group-hover:bg-white transition-colors duration-500 shadow-[0_0_0_4px_rgba(255,255,255,0.05)] group-hover:shadow-[0_0_20px_rgba(255,255,255,1)] z-10" />
+                    <div className="absolute left-[33px] top-4 w-7 h-7 rounded-full border-[5px] border-[#000] bg-gray-600 group-hover:bg-white transition-colors duration-500 shadow-[0_0_0_5px_rgba(255,255,255,0.05)] group-hover:shadow-[0_0_30px_rgba(255,255,255,1)] z-10" />
                     
-                    <p className="text-sm uppercase tracking-[0.4em] font-bold text-teal-500 mb-6 flex items-center gap-4">
-                      <span className="w-12 h-[1px] bg-teal-500/50 block"></span>
+                    <p className="text-base uppercase tracking-[0.5em] font-bold text-teal-500 mb-8 flex items-center gap-5">
+                      <span className="w-16 h-[2px] bg-teal-500/50 block"></span>
                       {step.phase}
                     </p>
-                    <h4 className="text-4xl font-bold text-white mb-6 tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-500 transition-all duration-500">{step.title}</h4>
-                    <p className="text-gray-400 text-xl leading-relaxed font-light">{step.desc}</p>
+                    <h4 className="text-5xl font-bold text-white mb-8 tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-500 transition-all duration-500">{step.title}</h4>
+                    <p className="text-gray-400 text-2xl leading-[1.8] font-light">{step.desc}</p>
                   </motion.div>
                 ))}
               </div>
@@ -765,26 +777,26 @@ const Home = () => {
         </section>
 
         {/* ================= SECTION 3: THE SHOWCASE ================= */}
-        <section id="projects" className="relative z-10 py-48 px-6 sm:px-10 md:px-20 lg:px-28 max-w-[1800px] mx-auto border-t border-white/[0.05]">
+        <section id="projects" className="relative z-10 py-56 px-6 sm:px-10 md:px-20 lg:px-28 max-w-[1920px] mx-auto border-t border-white/[0.05]">
           
-          <motion.header initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="mb-48 flex flex-col items-center text-center max-w-6xl mx-auto">
-            <motion.div variants={revealVariants} className="inline-flex items-center gap-4 px-8 py-4 rounded-full bg-white/[0.02] border border-white/[0.1] text-xs uppercase tracking-[0.3em] text-gray-300 mb-12 backdrop-blur-3xl shadow-2xl">
-              <Code2 size={16} className="text-teal-400" />
+          <motion.header initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="mb-56 flex flex-col items-center text-center max-w-6xl mx-auto">
+            <motion.div variants={revealVariants} className="inline-flex items-center gap-5 px-10 py-5 rounded-full bg-white/[0.02] border border-white/[0.1] text-sm uppercase tracking-[0.4em] text-gray-300 mb-14 backdrop-blur-3xl shadow-2xl">
+              <Code2 size={20} className="text-teal-400" />
               Selected Portfolio
             </motion.div>
             <div className="overflow-hidden pb-4">
-              <motion.h2 variants={revealVariants} className="text-7xl sm:text-8xl lg:text-[9rem] font-bold tracking-tighter mb-8 leading-[0.9]">
+              <motion.h2 variants={revealVariants} className="text-8xl sm:text-[10rem] lg:text-[11rem] font-bold tracking-tighter mb-10 leading-[0.9]">
                 Proof of <span className="text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-700">Work.</span>
               </motion.h2>
             </div>
-            <motion.p variants={revealVariants} className="text-gray-400 text-2xl font-light tracking-wide leading-[1.8] max-w-4xl">
+            <motion.p variants={revealVariants} className="text-gray-400 text-3xl font-light tracking-wide leading-[1.8] max-w-5xl">
               A curated collection of enterprise-grade applications. Scroll to explore the architecture, aesthetic, and engineering behind each digital platform.
             </motion.p>
           </motion.header>
 
-          <div className="flex flex-col gap-10 lg:gap-0 relative perspective-1000">
+          <div className="flex flex-col gap-16 lg:gap-0 relative perspective-1000">
             {projects.map((project, idx) => {
-              const stickyTop = `calc(15vh + ${idx * 40}px)`; 
+              const stickyTop = `calc(15vh + ${idx * 50}px)`; 
               return (
                 <ProjectCard 
                   key={idx} 
@@ -799,57 +811,57 @@ const Home = () => {
         </section>
 
         {/* ================= SECTION 4: CONTACT ================= */}
-        <section id="contact" className="relative z-10 py-48 px-6 sm:px-10 border-t border-white/[0.05] flex flex-col items-center overflow-hidden">
+        <section id="contact" className="relative z-10 py-56 px-6 sm:px-10 border-t border-white/[0.05] flex flex-col items-center overflow-hidden">
           
-          <div className="absolute bottom-[-60%] left-[50%] -translate-x-1/2 w-[120vw] h-[120vw] rounded-full bg-teal-900/20 blur-[250px] mix-blend-screen pointer-events-none animate-[pulse_15s_ease-in-out_infinite]" />
+          <div className="absolute bottom-[-60%] left-[50%] -translate-x-1/2 w-[140vw] h-[140vw] rounded-full bg-teal-900/20 blur-[300px] mix-blend-screen pointer-events-none animate-[pulse_15s_ease-in-out_infinite]" />
 
-          <div className="max-w-6xl w-full flex flex-col items-center text-center relative z-20">
-            <p className="text-sm uppercase tracking-[0.6em] text-gray-500 font-bold mb-12">Next Steps</p>
-            <div className="overflow-hidden pb-4 mb-16">
-              <motion.h2 initial={{ y: 150 }} whileInView={{ y: 0 }} viewport={{ once: true }} transition={{ duration: 1, type: "spring" }} className="text-7xl sm:text-[9rem] lg:text-[12rem] font-bold tracking-tighter leading-[0.8] text-white drop-shadow-2xl">
+          <div className="max-w-[1800px] w-full flex flex-col items-center text-center relative z-20">
+            <p className="text-base uppercase tracking-[0.8em] text-gray-500 font-bold mb-14">Next Steps</p>
+            <div className="overflow-hidden pb-6 mb-20">
+              <motion.h2 initial={{ y: 150 }} whileInView={{ y: 0 }} viewport={{ once: true }} transition={{ duration: 1, type: "spring" }} className="text-8xl sm:text-[12rem] lg:text-[15rem] font-bold tracking-tighter leading-[0.8] text-white drop-shadow-2xl">
                 LET'S TALK.
               </motion.h2>
             </div>
-            <p className="text-2xl sm:text-3xl text-gray-400 font-light max-w-3xl mb-24 leading-relaxed">
+            <p className="text-3xl sm:text-4xl text-gray-400 font-light max-w-4xl mb-32 leading-[1.8]">
               Currently available for freelance opportunities, full-time engineering roles, and visionary projects. Let's build something extraordinary together.
             </p>
 
-            <SpotlightCard glowColor="rgba(20, 184, 166, 0.25)" className="w-full max-w-4xl p-12 sm:p-20 mb-32 cursor-hover-target text-left">
-              <form className="flex flex-col gap-12" onSubmit={(e) => e.preventDefault()}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
+            <SpotlightCard glowColor="rgba(20, 184, 166, 0.25)" className="w-full max-w-5xl p-16 sm:p-24 mb-40 cursor-hover-target text-left rounded-[4rem]">
+              <form className="flex flex-col gap-16" onSubmit={(e) => e.preventDefault()}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-16">
                   <div className="relative group">
-                    <input type="text" placeholder="YOUR NAME" className="w-full bg-transparent border-b border-white/20 pb-5 text-white text-xl font-light tracking-wider focus:outline-none focus:border-white transition-colors uppercase placeholder:text-gray-700 peer" />
-                    <div className="absolute bottom-0 left-0 h-[2px] bg-white w-0 peer-focus:w-full transition-all duration-700 shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
+                    <input type="text" placeholder="YOUR NAME" className="w-full bg-transparent border-b border-white/20 pb-6 text-white text-2xl font-light tracking-widest focus:outline-none focus:border-white transition-colors uppercase placeholder:text-gray-700 peer" />
+                    <div className="absolute bottom-0 left-0 h-[2px] bg-white w-0 peer-focus:w-full transition-all duration-700 shadow-[0_0_15px_rgba(255,255,255,0.5)]" />
                   </div>
                   <div className="relative group">
-                    <input type="email" placeholder="EMAIL ADDRESS" className="w-full bg-transparent border-b border-white/20 pb-5 text-white text-xl font-light tracking-wider focus:outline-none focus:border-white transition-colors uppercase placeholder:text-gray-700 peer" />
-                    <div className="absolute bottom-0 left-0 h-[2px] bg-white w-0 peer-focus:w-full transition-all duration-700 shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
+                    <input type="email" placeholder="EMAIL ADDRESS" className="w-full bg-transparent border-b border-white/20 pb-6 text-white text-2xl font-light tracking-widest focus:outline-none focus:border-white transition-colors uppercase placeholder:text-gray-700 peer" />
+                    <div className="absolute bottom-0 left-0 h-[2px] bg-white w-0 peer-focus:w-full transition-all duration-700 shadow-[0_0_15px_rgba(255,255,255,0.5)]" />
                   </div>
                 </div>
-                <div className="relative group mt-4">
-                  <textarea placeholder="PROJECT DETAILS OR MESSAGE" rows="4" className="w-full bg-transparent border-b border-white/20 pt-4 pb-5 text-white text-xl font-light tracking-wider focus:outline-none focus:border-white transition-colors resize-none uppercase placeholder:text-gray-700 peer"></textarea>
-                  <div className="absolute bottom-0 left-0 h-[2px] bg-white w-0 peer-focus:w-full transition-all duration-700 shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
+                <div className="relative group mt-6">
+                  <textarea placeholder="PROJECT DETAILS OR MESSAGE" rows="4" className="w-full bg-transparent border-b border-white/20 pt-6 pb-6 text-white text-2xl font-light tracking-widest focus:outline-none focus:border-white transition-colors resize-none uppercase placeholder:text-gray-700 peer"></textarea>
+                  <div className="absolute bottom-0 left-0 h-[2px] bg-white w-0 peer-focus:w-full transition-all duration-700 shadow-[0_0_15px_rgba(255,255,255,0.5)]" />
                 </div>
                 
-                <MagneticButton className="mt-10 group w-full py-8 rounded-full border border-white text-black bg-white flex items-center justify-center gap-5 hover:bg-transparent hover:text-white transition-all duration-700 cursor-pointer shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:shadow-none overflow-hidden relative">
+                <MagneticButton className="mt-14 group w-full py-10 rounded-full border border-white text-black bg-white flex items-center justify-center gap-6 hover:bg-transparent hover:text-white transition-all duration-700 cursor-pointer shadow-[0_0_50px_rgba(255,255,255,0.3)] hover:shadow-none overflow-hidden relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
-                  <span className="text-sm font-extrabold tracking-[0.3em] uppercase relative z-10">Transmit Message</span>
-                  <Send size={20} className="relative z-10 group-hover:translate-x-3 group-hover:-translate-y-3 transition-transform duration-500" />
+                  <span className="text-lg font-extrabold tracking-[0.4em] uppercase relative z-10">Transmit Message</span>
+                  <Send size={24} className="relative z-10 group-hover:translate-x-4 group-hover:-translate-y-4 transition-transform duration-500" />
                 </MagneticButton>
               </form>
             </SpotlightCard>
 
-            <div className="flex flex-wrap justify-center gap-10 mb-24">
-              <SocialIcon href="https://github.com" icon={<Github size={32} strokeWidth={1.5} />} label="GitHub" />
-              <SocialIcon href="https://linkedin.com" icon={<Linkedin size={32} strokeWidth={1.5} />} label="LinkedIn" />
-              <SocialIcon href="mailto:your.email@example.com" icon={<Mail size={32} strokeWidth={1.5} />} label="Email" />
+            <div className="flex flex-wrap justify-center gap-12 mb-32">
+              <SocialIcon href="https://github.com" icon={<Github size={40} strokeWidth={1.5} />} label="GitHub" />
+              <SocialIcon href="https://linkedin.com" icon={<Linkedin size={40} strokeWidth={1.5} />} label="LinkedIn" />
+              <SocialIcon href="mailto:your.email@example.com" icon={<Mail size={40} strokeWidth={1.5} />} label="Email" />
             </div>
 
-            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent mb-12" />
+            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent mb-16" />
 
-            <div className="flex flex-col sm:flex-row items-center justify-between w-full text-xs font-bold tracking-[0.3em] text-gray-500 uppercase">
+            <div className="flex flex-col sm:flex-row items-center justify-between w-full text-sm font-bold tracking-[0.4em] text-gray-500 uppercase">
               <p>© {new Date().getFullYear()} Anas Khan</p>
-              <p className="mt-6 sm:mt-0">Designed & Engineered in India</p>
+              <p className="mt-8 sm:mt-0">Designed & Engineered in India</p>
             </div>
           </div>
         </section>
@@ -865,25 +877,25 @@ const Home = () => {
               onClick={() => setSelectedImg(null)}
             >
               <button 
-                className="absolute top-10 sm:top-14 right-10 sm:right-14 text-white/50 hover:text-white transition-all duration-500 p-6 bg-white/5 border border-white/10 rounded-full backdrop-blur-3xl z-50 hover:bg-white/20 hover:scale-110 shadow-[0_0_30px_rgba(255,255,255,0.1)] cursor-hover-target" 
+                className="absolute top-12 sm:top-16 right-12 sm:right-16 text-white/50 hover:text-white transition-all duration-500 p-8 bg-white/5 border border-white/10 rounded-full backdrop-blur-3xl z-50 hover:bg-white/20 hover:scale-110 shadow-[0_0_40px_rgba(255,255,255,0.1)] cursor-hover-target" 
                 onClick={() => setSelectedImg(null)}
               >
-                <X size={36} strokeWidth={1.5} />
+                <X size={44} strokeWidth={1.5} />
               </button>
               
               <motion.div 
-                initial={{ scale: 0.9, opacity: 0, y: 60 }} 
+                initial={{ scale: 0.9, opacity: 0, y: 80 }} 
                 animate={{ scale: 1, opacity: 1, y: 0 }} 
-                exit={{ scale: 0.9, opacity: 0, y: 60 }} 
+                exit={{ scale: 0.9, opacity: 0, y: 80 }} 
                 transition={{ type: "spring", damping: 30, stiffness: 300, mass: 1 }} 
-                className="relative max-w-[1700px] w-full flex justify-center items-center cursor-auto perspective-1000" 
+                className="relative max-w-[2000px] w-full flex justify-center items-center cursor-auto perspective-1000" 
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="absolute inset-0 bg-white/5 blur-[250px] rounded-full z-0 pointer-events-none" />
+                <div className="absolute inset-0 bg-white/5 blur-[300px] rounded-full z-0 pointer-events-none" />
                 <img 
                   src={selectedImg} 
                   alt="Expanded View" 
-                  className="relative z-10 w-full h-auto max-h-[90vh] object-contain rounded-[2rem] shadow-[0_0_200px_rgba(0,0,0,1)] border border-white/[0.1]" 
+                  className="relative z-10 w-full h-auto max-h-[90vh] object-contain rounded-[3rem] shadow-[0_0_250px_rgba(0,0,0,1)] border border-white/[0.1]" 
                 />
               </motion.div>
             </motion.div>
@@ -903,16 +915,20 @@ const Home = () => {
             100% { transform: translateX(100%); }
           }
           .outline-text {
-            -webkit-text-stroke: 2px rgba(255, 255, 255, 0.7);
+            -webkit-text-stroke: 3px rgba(255, 255, 255, 0.8);
+            color: transparent;
+          }
+          .outline-text-preloader {
+            -webkit-text-stroke: 2px rgba(255, 255, 255, 0.4);
             color: transparent;
           }
           .mask-edges {
             -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
             mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
           }
-          ::-webkit-scrollbar { width: 8px; }
+          ::-webkit-scrollbar { width: 10px; }
           ::-webkit-scrollbar-track { background: #000; }
-          ::-webkit-scrollbar-thumb { background: #222; border-radius: 4px; border: 1px solid #111; }
+          ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 5px; border: 1px solid #333; }
           ::-webkit-scrollbar-thumb:hover { background: #444; }
           body {
             -webkit-font-smoothing: antialiased;
@@ -929,11 +945,11 @@ const Home = () => {
 // ================= MAGNETIC SOCIAL ICON COMPONENT ================= //
 function SocialIcon({ href, icon, label }) {
   return (
-    <MagneticButton href={href} className="flex flex-col items-center gap-5 group cursor-hover-target">
-      <div className="p-8 sm:p-10 rounded-full border border-white/10 bg-white/[0.02] text-gray-400 group-hover:bg-white group-hover:text-black group-hover:border-white transition-all duration-700 shadow-2xl relative overflow-hidden backdrop-blur-xl group-hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]">
+    <MagneticButton href={href} className="flex flex-col items-center gap-6 group cursor-hover-target">
+      <div className="p-10 sm:p-12 rounded-full border border-white/10 bg-white/[0.02] text-gray-400 group-hover:bg-white group-hover:text-black group-hover:border-white transition-all duration-700 shadow-2xl relative overflow-hidden backdrop-blur-xl group-hover:shadow-[0_0_50px_rgba(255,255,255,0.4)]">
         <div className="relative z-10 scale-100 group-hover:scale-110 transition-transform duration-500">{icon}</div>
       </div>
-      <span className="text-xs font-bold uppercase tracking-[0.3em] text-gray-600 group-hover:text-white transition-colors duration-500">{label}</span>
+      <span className="text-sm font-bold uppercase tracking-[0.4em] text-gray-600 group-hover:text-white transition-colors duration-500">{label}</span>
     </MagneticButton>
   );
 }

@@ -221,7 +221,7 @@ const Contact = () => {
     }
   };
 
-  // Framer Motion Animation Variants
+  // Framer Motion Animation Variants (Fixed naming mismatch to resolve missing text bug)
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
@@ -232,11 +232,11 @@ const Contact = () => {
 
   const revealVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 25, mass: 1 } }
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 25, mass: 1 } }
   };
 
   const fadeUp = {
-    hidden: { opacity: 0, y: 30, scale: 0.98 },
+    hidden: { opacity: 0, y: 40, scale: 0.98 },
     show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 60, damping: 20, mass: 1 } },
   };
 
@@ -260,13 +260,12 @@ const Contact = () => {
         style={{ scaleX }}
       />
 
-      {/* FIXED: Reduced pt-28 to pt-32 (was pt-40) and removed unnecessary massive gaps */}
-      <div className="max-w-[1920px] mx-auto relative z-10 pt-32 pb-32 px-4 sm:px-10 md:px-20 lg:px-28">
+      <div className="max-w-[1920px] mx-auto relative z-10 pt-28 sm:pt-36 pb-32 px-4 sm:px-10 md:px-20 lg:px-28">
 
         {/* ================= HEADER ================= */}
         <motion.header 
           initial="hidden" animate="show" variants={containerVariants}
-          className="mb-16 flex flex-col items-center text-center max-w-5xl mx-auto"
+          className="mb-12 sm:mb-20 flex flex-col items-center text-center max-w-5xl mx-auto"
         >
           <motion.div variants={revealVariants} className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.02] border border-white/[0.1] text-xs uppercase tracking-[0.3em] text-gray-300 mb-6 backdrop-blur-3xl shadow-2xl cursor-hover-target">
             <Send className="w-4 h-4 text-teal-400" />
@@ -356,7 +355,7 @@ const Contact = () => {
           </motion.div>
 
           {/* 📝 RIGHT: Ultra-Premium Glassmorphism Form (Col Span 7) */}
-          <motion.div variants={fadeUp} className="lg:col-span-7">
+          <motion.div variants={fadeUp} className="lg:col-span-7 mt-8 lg:mt-0">
             <SpotlightCard glowColor="rgba(45, 212, 191, 0.15)" className="p-8 sm:p-12 rounded-[2.5rem] group/form">
               
               <div className="relative z-10">

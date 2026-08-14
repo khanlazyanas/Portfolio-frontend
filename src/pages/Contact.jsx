@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { motion, useScroll, useSpring, useMotionValue } from "framer-motion";
 import { 
   FaLinkedin, 
   FaGithub, 
@@ -105,7 +105,7 @@ const MagneticButton = ({ children, className, href, onClick, target }) => {
   return <div className="inline-block w-full sm:w-auto cursor-pointer">{content}</div>;
 };
 
-// 3. Custom Animated Cursor with Spring Trailer
+// 3. Custom Animated Cursor
 const CustomCursor = () => {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
@@ -226,22 +226,22 @@ const Contact = () => {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+      transition: { staggerChildren: 0.15, delayChildren: 0.1 },
     },
   };
 
   const revealVariants = {
-    hidden: { opacity: 0, y: 100, rotate: 2 },
-    visible: { opacity: 1, y: 0, rotate: 0, transition: { type: "spring", stiffness: 50, damping: 25, mass: 1 } }
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 25, mass: 1 } }
   };
 
   const fadeUp = {
-    hidden: { opacity: 0, y: 40, scale: 0.95 },
+    hidden: { opacity: 0, y: 30, scale: 0.98 },
     show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 60, damping: 20, mass: 1 } },
   };
 
   return (
-    <main ref={containerRef} className="relative bg-[#000000] text-white px-4 sm:px-10 md:px-20 lg:px-28 pt-28 sm:pt-40 pb-32 sm:pb-48 overflow-hidden selection:bg-teal-500/30 font-sans antialiased cursor-auto md:cursor-none">
+    <main ref={containerRef} className="relative min-h-screen bg-[#000000] text-white overflow-hidden selection:bg-teal-500/30 font-sans antialiased cursor-auto md:cursor-none">
       
       <CustomCursor />
 
@@ -260,90 +260,91 @@ const Contact = () => {
         style={{ scaleX }}
       />
 
-      <div className="max-w-[1920px] mx-auto relative z-10">
+      {/* FIXED: Reduced pt-28 to pt-32 (was pt-40) and removed unnecessary massive gaps */}
+      <div className="max-w-[1920px] mx-auto relative z-10 pt-32 pb-32 px-4 sm:px-10 md:px-20 lg:px-28">
 
         {/* ================= HEADER ================= */}
         <motion.header 
           initial="hidden" animate="show" variants={containerVariants}
-          className="mb-20 sm:mb-40 flex flex-col items-center text-center max-w-6xl mx-auto"
+          className="mb-16 flex flex-col items-center text-center max-w-5xl mx-auto"
         >
-          <motion.div variants={revealVariants} className="inline-flex items-center gap-3 sm:gap-4 px-6 sm:px-10 py-3 sm:py-5 rounded-full bg-white/[0.02] border border-white/[0.1] text-[10px] sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] text-gray-300 mb-8 sm:mb-14 backdrop-blur-3xl shadow-2xl cursor-hover-target">
-            <Send className="w-4 h-4 sm:w-5 sm:h-5 text-teal-400" />
+          <motion.div variants={revealVariants} className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.02] border border-white/[0.1] text-xs uppercase tracking-[0.3em] text-gray-300 mb-6 backdrop-blur-3xl shadow-2xl cursor-hover-target">
+            <Send className="w-4 h-4 text-teal-400" />
             Contact Me
           </motion.div>
           
-          <div className="overflow-hidden pb-4 w-full">
-            <motion.h1 variants={revealVariants} className="text-[14vw] sm:text-[9rem] lg:text-[11rem] font-bold tracking-tighter leading-[0.8] relative whitespace-nowrap">
+          <div className="overflow-hidden w-full pb-2">
+            <motion.h1 variants={revealVariants} className="text-[12vw] sm:text-[8rem] lg:text-[10rem] font-bold tracking-tighter leading-none relative whitespace-nowrap">
               <span className="text-transparent outline-text drop-shadow-2xl mix-blend-plus-lighter">LET'S</span>
             </motion.h1>
           </div>
-          <div className="overflow-hidden pb-10 w-full">
-            <motion.h1 variants={revealVariants} className="text-[14vw] sm:text-[9rem] lg:text-[11rem] font-bold tracking-tighter leading-[0.8] relative whitespace-nowrap">
-              <span className="text-white pb-2 sm:pb-4 inline-block drop-shadow-[0_20px_40px_rgba(255,255,255,0.15)] md:drop-shadow-[0_40px_80px_rgba(255,255,255,0.15)]">CONNECT.</span>
+          <div className="overflow-hidden w-full pb-6">
+            <motion.h1 variants={revealVariants} className="text-[12vw] sm:text-[8rem] lg:text-[10rem] font-bold tracking-tighter leading-none relative whitespace-nowrap">
+              <span className="text-white drop-shadow-[0_20px_40px_rgba(255,255,255,0.15)]">CONNECT.</span>
             </motion.h1>
           </div>
 
-          <motion.p variants={revealVariants} className="text-gray-400 text-lg sm:text-3xl font-light tracking-wide leading-[1.6] sm:leading-[1.8] max-w-4xl px-4 mix-blend-plus-lighter">
+          <motion.p variants={revealVariants} className="text-gray-400 text-base sm:text-2xl font-light tracking-wide leading-relaxed max-w-3xl mix-blend-plus-lighter">
             Have a project, idea, or collaboration in mind? I’m always open to discussing new opportunities and engineering scalable digital products.
           </motion.p>
         </motion.header>
 
         {/* ================= CONTENT GRID ================= */}
         <motion.div 
-          variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-50px" }}
-          className="grid lg:grid-cols-12 gap-12 sm:gap-16 items-start"
+          variants={containerVariants} initial="hidden" whileInView="show" viewport={{ once: true }}
+          className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start"
         >
 
           {/* 📱 LEFT: Contact Info & Socials (Col Span 5) */}
-          <motion.div variants={fadeUp} className="lg:col-span-5 space-y-10 sm:space-y-12">
+          <motion.div variants={fadeUp} className="lg:col-span-5 space-y-8">
             
-            <div className="space-y-4 sm:space-y-6">
+            <div className="space-y-4">
               {/* Info Card 1: Phone */}
               <MagneticButton href="tel:+918429755694" className="w-full">
-                <div className="flex items-center gap-5 sm:gap-6 p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 hover:bg-[#111111] hover:border-teal-500/30 transition-all duration-500 group shadow-lg hover:shadow-[0_15px_40px_-15px_rgba(45,212,191,0.2)] cursor-hover-target w-full">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 group-hover:scale-110 group-hover:bg-teal-500/20 transition-all duration-500 shrink-0">
-                    <Phone size={24} />
+                <div className="flex items-center gap-5 p-6 rounded-[2rem] bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 hover:bg-[#111111] hover:border-teal-500/30 transition-all duration-500 group shadow-lg hover:shadow-[0_15px_40px_-15px_rgba(45,212,191,0.2)] cursor-hover-target w-full">
+                  <div className="w-14 h-14 rounded-full bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 group-hover:scale-110 group-hover:bg-teal-500/20 transition-all duration-500 shrink-0">
+                    <Phone size={22} />
                   </div>
                   <div className="text-left overflow-hidden">
-                    <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-[0.2em] sm:tracking-widest mb-1 sm:mb-1.5 font-bold">Call Me</p>
-                    <p className="text-base sm:text-xl text-white font-light tracking-wide truncate">+91 84297 55694</p>
+                    <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-[0.2em] mb-1 font-bold">Call Me</p>
+                    <p className="text-base sm:text-lg text-white font-light tracking-wide truncate">+91 84297 55694</p>
                   </div>
                 </div>
               </MagneticButton>
 
               {/* Info Card 2: Email */}
               <MagneticButton href="mailto:anaskhan995620@gmail.com" className="w-full">
-                <div className="flex items-center gap-5 sm:gap-6 p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 hover:bg-[#111111] hover:border-blue-500/30 transition-all duration-500 group shadow-lg hover:shadow-[0_15px_40px_-15px_rgba(59,130,246,0.2)] cursor-hover-target w-full">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 group-hover:bg-blue-500/20 transition-all duration-500 shrink-0">
-                    <Mail size={24} />
+                <div className="flex items-center gap-5 p-6 rounded-[2rem] bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 hover:bg-[#111111] hover:border-blue-500/30 transition-all duration-500 group shadow-lg hover:shadow-[0_15px_40px_-15px_rgba(59,130,246,0.2)] cursor-hover-target w-full">
+                  <div className="w-14 h-14 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 group-hover:bg-blue-500/20 transition-all duration-500 shrink-0">
+                    <Mail size={22} />
                   </div>
                   <div className="text-left overflow-hidden">
-                    <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-[0.2em] sm:tracking-widest mb-1 sm:mb-1.5 font-bold">Email Me</p>
-                    <p className="text-base sm:text-xl text-white font-light tracking-wide truncate">anaskhan995620@gmail.com</p>
+                    <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-[0.2em] mb-1 font-bold">Email Me</p>
+                    <p className="text-base sm:text-lg text-white font-light tracking-wide truncate">anaskhan995620@gmail.com</p>
                   </div>
                 </div>
               </MagneticButton>
 
               {/* Info Card 3: Location */}
               <MagneticButton className="w-full">
-                <div className="flex items-center gap-5 sm:gap-6 p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 hover:bg-[#111111] hover:border-purple-500/30 transition-all duration-500 group shadow-lg hover:shadow-[0_15px_40px_-15px_rgba(168,85,247,0.2)] cursor-hover-target w-full">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 group-hover:bg-purple-500/20 transition-all duration-500 shrink-0">
-                    <MapPin size={24} />
+                <div className="flex items-center gap-5 p-6 rounded-[2rem] bg-[#0a0a0a]/80 backdrop-blur-xl border border-white/5 hover:bg-[#111111] hover:border-purple-500/30 transition-all duration-500 group shadow-lg hover:shadow-[0_15px_40px_-15px_rgba(168,85,247,0.2)] cursor-hover-target w-full">
+                  <div className="w-14 h-14 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 group-hover:scale-110 group-hover:bg-purple-500/20 transition-all duration-500 shrink-0">
+                    <MapPin size={22} />
                   </div>
                   <div className="text-left overflow-hidden">
-                    <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-[0.2em] sm:tracking-widest mb-1 sm:mb-1.5 font-bold">Location</p>
-                    <p className="text-base sm:text-xl text-white font-light tracking-wide truncate">Kanpur, India (IST)</p>
+                    <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-[0.2em] mb-1 font-bold">Location</p>
+                    <p className="text-base sm:text-lg text-white font-light tracking-wide truncate">Kanpur, India (IST)</p>
                   </div>
                 </div>
               </MagneticButton>
             </div>
 
             {/* Socials Box */}
-            <div className="pt-8 sm:pt-10 border-t border-white/10 text-center sm:text-left">
-              <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-[0.4em] text-gray-500 mb-6 sm:mb-8 font-bold">
+            <div className="pt-8 border-t border-white/10 text-center sm:text-left">
+              <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-gray-500 mb-6 font-bold">
                 Follow my journey
               </p>
-              <div className="flex flex-wrap justify-center sm:justify-start gap-4 sm:gap-6 text-xl sm:text-2xl">
+              <div className="flex flex-wrap justify-center sm:justify-start gap-4 text-xl sm:text-2xl">
                 <SocialIcon href="https://linkedin.com/in/khan-anas-a26b66364/" icon={<FaLinkedin />} hoverColor="rgba(10, 102, 194, 0.4)" hoverText="hover:text-[#0A66C2]" />
                 <SocialIcon href="https://github.com/khanlazyanas/anaskhanportfolio" icon={<FaGithub />} hoverColor="rgba(255, 255, 255, 0.4)" hoverText="hover:text-white" />
                 <SocialIcon href="https://instagram.com/khan_anas842" icon={<FaInstagram />} hoverColor="rgba(225, 48, 108, 0.4)" hoverText="hover:text-[#E1306C]" />
@@ -355,18 +356,18 @@ const Contact = () => {
           </motion.div>
 
           {/* 📝 RIGHT: Ultra-Premium Glassmorphism Form (Col Span 7) */}
-          <motion.div variants={fadeUp} className="lg:col-span-7 mt-8 lg:mt-0">
-            <SpotlightCard glowColor="rgba(45, 212, 191, 0.15)" className="p-8 sm:p-12 lg:p-16 rounded-[2.5rem] sm:rounded-[4rem] group/form">
+          <motion.div variants={fadeUp} className="lg:col-span-7">
+            <SpotlightCard glowColor="rgba(45, 212, 191, 0.15)" className="p-8 sm:p-12 rounded-[2.5rem] group/form">
               
               <div className="relative z-10">
-                <h3 className="text-3xl sm:text-5xl font-bold text-white mb-4 sm:mb-6 tracking-tight group-hover/form:text-transparent group-hover/form:bg-clip-text group-hover/form:bg-gradient-to-r group-hover/form:from-white group-hover/form:to-gray-400 transition-colors duration-500">Send a Message</h3>
-                <p className="text-gray-400 text-base sm:text-xl mb-10 sm:mb-12 font-light leading-[1.6]">Fill out the form below and I'll get back to you within 24 hours.</p>
+                <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight group-hover/form:text-transparent group-hover/form:bg-clip-text group-hover/form:bg-gradient-to-r group-hover/form:from-white group-hover/form:to-gray-400 transition-colors duration-500">Send a Message</h3>
+                <p className="text-gray-400 text-sm sm:text-base mb-8 font-light leading-relaxed">Fill out the form below and I'll get back to you within 24 hours.</p>
 
-                <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   
                   {/* Name Input */}
                   <div className="relative group cursor-hover-target">
-                    <User className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-teal-400 transition-colors duration-300 z-10" size={24} />
+                    <User className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-teal-400 transition-colors duration-300 z-10" size={20} />
                     <input
                       type="text"
                       name="name"
@@ -374,13 +375,13 @@ const Contact = () => {
                       onChange={handleChange}
                       placeholder="Your Full Name"
                       required
-                      className="w-full bg-[#111111]/80 backdrop-blur-md border border-white/5 rounded-2xl sm:rounded-[2rem] pl-16 sm:pl-20 pr-6 py-5 sm:py-6 text-base sm:text-lg text-white placeholder-gray-600 focus:outline-none focus:border-teal-500/50 focus:bg-[#151515] focus:ring-4 focus:ring-teal-500/10 transition-all duration-300 relative z-0"
+                      className="w-full bg-[#111111]/80 backdrop-blur-md border border-white/5 rounded-2xl pl-16 pr-6 py-5 text-sm sm:text-base text-white placeholder-gray-600 focus:outline-none focus:border-teal-500/50 focus:bg-[#151515] focus:ring-4 focus:ring-teal-500/10 transition-all duration-300 relative z-0"
                     />
                   </div>
 
                   {/* Email Input */}
                   <div className="relative group cursor-hover-target">
-                    <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-400 transition-colors duration-300 z-10" size={24} />
+                    <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-400 transition-colors duration-300 z-10" size={20} />
                     <input
                       type="email"
                       name="email"
@@ -388,42 +389,42 @@ const Contact = () => {
                       onChange={handleChange}
                       placeholder="Email Address"
                       required
-                      className="w-full bg-[#111111]/80 backdrop-blur-md border border-white/5 rounded-2xl sm:rounded-[2rem] pl-16 sm:pl-20 pr-6 py-5 sm:py-6 text-base sm:text-lg text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:bg-[#151515] focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 relative z-0"
+                      className="w-full bg-[#111111]/80 backdrop-blur-md border border-white/5 rounded-2xl pl-16 pr-6 py-5 text-sm sm:text-base text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:bg-[#151515] focus:ring-4 focus:ring-blue-500/10 transition-all duration-300 relative z-0"
                     />
                   </div>
 
                   {/* Message Textarea */}
                   <div className="relative group cursor-hover-target">
-                    <MessageSquare className="absolute left-6 top-6 sm:top-8 text-gray-500 group-focus-within:text-purple-400 transition-colors duration-300 z-10" size={24} />
+                    <MessageSquare className="absolute left-6 top-6 text-gray-500 group-focus-within:text-purple-400 transition-colors duration-300 z-10" size={20} />
                     <textarea
                       name="message"
-                      rows="5"
+                      rows="4"
                       value={form.message}
                       onChange={handleChange}
                       placeholder="Tell me about your project..."
                       required
-                      className="w-full bg-[#111111]/80 backdrop-blur-md border border-white/5 rounded-2xl sm:rounded-[2.5rem] pl-16 sm:pl-20 pr-6 py-6 sm:py-8 text-base sm:text-lg text-white placeholder-gray-600 focus:outline-none focus:border-purple-500/50 focus:bg-[#151515] focus:ring-4 focus:ring-purple-500/10 transition-all duration-300 resize-none custom-scrollbar relative z-0"
+                      className="w-full bg-[#111111]/80 backdrop-blur-md border border-white/5 rounded-2xl pl-16 pr-6 py-6 text-sm sm:text-base text-white placeholder-gray-600 focus:outline-none focus:border-purple-500/50 focus:bg-[#151515] focus:ring-4 focus:ring-purple-500/10 transition-all duration-300 resize-none custom-scrollbar relative z-0"
                     />
                   </div>
 
                   {/* Submit Button */}
-                  <div className="pt-4 sm:pt-6">
+                  <div className="pt-4">
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       type="submit"
                       disabled={sending}
-                      className="w-full flex items-center justify-center gap-3 sm:gap-4 bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-400 hover:to-blue-500 text-white font-bold py-5 sm:py-6 rounded-2xl sm:rounded-[2rem] transition-all duration-300 shadow-[0_10px_30px_-10px_rgba(45,212,191,0.5)] disabled:opacity-70 group cursor-hover-target"
+                      className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-400 hover:to-blue-500 text-white font-bold py-5 rounded-2xl transition-all duration-300 shadow-[0_10px_30px_-10px_rgba(45,212,191,0.5)] disabled:opacity-70 group cursor-hover-target"
                     >
                       {sending ? (
                         <>
-                          <Loader2 className="animate-spin" size={24} />
-                          <span className="text-base sm:text-xl tracking-wider">Sending Message...</span>
+                          <Loader2 className="animate-spin" size={20} />
+                          <span className="text-sm sm:text-base tracking-wider">Sending Message...</span>
                         </>
                       ) : (
                         <>
-                          <span className="text-base sm:text-xl tracking-widest uppercase">Transmit Message</span>
-                          <Send size={20} className="transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-1" />
+                          <span className="text-sm sm:text-base tracking-widest uppercase">Transmit Message</span>
+                          <Send size={18} className="transition-transform duration-500 group-hover:translate-x-2 group-hover:-translate-y-1" />
                         </>
                       )}
                     </motion.button>
@@ -465,7 +466,7 @@ function SocialIcon({ href, icon, hoverColor, hoverText }) {
   return (
     <MagneticButton href={href} target="_blank">
       <div 
-        className={`p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-white/10 bg-[#0a0a0a]/80 text-gray-400 backdrop-blur-md transition-all duration-500 ${hoverText} shadow-lg flex items-center justify-center cursor-hover-target`}
+        className={`p-4 rounded-2xl border border-white/10 bg-[#0a0a0a]/80 text-gray-400 backdrop-blur-md transition-all duration-500 ${hoverText} shadow-lg flex items-center justify-center cursor-hover-target`}
         style={{ '--tw-ring-color': hoverColor }}
         onMouseEnter={(e) => {
           e.currentTarget.style.borderColor = hoverColor.replace('0.4', '0.8');

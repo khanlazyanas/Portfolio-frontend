@@ -694,7 +694,7 @@ const Home = () => {
                         <MapPin className="w-3 h-3 sm:w-5 sm:h-5" />
                         <p className="text-[8px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] font-bold">Operating From</p>
                       </div>
-                      <p className="text-3xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tighter drop-shadow-[0_15px_30px_rgba(0,0,0,1)]">Kanpur, IN.</p>
+                      <p className="text-3xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tighter drop-shadow-[0_15px_30px_rgba(0,0,0,1)]">Lucknow, IN.</p>
                     </div>
                   </motion.div>
 

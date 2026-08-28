@@ -24,6 +24,7 @@ import weightlossimg from "../assets/drabubakar.png";
 import bizflowimg from "../assets/bizzflow.png";
 import nexposimg from "../assets/nexpos.png";
 import taskmindimg from "../assets/taskmind.png";
+import multiplayerImg from "../assets/multi-ai-workspace.png";
 
 // ================= DATA ARRAYS ================= //
 const techStack = [
@@ -108,6 +109,15 @@ const processSteps = [
 ];
 
 const projects = [
+  {
+    title: "MULTIPLAYER AI WORKSPACE",
+    subtitle: "Real-Time Collaborative Editor & AI Agent",
+    description: "An advanced real-time collaborative workspace engineered with Next.js and TypeScript. Designed for high-performance multiplayer interactions, it features Liveblocks-powered live cursors and seamless document synchronization. The platform deeply integrates an autonomous AI agent (@AI) via the Google Gemini API, enabling instant, context-aware code generation and updates directly within the shared environment.",
+    link: "https://multiplayer-ai-workspace.vercel.app", 
+    image: multiplayerImg, 
+    tech: ["Next.js", "TypeScript", "Liveblocks", "Google Gemini API", "Tailwind CSS"],
+    glowColor: "rgba(14, 165, 233, 0.35)", // A premium deep blue glow
+  },
   {
     title: "BIZFLOW",
     subtitle: "Enterprise B2B SaaS & Workspace Management Platform",

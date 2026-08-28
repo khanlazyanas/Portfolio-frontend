@@ -15,6 +15,8 @@ import bizflowimg from "../assets/bizzflow.png";
 import nexposimg from "../assets/nexpos.png";
 import taskmindimg from "../assets/taskmind.png";
 import multiplayerImg from "../assets/multi-ai-workspace.png";
+import bulkEmailImg from "../assets/bulkmailsender.png";
+
 
 const projects = [
   {
@@ -61,6 +63,15 @@ const projects = [
     image: taskmindimg, 
     tech: ["Next.js", "MongoDB", "Google Gemini API", "Vercel Cron", "Web Push API", "Tailwind CSS", "dnd-kit", "Shadcn UI"],
     glowColor: "rgba(16, 185, 129, 0.35)", 
+  },
+  {
+    title: "BULK EMAIL SENDER",
+    subtitle: "High-Performance Email Marketing Frontend",
+    description: "An enterprise-grade frontend architecture engineered for a bulk email marketing application. Built with Next.js and TypeScript, the platform features a highly optimized, ultra-premium landing page with responsive floating elements. Designed for scale and performance, it provides a seamless and visually stunning interface for managing large-scale email campaigns.",
+    link: "https://bulk-email-sender-frontend-two.vercel.app", 
+    image: bulkEmailImg, // Make sure to import this image at the top of your file
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "React.js"],
+    glowColor: "rgba(139, 92, 246, 0.35)", // A premium purple glow
   },
   {
     title: "AI-MOCK-INTERVIEW",

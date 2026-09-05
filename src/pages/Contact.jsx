@@ -332,7 +332,7 @@ const Contact = () => {
                   </div>
                   <div className="text-left overflow-hidden">
                     <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-[0.2em] mb-1 font-bold">Location</p>
-                    <p className="text-base sm:text-lg text-white font-light tracking-wide truncate">Kanpur, India (IST)</p>
+                    <p className="text-base sm:text-lg text-white font-light tracking-wide truncate">Lucknow, India (IST)</p>
                   </div>
                 </div>
               </MagneticButton>

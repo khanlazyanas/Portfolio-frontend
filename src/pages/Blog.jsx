@@ -102,6 +102,114 @@ const blogData = [
     category: "Core Computer Science",
     readTime: "4 min read",
     image: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?q=80&w=1000&auto=format&fit=crop"
+  },
+  {
+    id: 6,
+    title: "Architecting a Multiplayer AI Workspace with Liveblocks",
+    excerpt: "Designing a real-time collaborative editor featuring sub-millisecond cursor sync and autonomous AI code generation.",
+    content: `
+      <p class="text-gray-300 leading-relaxed mb-6 text-lg">Collaboration is the future of productivity software. Building the <strong>Multiplayer AI Workspace</strong> required moving beyond standard stateless HTTP requests and diving deep into real-time WebSocket connections.</p>
+      
+      <h3 class="text-2xl font-bold text-white mt-10 mb-4 border-l-4 border-cyan-500 pl-4">Liveblocks Integration</h3>
+      <p class="text-gray-300 leading-relaxed mb-6">To achieve seamless document synchronization and live multiplayer cursors, I engineered the frontend using <strong>Liveblocks</strong>. This infrastructure allows multiple users to edit the same canvas concurrently without conflict, maintaining a single source of truth at the edge.</p>
+      
+      <h3 class="text-2xl font-bold text-white mt-10 mb-4 border-l-4 border-cyan-500 pl-4">Autonomous AI Agents</h3>
+      <p class="text-gray-300 leading-relaxed mb-6">The application goes beyond human collaboration by introducing an autonomous AI agent integrated via the <strong>Google Gemini API</strong>. Users can tag the AI directly in the shared workspace, triggering context-aware code generation and updates that instantly propagate to all connected clients.</p>
+    `,
+    date: "August 12, 2026",
+    category: "WebSockets & AI",
+    readTime: "6 min read",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop"
+  },
+  {
+    id: 7,
+    title: "Scaling Frontend Architecture for Bulk Email Marketing",
+    excerpt: "Building an enterprise-grade, highly optimized landing page and dashboard for mass email campaigns using Next.js.",
+    content: `
+      <p class="text-gray-300 leading-relaxed mb-6 text-lg">Marketing platforms demand flawless performance and high conversion aesthetics. Developing the frontend for the <strong>Bulk Email Sender</strong> was a masterclass in UI optimization and responsive design logic.</p>
+      
+      <h3 class="text-2xl font-bold text-white mt-10 mb-4 border-l-4 border-purple-500 pl-4">Performance-First Next.js</h3>
+      <p class="text-gray-300 leading-relaxed mb-6">By utilizing Next.js and TypeScript, the application delivers incredibly fast load times. I implemented static generation for landing pages and client-side rendering for the dynamic campaign dashboards, striking the perfect balance between SEO and interactivity.</p>
+      
+      <h3 class="text-2xl font-bold text-white mt-10 mb-4 border-l-4 border-purple-500 pl-4">Advanced UI Engineering</h3>
+      <p class="text-gray-300 leading-relaxed mb-6">The interface features responsive floating elements and deep Tailwind CSS integrations to create a visually stunning experience. Managing complex state for large recipient lists required meticulous React logic to prevent UI blocking during heavy data processing.</p>
+    `,
+    date: "July 28, 2026",
+    category: "UI/UX & Frontend",
+    readTime: "5 min read",
+    image: "https://images.unsplash.com/photo-1557200134-90327ee9fafa?q=80&w=1000&auto=format&fit=crop"
+  },
+  {
+    id: 8,
+    title: "Simulating Reality: Engineering an AI Mock Interview Platform",
+    excerpt: "Using the MERN stack and AI to create dynamic, resume-based interview simulations and feedback loops.",
+    content: `
+      <p class="text-gray-300 leading-relaxed mb-6 text-lg">Preparing for technical interviews is a high-stress scenario. The <strong>AI Mock Interview</strong> platform is designed to alleviate this by providing a highly realistic, dynamic practice environment driven by artificial intelligence.</p>
+      
+      <h3 class="text-2xl font-bold text-white mt-10 mb-4 border-l-4 border-teal-500 pl-4">Dynamic Prompt Engineering</h3>
+      <p class="text-gray-300 leading-relaxed mb-6">The core backend challenge was creating a system that parses user resumes and generates targeted, contextually relevant interview questions. The AI integration evaluates user responses in real-time, offering actionable feedback and skill gap analysis.</p>
+      
+      <h3 class="text-2xl font-bold text-white mt-10 mb-4 border-l-4 border-teal-500 pl-4">Secure MERN Architecture</h3>
+      <p class="text-gray-300 leading-relaxed mb-6">User assessment data and feedback histories are highly sensitive. I implemented strict JWT-based authentication and secure routing across the MERN stack to ensure that all mock interview sessions remain entirely private and accessible only to the authenticated user.</p>
+    `,
+    date: "June 20, 2026",
+    category: "AI & Automation",
+    readTime: "7 min read",
+    image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=1000&auto=format&fit=crop"
+  },
+  {
+    id: 9,
+    title: "UrbanGreens: High-Performance E-Commerce on the MERN Stack",
+    excerpt: "Building a robust grocery commerce platform with secure authentication, complex cart logic, and Razorpay integration.",
+    content: `
+      <p class="text-gray-300 leading-relaxed mb-6 text-lg">E-commerce platforms require uncompromised reliability, especially when dealing with perishable goods and live transactions. <strong>UrbanGreens</strong> is engineered to handle these high-stakes requirements with a highly scalable MERN stack architecture.</p>
+      
+      <h3 class="text-2xl font-bold text-white mt-10 mb-4 border-l-4 border-emerald-500 pl-4">Complex State & Cart Workflows</h3>
+      <p class="text-gray-300 leading-relaxed mb-6">Managing a dynamic grocery cart requires precise global state management in React. The frontend seamlessly handles quantity updates, price calculations, and stock validations, communicating with the Node.js backend through optimized REST API calls.</p>
+      
+      <h3 class="text-2xl font-bold text-white mt-10 mb-4 border-l-4 border-emerald-500 pl-4">Secure Financial Transactions</h3>
+      <p class="text-gray-300 leading-relaxed mb-6">To facilitate seamless checkouts, I integrated the <strong>Razorpay payment gateway</strong>. This involved setting up secure webhook listeners on the Express backend to verify payment signatures before finalizing order states in the MongoDB database, ensuring zero transaction loss.</p>
+    `,
+    date: "March 05, 2026",
+    category: "Full-Stack Development",
+    readTime: "6 min read",
+    image: "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1000&auto=format&fit=crop"
+  },
+  {
+    id: 10,
+    title: "Digitizing Dealerships: The National Auto Sales System",
+    excerpt: "Developing a scalable automobile sales and service management platform with comprehensive REST APIs.",
+    content: `
+      <p class="text-gray-300 leading-relaxed mb-6 text-lg">The traditional automotive sales pipeline is ripe for digital transformation. I developed the <strong>National Auto Sales</strong> enterprise system to migrate dealership workflows into a centralized, highly efficient web application.</p>
+      
+      <h3 class="text-2xl font-bold text-white mt-10 mb-4 border-l-4 border-blue-600 pl-4">REST API Architecture</h3>
+      <p class="text-gray-300 leading-relaxed mb-6">The backbone of the platform is a comprehensive suite of REST APIs built with Node.js and Express. These endpoints handle complex vehicle discovery logic, dynamic pricing updates, and secure customer inquiry submissions, cleanly separating business logic from the presentation layer.</p>
+      
+      <h3 class="text-2xl font-bold text-white mt-10 mb-4 border-l-4 border-blue-600 pl-4">Scalable Business Interface</h3>
+      <p class="text-gray-300 leading-relaxed mb-6">Using Tailwind CSS, the React frontend provides a responsive, enterprise-grade interface. Dealership administrators can manage bookings and service workflows through a unified dashboard, bringing complete transparency and control to the sales cycle.</p>
+    `,
+    date: "January 14, 2026",
+    category: "Backend & Security",
+    readTime: "5 min read",
+    image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?q=80&w=1000&auto=format&fit=crop"
+  },
+  {
+    id: 11,
+    title: "Real-Time Data Visualization in React: Weather Forecast",
+    excerpt: "Crafting a responsive, API-driven weather intelligence application with a focus on UI/UX and seamless data fetching.",
+    content: `
+      <p class="text-gray-300 leading-relaxed mb-6 text-lg">Transforming raw external data into an intuitive user experience is a core frontend engineering challenge. The <strong>Weather Forecast</strong> app was designed to render complex meteorological data into a clean, modern interface.</p>
+      
+      <h3 class="text-2xl font-bold text-white mt-10 mb-4 border-l-4 border-purple-500 pl-4">API Integration & Error Handling</h3>
+      <p class="text-gray-300 leading-relaxed mb-6">The application dynamically fetches real-time data from the OpenWeather API. I implemented robust error boundary logic and loading states in React to ensure the UI remains graceful, even when network requests fail or location searches return empty results.</p>
+      
+      <h3 class="text-2xl font-bold text-white mt-10 mb-4 border-l-4 border-purple-500 pl-4">Responsive State Management</h3>
+      <p class="text-gray-300 leading-relaxed mb-6">By utilizing Tailwind CSS and React Hooks, the application instantly adapts to the requested geographic location, rendering highly responsive, user-centric visualizations that look incredible across all device viewports.</p>
+    `,
+    date: "December 05, 2025",
+    category: "UI/UX & Frontend",
+    readTime: "4 min read",
+    image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?q=80&w=1000&auto=format&fit=crop"
   }
 ];
 
@@ -277,11 +385,6 @@ export default function Blog() {
   const revealVariants = {
     hidden: { opacity: 0, y: 100, rotate: 2 },
     visible: { opacity: 1, y: 0, rotate: 0, transition: { type: "spring", stiffness: 50, damping: 25, mass: 1 } }
-  };
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 40, scale: 0.98 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 60, damping: 20, mass: 1 } }
   };
 
   return (

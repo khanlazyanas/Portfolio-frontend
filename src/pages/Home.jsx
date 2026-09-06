@@ -15,7 +15,7 @@ import {
 } from "react-icons/si";
 
 // ================= ASSETS ================= //
-import profileImage from "../assets/anas2.jpg";
+import profileImage from "../assets/anaskhan8.png";
 import urbanGreensImg from "../assets/urbangreens.png";
 import bajajAutoImg from "../assets/bajajnewimage.png";
 import weatherImg from "../assets/weather.png";
